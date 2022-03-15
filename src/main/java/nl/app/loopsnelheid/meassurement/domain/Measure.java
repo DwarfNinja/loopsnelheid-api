@@ -37,4 +37,9 @@ public class Measure
     {
         return registeredAt;
     }
+
+    public boolean isRegisterDateBetween(LocalDateTime startDate, LocalDateTime endDate)
+    {
+        return startDate.isBefore(this.registeredAt) && endDate.isAfter(this.registeredAt);
+    }
 }
