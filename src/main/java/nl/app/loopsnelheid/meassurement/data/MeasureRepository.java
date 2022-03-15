@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface MeasureRepository extends JpaRepository<Measure, Long>
 {
-    List<Measure> findAllByRegisteredAtBetween(LocalDateTime startTime, LocalDateTime endTime);
+
 }

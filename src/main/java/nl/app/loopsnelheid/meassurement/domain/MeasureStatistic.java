@@ -4,7 +4,6 @@ import nl.app.loopsnelheid.meassurement.domain.exceptions.NoAvailableMeasuresExc
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class MeasureStatistic
 {
