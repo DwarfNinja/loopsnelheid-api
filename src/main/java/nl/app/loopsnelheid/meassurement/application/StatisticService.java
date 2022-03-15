@@ -3,6 +3,7 @@ package nl.app.loopsnelheid.meassurement.application;
 import nl.app.loopsnelheid.meassurement.domain.Measure;
 import nl.app.loopsnelheid.meassurement.domain.MeasureStatistic;
 import nl.app.loopsnelheid.meassurement.domain.MeasureStatisticType;
+import nl.app.loopsnelheid.meassurement.domain.exceptions.NoAvailableMeasuresException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,13 +21,23 @@ public class StatisticService
         this.measureService = measureService;
     }
 
-    public MeasureStatistic getAverageMeasuresOfCurrentWeek()
+    public MeasureStatistic getAverageMeasuresOfCurrentWeek() throws NoAvailableMeasuresException
     {
         LocalDateTime startDate = LocalDateTime.now();
         LocalDateTime endDate = startDate.minusDays(7);
 
         List<Measure> measuresThisWeek = this.measureService.getMeasuresBetweenDates(endDate, startDate);
 
-        return new MeasureStatistic(measuresThisWeek, MeasureStatisticType.WEEK);
+        return new MeasureStatistic(startDate, endDate, measuresThisWeek, MeasureStatisticType.WEEK);
+    }
+
+    public MeasureStatistic getAverageMeasuresOfCurrentMonth() throws NoAvailableMeasuresException
+    {
+        LocalDateTime startDate = LocalDateTime.now();
+        LocalDateTime endDate = startDate.minusDays(31);
+
+        List<Measure> measuresThisWeek = this.measureService.getMeasuresBetweenDates(endDate, startDate);
+
+        return new MeasureStatistic(startDate, endDate, measuresThisWeek, MeasureStatisticType.MONTH);
     }
 }
