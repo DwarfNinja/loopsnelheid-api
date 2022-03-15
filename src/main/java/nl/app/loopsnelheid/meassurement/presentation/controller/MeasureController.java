@@ -20,6 +20,15 @@ public class MeasureController
         this.measureService = measureService;
     }
 
+    @GetMapping
+    public List<MeasureDTO> getAll()
+    {
+        return this.measureService.getAll()
+                .stream()
+                .map(measure -> new MeasureDTO(measure.getId(), measure.getWalkingSpeed(), measure.getRegisteredAt()))
+                .collect(Collectors.toList());
+    }
+
     @PostMapping
     public List<MeasureDTO> createMany(@Validated @RequestBody List<MeasureDTO> measureDTOS)
     {

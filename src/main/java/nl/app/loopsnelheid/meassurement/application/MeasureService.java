@@ -21,6 +21,11 @@ public class MeasureService
         this.measureRepository = measureRepository;
     }
 
+    public List<Measure> getAll()
+    {
+        return this.measureRepository.findAll();
+    }
+
     public List<Measure> createMany(List<MeasureDTO> measureDTOS)
     {
         List<Measure> measures = measureDTOS.stream()
