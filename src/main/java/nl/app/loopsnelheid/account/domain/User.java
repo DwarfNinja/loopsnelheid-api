@@ -2,8 +2,6 @@ package nl.app.loopsnelheid.account.domain;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -34,16 +32,20 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
+    @OneToOne(mappedBy = "user")
+    private VerificationToken verificationToken;
+
     public User() {
 
     }
 
-    public User(Long id, String email, String password, Date dateOfBirth, Sex sex) {
+    public User(Long id, String email, String password, Date dateOfBirth, Sex sex, VerificationToken verificationToken) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
+        this.verificationToken = verificationToken;
     }
 
     @Override
@@ -63,7 +65,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return verificationToken.isVerified();
     }
 
     @Override
