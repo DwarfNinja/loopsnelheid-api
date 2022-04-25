@@ -28,17 +28,13 @@ public class MeasureService
 
     public List<Measure> getMeasuresBetweenDates(LocalDateTime startDate, LocalDateTime endDate)
     {
-        // TODO Dit moet vervangen worden, data moet direct gefiltered worden in de database.
-        return this.measureRepository.findAll()
-                .stream()
-                .filter(measure -> measure.isRegisterDateBetween(startDate, endDate))
-                .collect(Collectors.toList());
+        return this.measureRepository.findAllBetweenDates(startDate, endDate);
     }
 
     public List<Measure> createMany(List<MeasureDTO> measureDTOS)
     {
         List<Measure> measures = measureDTOS.stream()
-                .map(measureDTO -> new Measure(measureDTO.getWalkingSpeed(), measureDTO.getRegisteredAt()))
+                .map(measureDTO -> new Measure(measureDTO.walkingSpeed, measureDTO.registeredAt))
                 .collect(Collectors.toList());
 
         this.measureRepository.saveAll(measures);

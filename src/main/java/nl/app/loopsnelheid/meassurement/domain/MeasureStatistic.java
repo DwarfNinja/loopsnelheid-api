@@ -46,6 +46,6 @@ public class MeasureStatistic
         return this.measures.stream()
                 .mapToDouble(Measure::getWalkingSpeed)
                 .average()
-                .orElseThrow(() -> new NoAvailableMeasuresException("There are no measures persisted yet."));
+                .orElse(0);
     }
 }
