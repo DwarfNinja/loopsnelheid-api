@@ -21,7 +21,7 @@ public class MeasureService
         this.measureRepository = measureRepository;
     }
 
-    public List<Measure> getAll()
+    public List<Measure> getAllMeasures()
     {
         return this.measureRepository.findAll();
     }
@@ -31,7 +31,7 @@ public class MeasureService
         return this.measureRepository.findAllBetweenDates(startDate, endDate);
     }
 
-    public List<Measure> createMany(List<MeasureDTO> measureDTOS)
+    public List<Measure> createManyMeasures(List<MeasureDTO> measureDTOS)
     {
         List<Measure> measures = measureDTOS.stream()
                 .map(measureDTO -> new Measure(measureDTO.walkingSpeed, measureDTO.registeredAt))

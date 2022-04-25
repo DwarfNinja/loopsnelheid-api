@@ -40,6 +40,6 @@ public class Measure
 
     public boolean isRegisterDateBetween(LocalDateTime startDate, LocalDateTime endDate)
     {
-        return startDate.isBefore(this.registeredAt) && endDate.isAfter(this.registeredAt);
+        return startDate.isBefore(registeredAt) && endDate.isAfter(registeredAt);
     }
 }

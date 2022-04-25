@@ -1,9 +1,10 @@
 package nl.app.loopsnelheid.meassurement.domain;
 
-import nl.app.loopsnelheid.meassurement.domain.exceptions.NoAvailableMeasuresException;
-
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MeasureStatistic
 {
@@ -14,7 +15,11 @@ public class MeasureStatistic
 
     private final List<Measure> measures;
 
-    public MeasureStatistic(LocalDateTime startDate, LocalDateTime endDate, List<Measure> measures, MeasureStatisticType measureStatisticType)
+    public MeasureStatistic(
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            List<Measure> measures,
+            MeasureStatisticType measureStatisticType)
     {
         this.startDate = startDate;
         this.endDate = endDate;
@@ -41,9 +46,26 @@ public class MeasureStatistic
         return measures.size();
     }
 
-    public double getAverageWalkingSpeed() throws NoAvailableMeasuresException
+    public Map<LocalDateTime, Double> getAverageWalkingSpeedEachDay()
     {
-        return this.measures.stream()
+        Map<LocalDateTime, Double> averageWalkingSpeeds = new HashMap<>();
+        Map<LocalDateTime, List<Measure>> measuresGroupedByDate = measures.stream()
+                .collect(Collectors.groupingBy(Measure::getRegisteredAt));
+
+        for (Map.Entry<LocalDateTime, List<Measure>> entry : measuresGroupedByDate.entrySet())
+        {
+            averageWalkingSpeeds.put(
+                    entry.getKey(),
+                    entry.getValue().stream().mapToDouble(Measure::getWalkingSpeed).average().orElse(0)
+            );
+        }
+
+        return averageWalkingSpeeds;
+    }
+
+    public double getAverageWalkingSpeed()
+    {
+        return measures.stream()
                 .mapToDouble(Measure::getWalkingSpeed)
                 .average()
                 .orElse(0);
