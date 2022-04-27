@@ -1,5 +1,6 @@
 package nl.app.loopsnelheid.meassurement.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -46,16 +47,16 @@ public class MeasureStatistic
         return measures.size();
     }
 
-    public Map<LocalDateTime, Double> getAverageWalkingSpeedEachDay()
+    public Map<LocalDate, Double> getAverageWalkingSpeedEachDay()
     {
-        Map<LocalDateTime, Double> averageWalkingSpeeds = new HashMap<>();
+        Map<LocalDate, Double> averageWalkingSpeeds = new HashMap<>();
         Map<LocalDateTime, List<Measure>> measuresGroupedByDate = measures.stream()
                 .collect(Collectors.groupingBy(Measure::getRegisteredAt));
 
         for (Map.Entry<LocalDateTime, List<Measure>> entry : measuresGroupedByDate.entrySet())
         {
             averageWalkingSpeeds.put(
-                    entry.getKey(),
+                    entry.getKey().toLocalDate(),
                     entry.getValue().stream().mapToDouble(Measure::getWalkingSpeed).average().orElse(0)
             );
         }

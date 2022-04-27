@@ -1,5 +1,6 @@
 package nl.app.loopsnelheid.meassurement.presentation.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class MeasureStatisticDTO
     public final String type;
     public final double averageSpeed;
     public final int amountOfMeasures;
-    public final Map<LocalDateTime, Double> averageMeasure;
+    public final Map<LocalDate, Double> averageMeasure;
 
     public MeasureStatisticDTO(
             LocalDateTime startDate,
@@ -19,7 +20,7 @@ public class MeasureStatisticDTO
             String type,
             double averageSpeed,
             int amountOfMeasures,
-            Map<LocalDateTime, Double> averageMeasures)
+            Map<LocalDate, Double> averageMeasures)
     {
         this.startDate = startDate;
         this.endDate = endDate;

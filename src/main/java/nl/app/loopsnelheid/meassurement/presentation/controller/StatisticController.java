@@ -35,7 +35,7 @@ public class StatisticController
                 measureStatistic.getAverageWalkingSpeedEachDay()
         );
     }
-
+    
     @GetMapping("/month")
     public MeasureStatisticDTO getCurrentMonthlyAverage()
     {
