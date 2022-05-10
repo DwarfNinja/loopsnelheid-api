@@ -43,10 +43,10 @@ public class RegistrationListener implements
         sendConfirmationEmail(user.getEmail(), verificationToken.getToken(), verificationToken.getDigitalCode());
     }
 
-    private void sendConfirmationEmail(String email, String token, String digitalToken) {
+    private void sendConfirmationEmail(String email, String token, String digitalCode) {
         Context context = new Context();
         context.setVariable("token", token);
-        context.setVariable("digitalToken", digitalToken);
+        context.setVariable("digitalCode", digitalCode);
 
         String process = templateEngine.process("welcome", context);
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();

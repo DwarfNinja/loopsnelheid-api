@@ -1,6 +1,5 @@
 package nl.app.loopsnelheid.account.application.util;
 
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,7 +12,8 @@ public class TokenGenerator {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-512");
             byte[] hash = digest.digest(randomUUID.getBytes(StandardCharsets.UTF_8));
-            return Base64.getEncoder().encodeToString(hash);
+
+            return Base64.getEncoder().encodeToString(hash).replace("/", "");
         } catch(NoSuchAlgorithmException noSuchAlgorithmException) {
             return null;
         }

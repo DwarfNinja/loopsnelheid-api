@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.account.data.VerificationTokenRepository;
 import nl.app.loopsnelheid.account.domain.User;
 import nl.app.loopsnelheid.account.domain.VerificationToken;
+import nl.app.loopsnelheid.account.domain.exception.VerificationTokenExpiredException;
+import nl.app.loopsnelheid.account.domain.exception.VerificationTokenNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,5 +28,32 @@ public class VerificationTokenService {
 
     public void saveVerificationToken(VerificationToken verificationToken) {
         verificationTokenRepository.save(verificationToken);
+    }
+
+    public void determineVerificationToken(VerificationToken verificationToken)
+    {
+        if (verificationToken.isExpired() || verificationToken.isVerified()) throw new VerificationTokenExpiredException();
+    }
+
+    public void verifyToken(Long userId, String token)
+    {
+        VerificationToken verificationToken = verificationTokenRepository.findByTokenAndUserId(token, userId)
+                .orElseThrow(VerificationTokenNotFoundException::new);
+
+        determineVerificationToken(verificationToken);
+        verificationToken.setVerificationDate(LocalDateTime.now());
+
+        saveVerificationToken(verificationToken);
+    }
+
+    public void verifyDigitalCode(Long userId, String digitalCode)
+    {
+        VerificationToken verificationToken = verificationTokenRepository.findByDigitalCodeAndUserId(digitalCode, userId)
+                .orElseThrow(VerificationTokenNotFoundException::new);
+
+        determineVerificationToken(verificationToken);
+        verificationToken.setVerificationDate(LocalDateTime.now());
+
+        saveVerificationToken(verificationToken);
     }
 }
