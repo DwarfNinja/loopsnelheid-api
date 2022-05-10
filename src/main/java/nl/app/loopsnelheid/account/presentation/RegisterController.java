@@ -29,7 +29,7 @@ public class RegisterController {
         verificationTokenService.verifyDigitalCode(userId, digitalCode);
     }
 
-    @PostMapping(AccountEndpoints.VERIFY_TOKEN_PATH)
+    @GetMapping(AccountEndpoints.VERIFY_TOKEN_PATH)
     public void verifyEmailByToken(@PathVariable Long userId, @PathVariable String token)
     {
         verificationTokenService.verifyToken(userId, token);
