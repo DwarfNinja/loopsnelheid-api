@@ -3,6 +3,7 @@ package nl.app.loopsnelheid.account.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,6 +26,8 @@ public class VerificationToken {
     private User user;
 
     private LocalDateTime expiryDate;
+
+    @Setter
     private LocalDateTime verificationDate;
 
     public VerificationToken(Long id, String digitalCode, String token, User user, LocalDateTime expiryDate, LocalDateTime verificationDate) {
