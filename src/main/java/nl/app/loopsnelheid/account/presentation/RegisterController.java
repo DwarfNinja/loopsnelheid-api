@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping(AccountEndpoints.REGISTER_PATH)
 @RequiredArgsConstructor
 public class RegisterController {
     private final AuthService authService;
     private final VerificationTokenService verificationTokenService;
 
-    @PostMapping
+    @PostMapping(AccountEndpoints.REGISTER_PATH)
     public void register(@Validated @RequestBody RegisterDto registerDto, HttpServletResponse response) {
         authService.userRegister(registerDto, registerDto.password);
         response.setStatus(HttpServletResponse.SC_CREATED);
