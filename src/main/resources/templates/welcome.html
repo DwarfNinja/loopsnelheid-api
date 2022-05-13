@@ -127,11 +127,11 @@
         <li th:text="${#strings.substring(digitalCode, 4,5)}"></li>
         <li th:text="${#strings.substring(digitalCode, 5,6)}"></li>
     </ul>
-    <form action="http://example.com/user/1/verify/c050e4a931cbbcc509332729d486fe773de97f98">
+    <form th:action="${mailApiUrl}">
         <button>Account verifiëren</button>
     </form>
     <p>Gebruik onderstaande link als u problemen ervaart met de knop “Account verifiëren”:</p>
-    <a href="#" th:text="${token}"></a>
+    <a th:href="${mailApiUrl}" th:text="${mailApiUrl}"></a>
 </div>
 
 <div>

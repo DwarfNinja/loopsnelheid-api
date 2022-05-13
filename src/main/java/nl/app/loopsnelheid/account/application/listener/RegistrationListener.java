@@ -1,15 +1,14 @@
 package nl.app.loopsnelheid.account.application.listener;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.account.application.AuthService;
 import nl.app.loopsnelheid.account.application.VerificationTokenService;
 import nl.app.loopsnelheid.account.application.util.TokenGenerator;
+import nl.app.loopsnelheid.account.config.AccountEndpoints;
 import nl.app.loopsnelheid.account.domain.User;
 import nl.app.loopsnelheid.account.domain.VerificationToken;
 import nl.app.loopsnelheid.account.domain.event.OnRegistrationCompleteEvent;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.MessageSource;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -28,6 +27,9 @@ public class RegistrationListener implements
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
+    @Value("${mail.api.url}")
+    private String mailApiUrl;
+
     @Override
     public void onApplicationEvent(OnRegistrationCompleteEvent onRegistrationCompleteEvent) {
         this.confirmRegistration(onRegistrationCompleteEvent);
@@ -40,13 +42,22 @@ public class RegistrationListener implements
         VerificationToken verificationToken = verificationTokenService.createVerificationToken(user, generatedToken, generatedDigitalCodeList);
         verificationTokenService.saveVerificationToken(verificationToken);
 
-        sendConfirmationEmail(user.getEmail(), verificationToken.getToken(), verificationToken.getDigitalCode());
+        sendConfirmationEmail(user.getId(), user.getEmail(), verificationToken.getToken(), verificationToken.getDigitalCode());
     }
 
-    private void sendConfirmationEmail(String email, String token, String digitalCode) {
+    private String generateMailApiUrl(Long userId, String token) {
+        String verifyTokenPath = AccountEndpoints.VERIFY_TOKEN_PATH
+                .replace("{userId}", userId.toString())
+                .replace("{token}", token);
+
+        return mailApiUrl + verifyTokenPath;
+    }
+
+    private void sendConfirmationEmail(Long userId, String email, String token, String digitalCode) {
         Context context = new Context();
         context.setVariable("token", token);
         context.setVariable("digitalCode", digitalCode);
+        context.setVariable("mailApiUrl", generateMailApiUrl(userId, token));
 
         String process = templateEngine.process("welcome", context);
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
