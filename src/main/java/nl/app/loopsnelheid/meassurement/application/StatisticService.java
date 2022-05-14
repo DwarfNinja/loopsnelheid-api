@@ -20,6 +20,16 @@ public class StatisticService
         this.measureService = measureService;
     }
 
+    public MeasureStatistic getAverageMeasuresOfToday()
+    {
+        LocalDateTime startDate = LocalDateTime.now();
+        LocalDateTime endDate = startDate.minusHours(24);
+
+        List<Measure> measuresToday = measureService.getMeasuresBetweenDates(endDate, startDate);
+
+        return new MeasureStatistic(startDate, endDate, measuresToday, MeasureStatisticType.DAY);
+    }
+
     public MeasureStatistic getAverageMeasuresOfCurrentWeek()
     {
         LocalDateTime startDate = LocalDateTime.now();
