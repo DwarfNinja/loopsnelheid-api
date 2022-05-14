@@ -23,7 +23,7 @@ public class MeasureController
     @GetMapping
     public List<MeasureDTO> getAll()
     {
-        return this.measureService.getAll()
+        return measureService.getAllMeasures()
                 .stream()
                 .map(measure -> new MeasureDTO(measure.getId(), measure.getWalkingSpeed(), measure.getRegisteredAt()))
                 .collect(Collectors.toList());
@@ -32,7 +32,7 @@ public class MeasureController
     @PostMapping
     public List<MeasureDTO> createMany(@Validated @RequestBody List<MeasureDTO> measureDTOS)
     {
-        List<Measure> measures = this.measureService.createMany(measureDTOS);
+        List<Measure> measures = measureService.createManyMeasures(measureDTOS);
 
         return measures.stream()
                 .map(measure -> new MeasureDTO(measure.getId(), measure.getWalkingSpeed(), measure.getRegisteredAt()))

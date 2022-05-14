@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "a4871d75-89ef-45a0-9ffb-f78e4dbddc9f",
+		"name": "MVP 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create measures",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"walkingSpeed\": \"1\",\r\n        \"registeredAt\": \"2022-03-15T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"3.4\",\r\n        \"registeredAt\": \"2022-03-14T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"2.1\",\r\n        \"registeredAt\": \"2022-03-13T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"2.1\",\r\n        \"registeredAt\": \"2022-03-03T12:59:11.332\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/measures",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"measures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve all measures",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/measures",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"measures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get average measures of this week",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stats/week",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"week"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get average measures of this month",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stats/month",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"month"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
