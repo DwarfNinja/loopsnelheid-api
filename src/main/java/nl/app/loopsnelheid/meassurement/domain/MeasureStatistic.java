@@ -28,14 +28,14 @@ public class MeasureStatistic
         this.measures = measures;
     }
 
-    public LocalDateTime getStartDate()
+    public LocalDate getStartDate()
     {
-        return startDate;
+        return startDate.toLocalDate();
     }
 
-    public LocalDateTime getEndDate()
+    public LocalDate getEndDate()
     {
-        return endDate;
+        return endDate.toLocalDate();
     }
 
     public MeasureStatisticType getMeasureStatisticType() {

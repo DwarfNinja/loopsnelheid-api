@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class MeasureStatisticDTO
 {
-    public final LocalDateTime startDate;
-    public final LocalDateTime endDate;
+    public final LocalDate startDate;
+    public final LocalDate endDate;
 
     public final String type;
     public final double averageSpeed;
@@ -15,8 +15,8 @@ public class MeasureStatisticDTO
     public final Map<LocalDate, Double> averageMeasure;
 
     public MeasureStatisticDTO(
-            LocalDateTime startDate,
-            LocalDateTime endDate,
+            LocalDate startDate,
+            LocalDate endDate,
             String type,
             double averageSpeed,
             int amountOfMeasures,
