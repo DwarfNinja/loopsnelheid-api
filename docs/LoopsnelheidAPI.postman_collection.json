@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "a4871d75-89ef-45a0-9ffb-f78e4dbddc9f",
+		"name": "Loopsnelheid API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create measures",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"walkingSpeed\": \"1\",\r\n        \"registeredAt\": \"2022-05-13T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"3.4\",\r\n        \"registeredAt\": \"2022-04-14T12:30:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"30.4\",\r\n        \"registeredAt\": \"2022-04-14T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"18.4\",\r\n        \"registeredAt\": \"2022-04-14T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"2.1\",\r\n        \"registeredAt\": \"2022-04-13T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"2.1\",\r\n        \"registeredAt\": \"2022-03-03T12:59:11.332\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backendUrl}}/measures",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"measures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve all measures",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backendUrl}}/measures",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"measures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get average measures of this week",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backendUrl}}/stats/week",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"stats",
+						"week"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get average measures of this week Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backendUrl}}/stats/week",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"stats",
+						"week"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get average measures of today",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backendUrl}}/stats/today",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"stats",
+						"today"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"admins@test.nl\",\r\n   \"password\" : \"afefef\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backendUrl}}/auth/login",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"admins@test.nl\",\r\n    \"password\" : \"afefef\",\r\n    \"sex\": \"MALE\",\r\n    \"dateOfBirth\": \"2002-02-02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backendUrl}}/auth/register",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Email By DigitalCode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{backendUrl}}/auth/verify/code/1/328014",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"auth",
+						"verify",
+						"code",
+						"1",
+						"328014"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Email By Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"admin@test.nl\",\r\n    \"password\" : \"afefef\",\r\n    \"sex\": \"MALE\",\r\n    \"dateOfBirth\": \"2002-02-02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{backendUrl}}/auth/verify/token/1/2+U3RykrQXzd7B5Dwa295Qn7+9XmKcNleHfMZ5QXWyeI+VtBMPD5KJKIWn4y2o9EnYURpAhba2nUsrsQ==",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"auth",
+						"verify",
+						"token",
+						"1",
+						"2+U3RykrQXzd7B5Dwa295Qn7+9XmKcNleHfMZ5QXWyeI+VtBMPD5KJKIWn4y2o9EnYURpAhba2nUsrsQ=="
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "backendUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}

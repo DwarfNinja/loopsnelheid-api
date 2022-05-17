@@ -21,15 +21,20 @@ public class MeasureService
         this.measureRepository = measureRepository;
     }
 
-    public List<Measure> getAll()
+    public List<Measure> getAllMeasures()
     {
         return this.measureRepository.findAll();
     }
 
-    public List<Measure> createMany(List<MeasureDTO> measureDTOS)
+    public List<Measure> getMeasuresBetweenDates(LocalDateTime startDate, LocalDateTime endDate)
+    {
+        return this.measureRepository.findAllBetweenDates(startDate, endDate);
+    }
+
+    public List<Measure> createManyMeasures(List<MeasureDTO> measureDTOS)
     {
         List<Measure> measures = measureDTOS.stream()
-                .map(measureDTO -> new Measure(measureDTO.getWalkingSpeed(), measureDTO.getRegisteredAt()))
+                .map(measureDTO -> new Measure(measureDTO.walkingSpeed, measureDTO.registeredAt))
                 .collect(Collectors.toList());
 
         this.measureRepository.saveAll(measures);
