@@ -43,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http = http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.REGISTER_PATH).permitAll()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.LOGIN_PATH).permitAll()
+                .antMatchers(HttpMethod.GET, AccountEndpoints.VERIFY_TOKEN_PATH).permitAll()
+                .antMatchers(HttpMethod.POST, AccountEndpoints.VERIFY_DIGITAL_CODE_PATH).permitAll()
                 .anyRequest().authenticated()
                 .and();
 

@@ -15,7 +15,7 @@ public class UserDto {
     public String email;
 
     @NotNull
-    @DateTimeFormat(pattern = "YYYY-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date dateOfBirth;
 
     @NotBlank(message = "Sex can't be empty")
