@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, AccountEndpoints.LOGIN_PATH).permitAll()
                 .antMatchers(HttpMethod.GET, AccountEndpoints.VERIFY_TOKEN_PATH).permitAll()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.VERIFY_DIGITAL_CODE_PATH).permitAll()
+                .antMatchers(HttpMethod.POST, AccountEndpoints.PRIVACY_PATH).permitAll()
                 .anyRequest().authenticated()
                 .and();
 

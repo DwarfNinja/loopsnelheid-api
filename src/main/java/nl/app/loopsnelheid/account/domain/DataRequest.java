@@ -1,14 +1,19 @@
 package nl.app.loopsnelheid.account.domain;
 
+import lombok.Builder;
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "data_requests")
+@Getter
+@Builder
 public class DataRequest
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -26,9 +31,10 @@ public class DataRequest
 
     public DataRequest() {}
 
-    public DataRequest(String email, LocalDateTime requestedAt, User user) {
+    public DataRequest(Long id, String email, DataRequestStatus dataRequestStatus, LocalDateTime requestedAt, User user) {
+        this.id = id;
         this.email = email;
-        this.dataRequestStatus = DataRequestStatus.CONFIRMED;
+        this.dataRequestStatus = dataRequestStatus;
         this.requestedAt = requestedAt;
         this.user = user;
     }
