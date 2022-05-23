@@ -6,9 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "users",
@@ -35,17 +33,19 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user")
     private VerificationToken verificationToken;
 
-    public User() {
+    @OneToMany(mappedBy = "user")
+    private List<DataRequest> dataRequests;
 
-    }
+    public User() {}
 
-    public User(Long id, String email, String password, Date dateOfBirth, Sex sex, VerificationToken verificationToken) {
+    public User(Long id, String email, String password, Date dateOfBirth, Sex sex, VerificationToken verificationToken, List<DataRequest> dataRequests) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
         this.verificationToken = verificationToken;
+        this.dataRequests = dataRequests;
     }
 
     @Override
