@@ -1,6 +1,7 @@
 package nl.app.loopsnelheid.security.domain;
 
-public class AccountEndpoints {
+public class AccountEndpoints
+{
     // Token prefixes and headers
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String SECURITY_HEADER = "Authorization";

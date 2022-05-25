@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 public class MeasureDTO
 {
     public final Long id;
-
     public final double walkingSpeed;
 
     public final LocalDateTime registeredAt;

@@ -32,7 +32,8 @@ public class DataRequest
 
     public DataRequest() {}
 
-    public DataRequest(Long id, String email, DataRequestStatus dataRequestStatus, LocalDateTime requestedAt, User user) {
+    public DataRequest(Long id, String email, DataRequestStatus dataRequestStatus, LocalDateTime requestedAt, User user)
+    {
         this.id = id;
         this.email = email;
         this.dataRequestStatus = dataRequestStatus;

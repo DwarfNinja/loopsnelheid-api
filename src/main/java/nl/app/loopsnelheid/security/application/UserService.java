@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 public class UserService
 {
     private final UserRepository userRepository;
+    public User loadUserByUsername(String username)
 
     public User loadUserByUsername(String username) {
         return this.userRepository.findByEmail(username).orElseThrow(() -> new RuntimeException("Gebruiker bestaat niet"));

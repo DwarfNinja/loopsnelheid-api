@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 @Entity
 @Builder
 @NoArgsConstructor
-public class VerificationToken {
+public class VerificationToken
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,7 +31,8 @@ public class VerificationToken {
     @Setter
     private LocalDateTime verificationDate;
 
-    public VerificationToken(Long id, String digitalCode, String token, User user, LocalDateTime expiryDate, LocalDateTime verificationDate) {
+    public VerificationToken(Long id, String digitalCode, String token, User user, LocalDateTime expiryDate, LocalDateTime verificationDate)
+    {
         this.id = id;
         this.digitalCode = digitalCode;
         this.token = token;
@@ -39,19 +41,23 @@ public class VerificationToken {
         this.verificationDate = verificationDate;
     }
 
-    public User getUser() {
+    public User getUser()
+    {
         return user;
     }
 
-    public boolean isExpired() {
+    public boolean isExpired()
+    {
         return LocalDateTime.now().isAfter(expiryDate);
     }
 
-    public boolean isVerified() {
+    public boolean isVerified()
+    {
         return verificationDate != null;
     }
 
-    public static LocalDateTime generateExpiryDate() {
+    public static LocalDateTime generateExpiryDate()
+    {
         return LocalDateTime.now().plusDays(7);
     }
 }

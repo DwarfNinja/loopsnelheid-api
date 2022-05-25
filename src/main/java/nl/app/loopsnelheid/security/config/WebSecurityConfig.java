@@ -1,5 +1,6 @@
 package nl.app.loopsnelheid.security.config;
 
+import nl.app.loopsnelheid.security.domain.AccountEndpoints;
 import nl.app.loopsnelheid.security.domain.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +20,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter
+{
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
@@ -28,30 +29,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthEntryPointJwt authEntryPointJwt;
 
     @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
+    public AuthTokenFilter authenticationJwtTokenFilter()
+    {
         return new AuthTokenFilter();
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
+    {
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception
+    {
         return super.authenticationManagerBean();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception
+    {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(authEntryPointJwt).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/auth/verify/code/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/auth/verify/token/**").permitAll()
+                .antMatchers(HttpMethod.POST, AccountEndpoints.REGISTER_PATH).permitAll()
+                .antMatchers(HttpMethod.POST, AccountEndpoints.LOGIN_PATH).permitAll()
+                .antMatchers(HttpMethod.GET, AccountEndpoints.VERIFY_TOKEN_PATH).permitAll()
+                .antMatchers(HttpMethod.POST, AccountEndpoints.VERIFY_DIGITAL_CODE_PATH).permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

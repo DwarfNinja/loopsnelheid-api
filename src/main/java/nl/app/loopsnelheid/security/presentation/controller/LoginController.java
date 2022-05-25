@@ -16,11 +16,13 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class LoginController {
+public class LoginController
+{
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public JwtResponseDto authenticateUser(@Valid @RequestBody LoginDto loginDto) {
+    public JwtResponseDto authenticateUser(@Valid @RequestBody LoginDto loginDto)
+    {
         JwtResponse jwtResponse = loginService.authenticateUser(loginDto.email, loginDto.password);
 
         return new JwtResponseDto(jwtResponse.getJwt(), jwtResponse.getEmail(), jwtResponse.getRoles());

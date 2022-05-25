@@ -4,8 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import nl.app.loopsnelheid.meassurement.domain.Measure;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
@@ -17,7 +15,8 @@ import java.util.*;
         })
 @Getter
 @Builder
-public class User implements UserDetails {
+public class User
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -72,32 +71,11 @@ public class User implements UserDetails {
         this.measures = measures;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
+    public boolean isVerified()
+    {
         return verificationToken.isVerified();
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
-    }
-
-    @Override
     public String getUsername() {
         return this.email;
     }
