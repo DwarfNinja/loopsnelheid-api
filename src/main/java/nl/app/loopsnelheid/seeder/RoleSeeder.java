@@ -20,8 +20,8 @@ public class RoleSeeder extends ObjectSeeder<Role>
     protected void load()
     {
         Set<Role> roles = new HashSet<>();
-        roles.add(new Role(ERole.USER));
-        roles.add(new Role(ERole.ADMIN));
+        roles.add(new Role(ERole.ROLE_USER));
+        roles.add(new Role(ERole.ROLE_ADMIN));
 
         objects.addAll(roles);
     }

@@ -3,7 +3,7 @@ package nl.app.loopsnelheid.security.presentation.controller;
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.application.RegisterService;
 import nl.app.loopsnelheid.security.application.VerificationTokenService;
-import nl.app.loopsnelheid.security.domain.AccountEndpoints;
+import nl.app.loopsnelheid.security.config.AccountEndpoints;
 import nl.app.loopsnelheid.security.presentation.dto.RegisterDto;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

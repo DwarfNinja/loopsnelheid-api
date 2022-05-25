@@ -28,7 +28,7 @@ public class RegisterService
 
     public User createUser(UserDto userDto, String encodedPassword)
     {
-        Set<Role> roles = roleService.provideUserRoles(List.of("USER"));
+        Set<Role> roles = roleService.provideUserRoles(List.of("ROLE_USER"));
 
         User.UserBuilder userBuilder = User.builder()
                 .email(userDto.email)
