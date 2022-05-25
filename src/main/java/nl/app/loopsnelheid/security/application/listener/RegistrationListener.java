@@ -3,7 +3,7 @@ package nl.app.loopsnelheid.security.application.listener;
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.application.VerificationTokenService;
 import nl.app.loopsnelheid.security.application.util.TokenGenerator;
-import nl.app.loopsnelheid.security.domain.AccountEndpoints;
+import nl.app.loopsnelheid.security.config.AccountEndpoints;
 import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.domain.VerificationToken;
 import nl.app.loopsnelheid.security.domain.event.OnRegistrationCompleteEvent;
