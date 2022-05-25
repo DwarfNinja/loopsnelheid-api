@@ -8,7 +8,6 @@ import nl.app.loopsnelheid.security.presentation.dto.UserDto;
 import nl.app.loopsnelheid.security.domain.Sex;
 import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,14 +18,16 @@ import java.util.Set;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class RegisterService implements UserDetailsService {
+public class RegisterService
+{
     private final UserRepository userRepository;
 
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher eventPublisher;
 
-    public User createUser(UserDto userDto, String encodedPassword) {
+    public User createUser(UserDto userDto, String encodedPassword)
+    {
         Set<Role> roles = roleService.provideUserRoles(List.of("USER"));
 
         User.UserBuilder userBuilder = User.builder()
@@ -36,14 +37,16 @@ public class RegisterService implements UserDetailsService {
                 .sex(Sex.valueOf(userDto.sex))
                 .roles(roles);
 
-        if(userDto.id != null) {
+        if (userDto.id != null)
+        {
             userBuilder.id(userDto.id);
         }
 
         return userBuilder.build();
     }
 
-    public void registerUser(UserDto userDTO, String password)  {
+    public void registerUser(UserDto userDTO, String password)
+    {
         String encodedPassword = this.passwordEncoder.encode(password);
         User user = createUser(userDTO, encodedPassword);
 
@@ -51,12 +54,8 @@ public class RegisterService implements UserDetailsService {
         eventPublisher.publishEvent(new OnRegistrationCompleteEvent(user));
     }
 
-    public void saveUser(User user) {
+    public void saveUser(User user)
+    {
         this.userRepository.save(user);
-    }
-
-    @Override
-    public User loadUserByUsername(String username) {
-        return this.userRepository.findByEmail(username).orElseThrow(() -> new RuntimeException("Gebruiker bestaat niet"));
     }
 }

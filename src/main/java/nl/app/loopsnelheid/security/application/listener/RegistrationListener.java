@@ -20,8 +20,8 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class RegistrationListener implements
-        ApplicationListener<OnRegistrationCompleteEvent> {
+public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent>
+{
 
     private final VerificationTokenService verificationTokenService;
     private final JavaMailSender javaMailSender;
@@ -31,11 +31,13 @@ public class RegistrationListener implements
     private String mailApiUrl;
 
     @Override
-    public void onApplicationEvent(OnRegistrationCompleteEvent onRegistrationCompleteEvent) {
+    public void onApplicationEvent(OnRegistrationCompleteEvent onRegistrationCompleteEvent)
+    {
         this.confirmRegistration(onRegistrationCompleteEvent);
     }
 
-    private void confirmRegistration(OnRegistrationCompleteEvent event) {
+    private void confirmRegistration(OnRegistrationCompleteEvent event)
+    {
         User user = event.getUser();
         String generatedToken = TokenGenerator.generateToken();
         List<Integer> generatedDigitalCodeList = TokenGenerator.generateDigitalCode(6);
@@ -45,7 +47,8 @@ public class RegistrationListener implements
         sendConfirmationEmail(user.getId(), user.getEmail(), verificationToken.getToken(), verificationToken.getDigitalCode());
     }
 
-    private String generateMailApiUrl(Long userId, String token) {
+    private String generateMailApiUrl(Long userId, String token)
+    {
         String verifyTokenPath = AccountEndpoints.VERIFY_TOKEN_PATH
                 .replace("{userId}", userId.toString())
                 .replace("{token}", token);
@@ -53,7 +56,8 @@ public class RegistrationListener implements
         return mailApiUrl + verifyTokenPath;
     }
 
-    private void sendConfirmationEmail(Long userId, String email, String token, String digitalCode) {
+    private void sendConfirmationEmail(Long userId, String email, String token, String digitalCode)
+    {
         Context context = new Context();
         context.setVariable("token", token);
         context.setVariable("digitalCode", digitalCode);
@@ -62,11 +66,14 @@ public class RegistrationListener implements
         String process = templateEngine.process("welcome", context);
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        try{
+
+        try
+        {
             helper.setSubject("Welcome ");
             helper.setText(process, true);
             helper.setTo(email);
             javaMailSender.send(mimeMessage);
-        }catch(MessagingException ignored) {}
+        }
+        catch(MessagingException ignored) {}
     }
 }

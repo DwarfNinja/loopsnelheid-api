@@ -13,12 +13,14 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-public class RegisterController {
+public class RegisterController
+{
     private final RegisterService registerService;
     private final VerificationTokenService verificationTokenService;
 
     @PostMapping(AccountEndpoints.REGISTER_PATH)
-    public void register(@Validated @RequestBody RegisterDto registerDto, HttpServletResponse response) {
+    public void register(@Validated @RequestBody RegisterDto registerDto, HttpServletResponse response)
+    {
         registerService.registerUser(registerDto, registerDto.password);
         response.setStatus(HttpServletResponse.SC_CREATED);
     }
@@ -30,7 +32,8 @@ public class RegisterController {
     }
 
     @GetMapping(AccountEndpoints.VERIFY_TOKEN_PATH)
-    public void verifyEmailByToken(@PathVariable Long userId, @PathVariable String token, HttpServletResponse response) throws IOException {
+    public void verifyEmailByToken(@PathVariable Long userId, @PathVariable String token, HttpServletResponse response) throws IOException
+    {
         verificationTokenService.verifyToken(userId, token);
         response.sendRedirect("intent:#Intent;scheme=startci;package=com.example.loopsnelheidapp;end");
     }

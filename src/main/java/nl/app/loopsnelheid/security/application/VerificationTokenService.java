@@ -13,10 +13,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class VerificationTokenService {
+public class VerificationTokenService
+{
     private final VerificationTokenRepository verificationTokenRepository;
 
-    public VerificationToken createVerificationToken(User user, String token, List<Integer> digitalCode) {
+    public VerificationToken createVerificationToken(User user, String token, List<Integer> digitalCode)
+    {
         return VerificationToken
                 .builder()
                 .user(user)
@@ -26,7 +28,8 @@ public class VerificationTokenService {
                 .build();
     }
 
-    public void saveVerificationToken(VerificationToken verificationToken) {
+    public void saveVerificationToken(VerificationToken verificationToken)
+    {
         verificationTokenRepository.save(verificationToken);
     }
 

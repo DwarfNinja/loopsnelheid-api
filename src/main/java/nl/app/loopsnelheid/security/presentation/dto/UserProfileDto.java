@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class UserProfileDto {
+public class UserProfileDto
+{
     private final String email;
 }

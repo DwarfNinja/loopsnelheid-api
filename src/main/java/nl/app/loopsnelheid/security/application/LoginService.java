@@ -19,7 +19,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class LoginService {
+public class LoginService
+{
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
 

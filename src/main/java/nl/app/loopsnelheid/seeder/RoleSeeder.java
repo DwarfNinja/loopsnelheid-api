@@ -11,7 +11,8 @@ public class RoleSeeder extends ObjectSeeder<Role>
 {
     private final RoleService roleService;
 
-    public RoleSeeder(RoleService roleService) {
+    public RoleSeeder(RoleService roleService)
+    {
         this.roleService = roleService;
     }
 

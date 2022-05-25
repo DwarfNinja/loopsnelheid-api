@@ -10,7 +10,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class DatabaseSeeder extends Seeder {
+public class DatabaseSeeder extends Seeder
+{
     private final List<Seeder> seeders = new ArrayList<>();
 
     private final RoleRepository roleRepository;

@@ -11,9 +11,7 @@ public class MeasureStatistic
 {
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
-
     private final MeasureStatisticType measureStatisticType;
-
     private final List<Measure> measures;
 
     public MeasureStatistic(

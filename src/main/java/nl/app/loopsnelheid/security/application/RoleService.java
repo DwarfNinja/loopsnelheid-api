@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class RoleService {
+public class RoleService
+{
     private final RoleRepository roleRepository;
 
     public Role getRoleByName(String name)
