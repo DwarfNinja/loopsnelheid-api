@@ -1,19 +1,16 @@
 package nl.app.loopsnelheid.privacy.application;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.meassurement.domain.Measure;
+import nl.app.loopsnelheid.privacy.application.handler.DataRequestHandler;
 import nl.app.loopsnelheid.privacy.data.DataRequestRepository;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
 import nl.app.loopsnelheid.privacy.domain.DataRequestContent;
 import nl.app.loopsnelheid.privacy.domain.DataRequestStatus;
-import nl.app.loopsnelheid.privacy.domain.PersonalData;
-import nl.app.loopsnelheid.privacy.presentation.dto.DataRequestDto;
 import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @Transactional

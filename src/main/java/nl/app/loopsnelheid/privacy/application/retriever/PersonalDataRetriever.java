@@ -1,4 +1,4 @@
-package nl.app.loopsnelheid.privacy.application;
+package nl.app.loopsnelheid.privacy.application.retriever;
 
 import nl.app.loopsnelheid.privacy.domain.PersonalData;
 import nl.app.loopsnelheid.security.domain.Sex;
