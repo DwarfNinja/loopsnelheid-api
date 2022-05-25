@@ -1,9 +1,12 @@
 package nl.app.loopsnelheid.security.presentation.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Set;
 
 public class JwtResponseDto
 {
+    @JsonProperty("access_token")
     private final String accessToken;
     private final String email;
     private final Set<String> roles;

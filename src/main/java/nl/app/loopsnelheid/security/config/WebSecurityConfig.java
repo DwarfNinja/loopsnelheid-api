@@ -1,5 +1,6 @@
 package nl.app.loopsnelheid.security.config;
 
+import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.domain.AccountEndpoints;
 import nl.app.loopsnelheid.security.domain.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
-    private AuthEntryPointJwt authEntryPointJwt;
+    private final AuthEntryPointJwt authEntryPointJwt;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter()
