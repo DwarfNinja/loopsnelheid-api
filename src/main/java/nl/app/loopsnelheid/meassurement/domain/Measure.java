@@ -1,5 +1,7 @@
 package nl.app.loopsnelheid.meassurement.domain;
 
+import nl.app.loopsnelheid.security.domain.User;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -10,17 +12,21 @@ public class Measure
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private double walkingSpeed;
 
     private LocalDateTime registeredAt;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     public Measure() {}
 
-    public Measure(double walkingSpeed, LocalDateTime registeredAt)
+    public Measure(double walkingSpeed, LocalDateTime registeredAt, User user)
     {
         this.walkingSpeed = walkingSpeed;
         this.registeredAt = registeredAt;
+        this.user = user;
     }
 
     public Long getId()

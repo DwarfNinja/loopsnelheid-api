@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface MeasureRepository extends JpaRepository<Measure, Long>
 {
-    @Query("select m from Measure m where m.registeredAt between ?1 AND ?2")
-    List<Measure> findAllBetweenDates(LocalDateTime startDate, LocalDateTime endDate);
+    @Query("select m from Measure m where m.registeredAt between ?1 AND ?2 AND user_id = ?3")
+    List<Measure> findAllBetweenDates(LocalDateTime startDate, LocalDateTime endDate, Long userId);
 }

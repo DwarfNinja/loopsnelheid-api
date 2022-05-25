@@ -2,6 +2,7 @@ package nl.app.loopsnelheid.security.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import nl.app.loopsnelheid.meassurement.domain.Measure;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
 
 import javax.persistence.*;
@@ -44,9 +45,21 @@ public class User
     )
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user")
+    private Set<Measure> measures = new HashSet<>();
+
     public User() {}
 
-    public User(Long id, String email, String password, Date dateOfBirth, Sex sex, VerificationToken verificationToken, List<DataRequest> dataRequests, Set<Role> roles) {
+    public User(
+            Long id,
+            String email,
+            String password,
+            Date dateOfBirth,
+            Sex sex,
+            VerificationToken verificationToken,
+            List<DataRequest> dataRequests,
+            Set<Role> roles,
+            Set<Measure> measures) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -55,6 +68,7 @@ public class User
         this.verificationToken = verificationToken;
         this.dataRequests = dataRequests;
         this.roles = roles;
+        this.measures = measures;
     }
 
     public boolean isVerified()
