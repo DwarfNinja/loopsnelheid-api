@@ -2,6 +2,7 @@ package nl.app.loopsnelheid.privacy.presentation;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.privacy.application.PrivacyService;
+import nl.app.loopsnelheid.privacy.domain.DataRequestContent;
 import nl.app.loopsnelheid.security.application.UserService;
 import nl.app.loopsnelheid.security.config.AccountEndpoints;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
@@ -9,9 +10,7 @@ import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.privacy.presentation.dto.DataRequestDto;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(AccountEndpoints.PRIVACY_PATH)
@@ -30,6 +29,7 @@ public class PrivacyController {
         DataRequest dataRequest = privacyService.saveDataRequest(authenticatedUser);
 
         return new DataRequestDto(
+                dataRequest.getId(),
                 dataRequest.getEmail(),
                 dataRequest.getDataRequestStatus().toString(),
                 dataRequest.getRequestedAt()

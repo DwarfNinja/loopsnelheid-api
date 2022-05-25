@@ -46,7 +46,7 @@ public class User
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
-    private Set<Measure> measures = new HashSet<>();
+    private List<Measure> measures = new ArrayList<>();
 
     public User() {}
 
@@ -59,7 +59,7 @@ public class User
             VerificationToken verificationToken,
             List<DataRequest> dataRequests,
             Set<Role> roles,
-            Set<Measure> measures) {
+            List<Measure> measures) {
         this.id = id;
         this.email = email;
         this.password = password;
