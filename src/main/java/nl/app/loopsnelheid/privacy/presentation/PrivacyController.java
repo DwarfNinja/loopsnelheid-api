@@ -2,7 +2,6 @@ package nl.app.loopsnelheid.privacy.presentation;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.privacy.application.PrivacyService;
-import nl.app.loopsnelheid.privacy.domain.DataRequestContent;
 import nl.app.loopsnelheid.security.application.UserService;
 import nl.app.loopsnelheid.security.config.AccountEndpoints;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
@@ -27,6 +26,7 @@ public class PrivacyController {
         User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
 
         DataRequest dataRequest = privacyService.saveDataRequest(authenticatedUser);
+        privacyService.handleRequest(dataRequest);
 
         return new DataRequestDto(
                 dataRequest.getId(),

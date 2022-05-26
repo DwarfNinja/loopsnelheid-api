@@ -16,6 +16,7 @@ public class ArchiveHandler implements Handler
 {
     private static final Logger logger = LoggerFactory.getLogger(ArchiveHandler.class);
     private final File file;
+    private String path;
     @Override
     public void handle()
     {
@@ -33,17 +34,25 @@ public class ArchiveHandler implements Handler
             byte[] bytes = new byte[1024];
             int length;
 
-            while((length = fileInputStream.read(bytes)) >= 0) {
+            while ((length = fileInputStream.read(bytes)) >= 0)
+            {
                 zipOutputStream.write(bytes, 0, length);
             }
 
             zipOutputStream.close();
             fileInputStream.close();
             fileOutputStream.close();
+
+            this.path = path;
         }
         catch (Exception e)
         {
             logger.error(e.getMessage());
         }
+    }
+
+    public String getPath()
+    {
+        return path;
     }
 }
