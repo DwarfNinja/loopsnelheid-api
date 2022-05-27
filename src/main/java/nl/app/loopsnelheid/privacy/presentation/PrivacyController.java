@@ -1,6 +1,7 @@
 package nl.app.loopsnelheid.privacy.presentation;
 
 import lombok.RequiredArgsConstructor;
+import nl.app.loopsnelheid.privacy.application.DataRequestJobService;
 import nl.app.loopsnelheid.privacy.application.PrivacyService;
 import nl.app.loopsnelheid.security.application.UserService;
 import nl.app.loopsnelheid.security.config.AccountEndpoints;
@@ -9,9 +10,7 @@ import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.privacy.presentation.dto.DataRequestDto;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(AccountEndpoints.PRIVACY_PATH)
@@ -20,6 +19,20 @@ public class PrivacyController {
 
     private final UserService userService;
     private final PrivacyService privacyService;
+    private final DataRequestJobService dataRequestJobService;
+
+    @GetMapping("/{id}")
+    public DataRequestDto getDataRequest(@PathVariable Long id)
+    {
+        DataRequest dataRequest = privacyService.getDataRequestById(id);
+
+        return new DataRequestDto(
+                dataRequest.getId(),
+                dataRequest.getEmail(),
+                dataRequest.getDataRequestStatus().toString(),
+                dataRequest.getRequestedAt()
+        );
+    }
 
     @PostMapping
     public DataRequestDto submitRequest()
@@ -28,8 +41,10 @@ public class PrivacyController {
         User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
 
         DataRequest dataRequest = privacyService.saveDataRequest(authenticatedUser);
+        dataRequestJobService.initJob(dataRequest);
 
         return new DataRequestDto(
+                dataRequest.getId(),
                 dataRequest.getEmail(),
                 dataRequest.getDataRequestStatus().toString(),
                 dataRequest.getRequestedAt()

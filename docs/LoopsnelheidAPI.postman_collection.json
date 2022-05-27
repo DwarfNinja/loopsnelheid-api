@@ -2,12 +2,23 @@
 	"info": {
 		"_postman_id": "a4871d75-89ef-45a0-9ffb-f78e4dbddc9f",
 		"name": "Loopsnelheid API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10984202"
 	},
 	"item": [
 		{
 			"name": "Create measures",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzNDQ1OTc3LCJleHAiOjE2NTQwNTA3Nzd9.9vNHwykQd29in3wMvT0uyM8TUnVM2OcCArCjvP1t0--KaqTho8VrYW5blXXCoimWPkIaItIg1i8dbVhqBTZjRw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -34,6 +45,16 @@
 		{
 			"name": "Retrieve all measures",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzNDk0NjIyLCJleHAiOjE2NTQwOTk0MjJ9.UXifoplTI9QQNLoMa6h0QVguDEpDvW8Uy98-ertqZ0T4-ML4-9tWRtJcfHPQkgpr58qg9uosTUBPMYM16_j35A",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -67,18 +88,28 @@
 			"response": []
 		},
 		{
-			"name": "Get average measures of this week Copy",
+			"name": "Get average measures of this month",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzNDQ1OTc3LCJleHAiOjE2NTQwNTA3Nzd9.9vNHwykQd29in3wMvT0uyM8TUnVM2OcCArCjvP1t0--KaqTho8VrYW5blXXCoimWPkIaItIg1i8dbVhqBTZjRw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{backendUrl}}/stats/week",
+					"raw": "{{backendUrl}}/stats/month",
 					"host": [
 						"{{backendUrl}}"
 					],
 					"path": [
 						"stats",
-						"week"
+						"month"
 					]
 				}
 			},
@@ -87,6 +118,16 @@
 		{
 			"name": "Get average measures of today",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzNDQ2ODI4LCJleHAiOjE2NTQwNTE2Mjh9.Yjjf-IP2kKxSEVJrIpLnLVG3msq7VYxOA0I--1jxHoX36Jyxa3IUTqOtHMdnktz8m5eUbfC9czzCyi8XMWJEBw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -109,7 +150,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\" : \"admins@test.nl\",\r\n   \"password\" : \"afefef\"\r\n}",
+					"raw": "{\r\n    \"email\" : \"admin@test.nl\",\r\n    \"password\" : \"afefef\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -136,7 +177,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\" : \"admins@test.nl\",\r\n    \"password\" : \"afefef\",\r\n    \"sex\": \"MALE\",\r\n    \"dateOfBirth\": \"2002-02-02\"\r\n}",
+					"raw": "{\r\n    \"email\" : \"admin@test.nl\",\r\n    \"password\" : \"afefef\",\r\n    \"sex\": \"MALE\",\r\n    \"dateOfBirth\": \"2002-02-02\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -179,8 +220,14 @@
 		},
 		{
 			"name": "Verify Email By Token",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -192,7 +239,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{backendUrl}}/auth/verify/token/1/2+U3RykrQXzd7B5Dwa295Qn7+9XmKcNleHfMZ5QXWyeI+VtBMPD5KJKIWn4y2o9EnYURpAhba2nUsrsQ==",
+					"raw": "{{backendUrl}}/auth/verify/token/3/uLTXmeSZJzzN2sQGCsw2zzm+4xsCrhIgVkA8KRrCw4mljwSNddMH+9gIgDciBcyFB4pzCwhQ3j5zkWXIlKVzg==",
 					"host": [
 						"{{backendUrl}}"
 					],
@@ -200,8 +247,91 @@
 						"auth",
 						"verify",
 						"token",
-						"1",
-						"2+U3RykrQXzd7B5Dwa295Qn7+9XmKcNleHfMZ5QXWyeI+VtBMPD5KJKIWn4y2o9EnYURpAhba2nUsrsQ=="
+						"3",
+						"uLTXmeSZJzzN2sQGCsw2zzm+4xsCrhIgVkA8KRrCw4mljwSNddMH+9gIgDciBcyFB4pzCwhQ3j5zkWXIlKVzg=="
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit privacy data request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzNjUyMDgxLCJleHAiOjE2NTQyNTY4ODF9.Fg75ZPgj69YGJtJza_bJkIKfSTp50WC9oNUEv6MxTn2pyvbTstWas3Wfdp2cbKDXOSJp33zW4pcBusqHnNg9kQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{backendUrl}}/privacy",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"privacy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsb29wc25lbGhlaWQtYXBpIiwiYXVkIjoibG9vcHNuZWxoZWlkIiwic3ViIjoiYWRtaW5zQHRlc3QubmwiLCJleHAiOjE2NTQwMDkxNjh9.B_kQe3ccBEkOA1jEY1J5ulQ7F94-u1MKPdgMitGjObJMF9hHx6YGF2gmqV5XPuquyXyYyXv-u3Ftr0hXvxRRJA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backendUrl}}/auth/profile",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"auth",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get data request content",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzNjUyMDgxLCJleHAiOjE2NTQyNTY4ODF9.Fg75ZPgj69YGJtJza_bJkIKfSTp50WC9oNUEv6MxTn2pyvbTstWas3Wfdp2cbKDXOSJp33zW4pcBusqHnNg9kQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{backendUrl}}/privacy/1",
+					"host": [
+						"{{backendUrl}}"
+					],
+					"path": [
+						"privacy",
+						"1"
 					]
 				}
 			},

@@ -37,7 +37,7 @@ public class User
     @OneToMany(mappedBy = "user")
     private List<DataRequest> dataRequests;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -45,8 +45,8 @@ public class User
     )
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
-    private Set<Measure> measures = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Measure> measures = new ArrayList<>();
 
     public User() {}
 
@@ -59,7 +59,7 @@ public class User
             VerificationToken verificationToken,
             List<DataRequest> dataRequests,
             Set<Role> roles,
-            Set<Measure> measures) {
+            List<Measure> measures) {
         this.id = id;
         this.email = email;
         this.password = password;
