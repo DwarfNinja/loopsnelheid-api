@@ -2,9 +2,9 @@ package nl.app.loopsnelheid.meassurement.presentation.dto;
 
 public class DefaultMeasureDto
 {
-    public int age;
+    public final int age;
 
-    public double speed;
+    public final double speed;
 
     public DefaultMeasureDto(int age, double speed)
     {

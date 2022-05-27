@@ -4,9 +4,9 @@ import java.util.List;
 
 public class DefaultMeasureStatisticDto
 {
-    public List<DefaultMeasureDto> defaultMaleMeasures;
+    public final List<DefaultMeasureDto> defaultMaleMeasures;
 
-    public List<DefaultMeasureDto> defaultFemaleMeasures;
+    public final List<DefaultMeasureDto> defaultFemaleMeasures;
 
     public DefaultMeasureStatisticDto(List<DefaultMeasureDto> defaultMaleMeasures, List<DefaultMeasureDto> defaultFemaleMeasures)
     {

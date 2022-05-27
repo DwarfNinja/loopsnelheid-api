@@ -4,12 +4,11 @@ import java.time.LocalDateTime;
 
 public class DataRequestDto
 {
-    public Long id;
-    public String email;
+    public final Long id;
+    public final String email;
+    public final String dataRequestStatus;
 
-    public String dataRequestStatus;
-
-    public LocalDateTime requestedAt;
+    public final LocalDateTime requestedAt;
 
     public DataRequestDto(Long id, String email, String dataRequestStatus, LocalDateTime requestedAt)
     {
