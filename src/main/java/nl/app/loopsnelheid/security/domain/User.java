@@ -37,7 +37,7 @@ public class User
     @OneToMany(mappedBy = "user")
     private List<DataRequest> dataRequests;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -45,7 +45,7 @@ public class User
     )
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Measure> measures = new ArrayList<>();
 
     public User() {}

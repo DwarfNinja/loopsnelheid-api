@@ -1,6 +1,7 @@
 package nl.app.loopsnelheid.privacy.presentation;
 
 import lombok.RequiredArgsConstructor;
+import nl.app.loopsnelheid.privacy.application.DataRequestJobService;
 import nl.app.loopsnelheid.privacy.application.PrivacyService;
 import nl.app.loopsnelheid.security.application.UserService;
 import nl.app.loopsnelheid.security.config.AccountEndpoints;
@@ -18,6 +19,20 @@ public class PrivacyController {
 
     private final UserService userService;
     private final PrivacyService privacyService;
+    private final DataRequestJobService dataRequestJobService;
+
+    @GetMapping("/{id}")
+    public DataRequestDto getDataRequest(@PathVariable Long id)
+    {
+        DataRequest dataRequest = privacyService.getDataRequestById(id);
+
+        return new DataRequestDto(
+                dataRequest.getId(),
+                dataRequest.getEmail(),
+                dataRequest.getDataRequestStatus().toString(),
+                dataRequest.getRequestedAt()
+        );
+    }
 
     @PostMapping
     public DataRequestDto submitRequest()
@@ -26,7 +41,7 @@ public class PrivacyController {
         User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
 
         DataRequest dataRequest = privacyService.saveDataRequest(authenticatedUser);
-        privacyService.handleRequest(dataRequest);
+        dataRequestJobService.initJob(dataRequest);
 
         return new DataRequestDto(
                 dataRequest.getId(),

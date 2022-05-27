@@ -47,7 +47,14 @@ public class PrivacyService {
         dataRequest.markAsFinished();
         dataRequestRepository.save(dataRequest);
     }
-    
+
+    public DataRequest getDataRequestById(Long id)
+    {
+        return dataRequestRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Gegeven data request id bestaat niet"));
+    }
+
+    @Transactional
     public void handleRequest(DataRequest dataRequest)
     {
         dataRequest.markAsPending();
