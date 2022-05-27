@@ -7,5 +7,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserProfileDto
 {
-    private final String email;
+    public final String email;
 }

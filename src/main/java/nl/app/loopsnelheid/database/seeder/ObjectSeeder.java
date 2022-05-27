@@ -1,4 +1,4 @@
-package nl.app.loopsnelheid.seeder;
+package nl.app.loopsnelheid.database.seeder;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package nl.app.loopsnelheid.seeder;
+package nl.app.loopsnelheid.database.seeder;
 
 
 public abstract class Seeder

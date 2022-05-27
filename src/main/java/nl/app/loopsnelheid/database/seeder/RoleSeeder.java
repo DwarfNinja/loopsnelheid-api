@@ -1,4 +1,4 @@
-package nl.app.loopsnelheid.seeder;
+package nl.app.loopsnelheid.database.seeder;
 
 import nl.app.loopsnelheid.security.application.RoleService;
 import nl.app.loopsnelheid.security.domain.ERole;
@@ -20,8 +20,8 @@ public class RoleSeeder extends ObjectSeeder<Role>
     protected void load()
     {
         Set<Role> roles = new HashSet<>();
-        roles.add(new Role(ERole.ROLE_USER));
-        roles.add(new Role(ERole.ROLE_ADMIN));
+        roles.add(roleService.createRole(ERole.ROLE_USER));
+        roles.add(roleService.createRole(ERole.ROLE_ADMIN));
 
         objects.addAll(roles);
     }

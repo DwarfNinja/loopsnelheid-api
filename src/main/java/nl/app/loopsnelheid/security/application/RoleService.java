@@ -29,6 +29,11 @@ public class RoleService
         return roles.stream().map(this::getRoleByName).collect(Collectors.toSet());
     }
 
+    public Role createRole(ERole eRole)
+    {
+        return new Role(eRole);
+    }
+
     public void saveAllRoles(Set<Role> roles)
     {
         roleRepository.saveAll(roles);

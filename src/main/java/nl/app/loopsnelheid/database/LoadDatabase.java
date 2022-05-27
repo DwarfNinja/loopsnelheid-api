@@ -1,5 +1,6 @@
-package nl.app.loopsnelheid.seeder;
+package nl.app.loopsnelheid.database;
 
+import nl.app.loopsnelheid.database.seeder.DatabaseSeeder;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -6,6 +6,9 @@ import nl.app.loopsnelheid.meassurement.domain.Measure;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.*;
 
 @Entity
@@ -78,5 +81,13 @@ public class User
 
     public String getUsername() {
         return this.email;
+    }
+
+    public int getAge()
+    {
+        LocalDate date = LocalDate.now();
+        Period period = Period.between(dateOfBirth.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), date);
+
+        return period.getYears();
     }
 }
