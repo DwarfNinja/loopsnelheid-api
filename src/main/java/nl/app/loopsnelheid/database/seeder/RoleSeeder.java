@@ -1,4 +1,4 @@
-package nl.app.loopsnelheid.seeder;
+package nl.app.loopsnelheid.database.seeder;
 
 import nl.app.loopsnelheid.security.application.RoleService;
 import nl.app.loopsnelheid.security.domain.ERole;
