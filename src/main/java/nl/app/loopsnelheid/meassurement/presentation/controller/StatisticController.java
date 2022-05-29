@@ -43,8 +43,8 @@ public class StatisticController
                 measureStatistic.getMeasureStatisticType().toString(),
                 measureStatistic.getAverageWalkingSpeed(),
                 measureStatistic.getAmountOfMeasures(),
-                measureStatistic.getAverageWalkingSpeedEachDay(),
-                new DefaultMeasureDto(defaultMeasure.getAge(), defaultMeasure.getSpeed())
+                new DefaultMeasureDto(defaultMeasure.getAge(), defaultMeasure.getSpeed()),
+                measureStatistic.getAverageWalkingSpeedEachDay()
         );
     }
 
@@ -66,8 +66,8 @@ public class StatisticController
                 measureStatistic.getMeasureStatisticType().toString(),
                 measureStatistic.getAverageWalkingSpeed(),
                 measureStatistic.getAmountOfMeasures(),
-                measureStatistic.getAverageWalkingSpeedEachDay(),
-                new DefaultMeasureDto(defaultMeasure.getAge(), defaultMeasure.getSpeed())
+                new DefaultMeasureDto(defaultMeasure.getAge(), defaultMeasure.getSpeed()),
+                measureStatistic.getAverageWalkingSpeedEachDay()
         );
     }
     
@@ -89,8 +89,8 @@ public class StatisticController
                 measureStatistic.getMeasureStatisticType().toString(),
                 measureStatistic.getAverageWalkingSpeed(),
                 measureStatistic.getAmountOfMeasures(),
-                measureStatistic.getAverageWalkingSpeedEachDay(),
-                new DefaultMeasureDto(defaultMeasure.getAge(), defaultMeasure.getSpeed())
+                new DefaultMeasureDto(defaultMeasure.getAge(), defaultMeasure.getSpeed()),
+                measureStatistic.getAverageWalkingSpeedEachDay()
         );
     }
 }
