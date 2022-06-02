@@ -12,6 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping(AccountEndpoints.PRIVACY_PATH)
 @RequiredArgsConstructor
@@ -20,6 +23,22 @@ public class PrivacyController {
     private final UserService userService;
     private final PrivacyService privacyService;
     private final DataRequestJobService dataRequestJobService;
+
+    @GetMapping
+    public List<DataRequestDto> getDataRequests()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
+
+        return privacyService.getDataRequests(authenticatedUser.getId()).stream()
+                .map(dataRequest -> new DataRequestDto(
+                        dataRequest.getId(),
+                        dataRequest.getEmail(),
+                        dataRequest.getDataRequestStatus().toString(),
+                        dataRequest.getRequestedAt()
+                ))
+                .collect(Collectors.toList());
+    }
 
     @GetMapping("/{id}")
     public DataRequestDto getDataRequest(@PathVariable Long id)

@@ -17,6 +17,7 @@ import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileInputStream;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -46,6 +47,11 @@ public class PrivacyService {
     {
         dataRequest.markAsFinished();
         dataRequestRepository.save(dataRequest);
+    }
+
+    public List<DataRequest> getDataRequests(Long userId)
+    {
+        return dataRequestRepository.findAllByUserId(userId);
     }
 
     public DataRequest getDataRequestById(Long id)
