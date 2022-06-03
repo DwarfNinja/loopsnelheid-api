@@ -22,3 +22,9 @@ services:
       - DB_APP_PASS=loopsnelheid-db
     volumes:
       - "./data:/var/data/db"
+  mailcatcher:
+    image: schickling/mailcatcher
+    container_name: loopsnelheid-mailcatcher
+    ports:
+      - "1080:1080"
+      - "1025:1025"
