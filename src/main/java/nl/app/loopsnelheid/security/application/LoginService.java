@@ -24,6 +24,8 @@ public class LoginService
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
 
+    private UserDetails userDetails;
+
     public JwtResponse authenticateUser(String email, String password)
     {
         Authentication authentication = authenticationManager.authenticate(
@@ -33,11 +35,16 @@ public class LoginService
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
-        UserDetails userDetails = (UserDetailsImp) authentication.getPrincipal();
+        userDetails = (UserDetailsImp) authentication.getPrincipal();
         Set<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
 
         return new JwtResponse(jwt, userDetails.getUsername(), roles);
+    }
+
+    public UserDetails getUserDetails()
+    {
+        return userDetails;
     }
 }
