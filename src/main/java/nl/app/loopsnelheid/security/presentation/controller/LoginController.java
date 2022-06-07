@@ -54,5 +54,14 @@ public class LoginController
         deviceService.revokeDevice(device, authenticatedUser);
     }
 
+    @GetMapping("/devices")
+    public List<DeviceDto> getDevices()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
+        
+        return  authenticatedUser.getDevices().stream()
+                .map(device -> new DeviceDto(device.getSession(), device.getEDevice().toString()))
+                .collect(Collectors.toList());
     }
 }
