@@ -3,19 +3,17 @@ package nl.app.loopsnelheid.meassurement.presentation.controller;
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.meassurement.application.DefaultMeasureService;
 import nl.app.loopsnelheid.meassurement.application.MeasureService;
-import nl.app.loopsnelheid.meassurement.domain.DefaultMeasure;
 import nl.app.loopsnelheid.meassurement.domain.Measure;
 import nl.app.loopsnelheid.meassurement.presentation.dto.DefaultMeasureDto;
 import nl.app.loopsnelheid.meassurement.presentation.dto.DefaultMeasureStatisticDto;
 import nl.app.loopsnelheid.meassurement.presentation.dto.MeasureDto;
 import nl.app.loopsnelheid.security.application.DeviceService;
 import nl.app.loopsnelheid.security.application.UserService;
-import nl.app.loopsnelheid.security.config.AccountEndpoints;
 import nl.app.loopsnelheid.security.domain.Device;
 import nl.app.loopsnelheid.security.domain.EDevice;
 import nl.app.loopsnelheid.security.domain.Sex;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.domain.exception.UnauthorizedMeasureDevice;
+import nl.app.loopsnelheid.security.domain.exception.UnauthorizedMeasureDeviceException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -57,7 +55,7 @@ public class MeasureController
 
         if (device.getEDevice().equals(EDevice.READING_DEVICE))
         {
-            throw new UnauthorizedMeasureDevice();
+            throw new UnauthorizedMeasureDeviceException();
         }
 
         List<Measure> measures = measureService.createManyMeasures(measureDtos, authenticatedUser);

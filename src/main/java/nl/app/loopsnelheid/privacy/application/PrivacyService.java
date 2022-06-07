@@ -9,6 +9,7 @@ import nl.app.loopsnelheid.privacy.domain.DataRequest;
 import nl.app.loopsnelheid.privacy.domain.DataRequestContent;
 import nl.app.loopsnelheid.privacy.domain.DataRequestStatus;
 import nl.app.loopsnelheid.privacy.domain.event.OnDataRequestCompleteEvent;
+import nl.app.loopsnelheid.privacy.domain.exception.DataRequestNotFoundException;
 import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -57,7 +58,7 @@ public class PrivacyService {
     public DataRequest getDataRequestById(Long id)
     {
         return dataRequestRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Gegeven data request id bestaat niet"));
+                .orElseThrow(() -> new DataRequestNotFoundException("Gegeven data request id bestaat niet"));
     }
 
     @Transactional

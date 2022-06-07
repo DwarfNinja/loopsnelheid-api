@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.data.RoleRepository;
 import nl.app.loopsnelheid.security.domain.ERole;
 import nl.app.loopsnelheid.security.domain.Role;
+import nl.app.loopsnelheid.security.domain.exception.RoleNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +22,7 @@ public class RoleService
     public Role getRoleByName(String name)
     {
         return roleRepository.findByName(ERole.valueOf(name))
-                .orElseThrow(() -> new RuntimeException("Error: Deze rol bestaat niet"));
+                .orElseThrow(() -> new RoleNotFoundException("Error: Deze rol bestaat niet"));
     }
 
     public Set<Role> provideUserRoles(List<String> roles)

@@ -1,5 +1,6 @@
 package nl.app.loopsnelheid.security.application;
 
+import nl.app.loopsnelheid.privacy.domain.exception.DeviceNotFoundException;
 import nl.app.loopsnelheid.security.application.util.TokenGenerator;
 import nl.app.loopsnelheid.security.data.DeviceRepository;
 import nl.app.loopsnelheid.security.domain.Device;
@@ -23,7 +24,7 @@ public class DeviceService
     public Device getDeviceBySession(String session)
     {
         return deviceRepository.findBySession(session)
-                .orElseThrow(() -> new RuntimeException("Het opgegeven sessie is ongeldig"));
+                .orElseThrow(() -> new DeviceNotFoundException("Het opgegeven sessie bestaat niet"));
     }
 
     public Device createDevice(User authenticatedUser)
