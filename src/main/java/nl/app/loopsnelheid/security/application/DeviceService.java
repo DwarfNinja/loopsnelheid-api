@@ -20,6 +20,11 @@ public class DeviceService
         this.deviceRepository = deviceRepository;
     }
 
+    public Device getDeviceBySession(String session)
+    {
+        return deviceRepository.findBySession(session)
+                .orElseThrow(() -> new RuntimeException("Het opgegeven sessie is ongeldig"));
+    }
 
     public Device createDevice(User authenticatedUser)
     {
@@ -31,5 +36,17 @@ public class DeviceService
         return deviceRepository.save(device);
     }
 
+    public void revokeDevice(Device device, User authenticatedUser)
+    {
+        if (device.getEDevice() == EDevice.MEASURING_DEVICE && authenticatedUser.getAmountOfDevices() > 1)
+        {
+            Device newDevice = authenticatedUser.getRandomDeviceExceptGivenSession(device.getSession());
+            newDevice.setEDevice(EDevice.MEASURING_DEVICE);
+
+            deviceRepository.save(newDevice);
+        }
+
+        deviceRepository.delete(device);
+    }
 
 }

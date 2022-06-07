@@ -100,4 +100,14 @@ public class User
     {
         return devices.size();
     }
+
+    public Device getRandomDeviceExceptGivenSession(String session)
+    {
+        for (Device device : devices)
+        {
+            if (!device.getSession().equals(session)) return device;
+        }
+
+        return null;
+    }
 }

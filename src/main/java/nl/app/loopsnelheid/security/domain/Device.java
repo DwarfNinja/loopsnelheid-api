@@ -1,12 +1,14 @@
 package nl.app.loopsnelheid.security.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "devices")
 @Getter
+@Setter
 public class Device
 {
     @Id

@@ -16,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
@@ -42,7 +44,15 @@ public class LoginController
         );
     }
 
+    @PostMapping("/logout")
+    public void logoutUser(@RequestHeader("session") String session)
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
 
-        return new JwtResponseDto(jwtResponse.getJwt(), jwtResponse.getEmail(), jwtResponse.getRoles());
+        Device device = deviceService.getDeviceBySession(session);
+        deviceService.revokeDevice(device, authenticatedUser);
+    }
+
     }
 }
