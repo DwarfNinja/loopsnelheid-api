@@ -103,11 +103,17 @@ public class User
 
     public Device getRandomDeviceExceptGivenSession(String session)
     {
-        for (Device device : devices)
-        {
-            if (!device.getSession().equals(session)) return device;
-        }
+        return devices.stream()
+                .filter(device -> !device.getSession().equals(session))
+                .findFirst()
+                .orElse(null);
+    }
 
-        return null;
+    public Device getCurrentMeasureDevice()
+    {
+        return devices.stream()
+                .filter(device -> device.getEDevice().equals(EDevice.MEASURING_DEVICE))
+                .findFirst()
+                .orElse(null);
     }
 }

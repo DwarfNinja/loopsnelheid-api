@@ -8,10 +8,14 @@ import nl.app.loopsnelheid.meassurement.domain.Measure;
 import nl.app.loopsnelheid.meassurement.presentation.dto.DefaultMeasureDto;
 import nl.app.loopsnelheid.meassurement.presentation.dto.DefaultMeasureStatisticDto;
 import nl.app.loopsnelheid.meassurement.presentation.dto.MeasureDto;
+import nl.app.loopsnelheid.security.application.DeviceService;
 import nl.app.loopsnelheid.security.application.UserService;
 import nl.app.loopsnelheid.security.config.AccountEndpoints;
+import nl.app.loopsnelheid.security.domain.Device;
+import nl.app.loopsnelheid.security.domain.EDevice;
 import nl.app.loopsnelheid.security.domain.Sex;
 import nl.app.loopsnelheid.security.domain.User;
+import nl.app.loopsnelheid.security.domain.exception.UnauthorizedMeasureDevice;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +35,8 @@ public class MeasureController
     private final DefaultMeasureService defaultMeasureService;
     private final UserService userService;
 
+    private final DeviceService deviceService;
+
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public List<MeasureDto> getAll()
@@ -42,10 +48,17 @@ public class MeasureController
     }
 
     @PostMapping
-    public List<MeasureDto> createMany(@Validated @RequestBody List<MeasureDto> measureDtos)
+    public List<MeasureDto> createMany(@RequestHeader("session") String session, @Validated @RequestBody List<MeasureDto> measureDtos)
     {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
+
+        Device device = deviceService.getDeviceBySession(session);
+
+        if (device.getEDevice().equals(EDevice.READING_DEVICE))
+        {
+            throw new UnauthorizedMeasureDevice();
+        }
 
         List<Measure> measures = measureService.createManyMeasures(measureDtos, authenticatedUser);
 

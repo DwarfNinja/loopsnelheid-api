@@ -49,4 +49,13 @@ public class DeviceService
         deviceRepository.delete(device);
     }
 
+    public void markDeviceAsMeasureDevice(Device device, User authenticatedUser)
+    {
+        Device previousDevice = authenticatedUser.getCurrentMeasureDevice();
+        previousDevice.setEDevice(EDevice.READING_DEVICE);
+        device.setEDevice(EDevice.MEASURING_DEVICE);
+
+        deviceRepository.save(previousDevice);
+        deviceRepository.save(device);
+    }
 }

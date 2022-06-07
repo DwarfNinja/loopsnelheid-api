@@ -64,4 +64,15 @@ public class LoginController
                 .map(device -> new DeviceDto(device.getSession(), device.getEDevice().toString()))
                 .collect(Collectors.toList());
     }
+
+    @PatchMapping("/devices/{session}")
+    public void markDeviceAsMeasureDevice(@PathVariable String session)
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
+
+        Device device = deviceService.getDeviceBySession(session);
+
+        deviceService.markDeviceAsMeasureDevice(device, authenticatedUser);
+    }
 }
