@@ -13,7 +13,7 @@ import nl.app.loopsnelheid.security.domain.Device;
 import nl.app.loopsnelheid.security.domain.EDevice;
 import nl.app.loopsnelheid.security.domain.Sex;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.domain.exception.UnauthorizedMeasureDeviceException;
+import nl.app.loopsnelheid.meassurement.domain.exception.UnauthorizedMeasureDeviceException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

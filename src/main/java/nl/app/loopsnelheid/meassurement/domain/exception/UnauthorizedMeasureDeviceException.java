@@ -1,4 +1,4 @@
-package nl.app.loopsnelheid.security.domain.exception;
+package nl.app.loopsnelheid.meassurement.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
