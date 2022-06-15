@@ -13,4 +13,7 @@ public class JwtResponseDto
     public final String email;
     public final Set<String> roles;
 
+    @JsonProperty("device")
+    public final DeviceDto deviceDto;
+
 }
