@@ -3,6 +3,7 @@ package nl.app.loopsnelheid.meassurement.application;
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.meassurement.data.DefaultMeasureRepository;
 import nl.app.loopsnelheid.meassurement.domain.DefaultMeasure;
+import nl.app.loopsnelheid.privacy.domain.exception.MissingDataSetException;
 import nl.app.loopsnelheid.security.domain.Sex;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,6 @@ public class DefaultMeasureService
     public DefaultMeasure getDefaultMeasureBySexAndAge(Sex sex, int age)
     {
         return defaultMeasureRepository.findBySexAndAge(sex, age)
-                .orElseThrow(() -> new RuntimeException("Gegeven geslacht en leeftijd is geen match in de dataset"));
+                .orElseThrow(() -> new MissingDataSetException("Gegeven geslacht en leeftijd is geen match in de dataset"));
     }
 }

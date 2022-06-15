@@ -40,6 +40,9 @@ public class User
     @OneToMany(mappedBy = "user")
     private List<DataRequest> dataRequests;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Device> devices;
+
     @ManyToMany
     @JoinTable(
             name = "user_roles",
@@ -61,6 +64,7 @@ public class User
             Sex sex,
             VerificationToken verificationToken,
             List<DataRequest> dataRequests,
+            Set<Device> devices,
             Set<Role> roles,
             List<Measure> measures) {
         this.id = id;
@@ -70,6 +74,7 @@ public class User
         this.sex = sex;
         this.verificationToken = verificationToken;
         this.dataRequests = dataRequests;
+        this.devices = devices;
         this.roles = roles;
         this.measures = measures;
     }
@@ -89,5 +94,26 @@ public class User
         Period period = Period.between(dateOfBirth.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), date);
 
         return period.getYears();
+    }
+
+    public int getAmountOfDevices()
+    {
+        return devices.size();
+    }
+
+    public Device getRandomDeviceExceptGivenSession(String session)
+    {
+        return devices.stream()
+                .filter(device -> !device.getSession().equals(session))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Device getCurrentMeasureDevice()
+    {
+        return devices.stream()
+                .filter(device -> device.getEDevice().equals(EDevice.MEASURING_DEVICE))
+                .findFirst()
+                .orElse(null);
     }
 }
