@@ -167,7 +167,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\" : \"admin@test.nl\",\r\n    \"password\" : \"afefef\",\r\n    \"sex\": \"MALE\",\r\n    \"dateOfBirth\": \"2002-02-02\"\r\n}",
+							"raw": "{\r\n    \"email\" : \"admin@test.nl\",\r\n    \"password\" : \"afefef\",\r\n    \"sex\": \"MALE\",\r\n    \"dateOfBirth\": \"2002-02-02\",\r\n    \"isResearchCandidate\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -336,6 +336,34 @@
 									"path": [
 										"stats",
 										"today"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Submit research data request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjU1Mzg1MzI0LCJleHAiOjE2NTU5OTAxMjR9.p3xD9Y8y8OzlVMhf9HnvhOWGTsrE7PNJk3awmKsw9OaB3xD1Yowk4lpT-yKFRY-24AO7sExx-kniiwtoBfpPFA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{backendUrl}}/stats/research",
+									"host": [
+										"{{backendUrl}}"
+									],
+									"path": [
+										"stats",
+										"research"
 									]
 								}
 							},
