@@ -21,4 +21,6 @@ public class UserDto
 
     @NotBlank(message = "Sex can't be empty")
     public String sex;
+
+    public boolean isResearchCandidate;
 }

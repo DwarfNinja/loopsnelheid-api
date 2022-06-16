@@ -34,6 +34,9 @@ public class User
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
+    @Column(nullable = false)
+    private boolean isResearchCandidate;
+
     @OneToOne(mappedBy = "user")
     private VerificationToken verificationToken;
 
@@ -62,6 +65,7 @@ public class User
             String password,
             Date dateOfBirth,
             Sex sex,
+            boolean isResearchCandidate,
             VerificationToken verificationToken,
             List<DataRequest> dataRequests,
             Set<Device> devices,
@@ -72,6 +76,7 @@ public class User
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
+        this.isResearchCandidate = isResearchCandidate;
         this.verificationToken = verificationToken;
         this.dataRequests = dataRequests;
         this.devices = devices;

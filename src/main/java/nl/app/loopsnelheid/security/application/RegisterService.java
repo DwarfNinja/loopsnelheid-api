@@ -35,7 +35,8 @@ public class RegisterService
                 .password(encodedPassword)
                 .dateOfBirth(userDto.dateOfBirth)
                 .sex(Sex.valueOf(userDto.sex))
-                .roles(roles);
+                .roles(roles)
+                .isResearchCandidate(userDto.isResearchCandidate);
 
         if (userDto.id != null)
         {
