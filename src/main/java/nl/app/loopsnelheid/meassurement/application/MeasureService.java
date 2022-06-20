@@ -3,10 +3,8 @@ package nl.app.loopsnelheid.meassurement.application;
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.meassurement.data.DefaultMeasureRepository;
 import nl.app.loopsnelheid.meassurement.data.MeasureRepository;
-import nl.app.loopsnelheid.meassurement.domain.DefaultMeasure;
 import nl.app.loopsnelheid.meassurement.domain.Measure;
 import nl.app.loopsnelheid.meassurement.presentation.dto.MeasureDto;
-import nl.app.loopsnelheid.security.domain.Sex;
 import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +26,14 @@ public class MeasureService
         return this.measureRepository.findAll();
     }
 
-    public List<Measure> getMeasuresBetweenDates(LocalDateTime startDate, LocalDateTime endDate, Long userId)
+    public List<Measure> getMeasuresBetweenDatesByUser(LocalDateTime startDate, LocalDateTime endDate, Long userId)
     {
         return this.measureRepository.findAllBetweenDates(startDate, endDate, userId);
+    }
+
+    public List<Measure> getMeasuresBetweenDates(LocalDateTime startDate, LocalDateTime endDate)
+    {
+        return this.measureRepository.findAllBetweenDates(startDate, endDate);
     }
 
     public List<Measure> createManyMeasures(List<MeasureDto> measureDtos, User authenticatedUser)

@@ -1,4 +1,4 @@
-package nl.app.loopsnelheid.privacy.presentation;
+package nl.app.loopsnelheid.privacy.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.privacy.application.DataRequestJobService;

@@ -72,7 +72,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
         try
         {
-            helper.setSubject("Welcome ");
+            helper.setSubject("Bevestig uw e-mailadres ");
             helper.setText(process, true);
             helper.setTo(email);
             javaMailSender.send(mimeMessage);
