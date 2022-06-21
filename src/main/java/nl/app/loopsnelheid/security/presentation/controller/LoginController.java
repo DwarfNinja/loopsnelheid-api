@@ -40,7 +40,7 @@ public class LoginController
                 jwtResponse.getJwt(),
                 jwtResponse.getEmail(),
                 jwtResponse.getRoles(),
-                new DeviceDto(device.getSession(), device.getEDevice().toString())
+                new DeviceDto(device.getId(),device.getSession(), device.getEDevice().toString())
         );
     }
 
@@ -61,7 +61,7 @@ public class LoginController
         User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
         
         return  authenticatedUser.getDevices().stream()
-                .map(device -> new DeviceDto(device.getSession(), device.getEDevice().toString()))
+                .map(device -> new DeviceDto(device.getId(), device.getSession(), device.getEDevice().toString()))
                 .collect(Collectors.toList());
     }
 
