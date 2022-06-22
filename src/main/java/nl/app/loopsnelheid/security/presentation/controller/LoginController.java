@@ -34,13 +34,19 @@ public class LoginController
     {
         JwtResponse jwtResponse = loginService.authenticateUser(loginDto.email, loginDto.password);
         User authenticatedUser = userService.loadUserByUsername(loginService.getUserDetails().getUsername());
-        Device device = deviceService.createDevice(authenticatedUser, loginDto.deviceInfo);
+        Device device = deviceService.createDevice(authenticatedUser, loginDto.deviceOs, loginDto.deviceInfo);
 
         return new JwtResponseDto(
                 jwtResponse.getJwt(),
                 jwtResponse.getEmail(),
                 jwtResponse.getRoles(),
-                new DeviceDto(device.getId(), device.getSession(), device.getDeviceInfoJSON(), device.getEDevice().toString())
+                new DeviceDto(
+                        device.getId(),
+                        device.getSession(),
+                        device.getEosDevice().toString(),
+                        device.getDeviceInfoJSON(),
+                        device.getEDevice().toString()
+                )
         );
     }
 
@@ -61,8 +67,13 @@ public class LoginController
         User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
         
         return  authenticatedUser.getDevices().stream()
-                .map(device -> new DeviceDto(device.getId(), device.getSession(), device.getDeviceInfoJSON(), device.getEDevice().toString()))
-                .collect(Collectors.toList());
+                .map(device -> new DeviceDto(
+                        device.getId(),
+                        device.getSession(),
+                        device.getEosDevice().toString(),
+                        device.getDeviceInfoJSON(),
+                        device.getEDevice().toString()
+                )).collect(Collectors.toList());
     }
 
     @PatchMapping("/devices/{session}")

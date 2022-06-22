@@ -5,6 +5,7 @@ import nl.app.loopsnelheid.security.application.util.TokenGenerator;
 import nl.app.loopsnelheid.security.data.DeviceRepository;
 import nl.app.loopsnelheid.security.domain.Device;
 import nl.app.loopsnelheid.security.domain.EDevice;
+import nl.app.loopsnelheid.security.domain.EOSDevice;
 import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +28,18 @@ public class DeviceService
                 .orElseThrow(() -> new DeviceNotFoundException("Het opgegeven sessie bestaat niet"));
     }
 
-    public Device createDevice(User authenticatedUser, String deviceInfo)
+    public Device createDevice(User authenticatedUser, String deviceOs, String deviceInfo)
     {
         EDevice eDevice = authenticatedUser.getAmountOfDevices() > 0
                 ? EDevice.READING_DEVICE
                 : EDevice.MEASURING_DEVICE;
-        Device device = new Device(TokenGenerator.generateToken(), deviceInfo, eDevice, authenticatedUser);
+        Device device = new Device(
+                TokenGenerator.generateToken(),
+                deviceInfo,
+                eDevice,
+                EOSDevice.valueOf(deviceOs),
+                authenticatedUser
+        );
 
         return deviceRepository.save(device);
     }
