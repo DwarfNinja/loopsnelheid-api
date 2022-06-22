@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Entity
 @Table(name = "devices")
@@ -21,15 +22,18 @@ public class Device
     @Enumerated(EnumType.STRING)
     private EDevice eDevice;
 
+    private String deviceInfoJSON;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Device() {}
 
-    public Device(String session, EDevice eDevice, User user)
+    public Device(String session, String deviceInfoJSON, EDevice eDevice, User user)
     {
         this.session = session;
+        this.deviceInfoJSON = deviceInfoJSON;
         this.eDevice = eDevice;
         this.user = user;
     }

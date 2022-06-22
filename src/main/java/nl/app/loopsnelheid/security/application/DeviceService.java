@@ -27,12 +27,12 @@ public class DeviceService
                 .orElseThrow(() -> new DeviceNotFoundException("Het opgegeven sessie bestaat niet"));
     }
 
-    public Device createDevice(User authenticatedUser)
+    public Device createDevice(User authenticatedUser, String deviceInfo)
     {
         EDevice eDevice = authenticatedUser.getAmountOfDevices() > 0
                 ? EDevice.READING_DEVICE
                 : EDevice.MEASURING_DEVICE;
-        Device device = new Device(TokenGenerator.generateToken(), eDevice, authenticatedUser);
+        Device device = new Device(TokenGenerator.generateToken(), deviceInfo, eDevice, authenticatedUser);
 
         return deviceRepository.save(device);
     }
