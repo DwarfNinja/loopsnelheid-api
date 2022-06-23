@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-    <title>Bevestig uw e-mailadres</title>
+    <title>Het onderzoeksrapport</title>
 </head>
 <style>
     * {
@@ -44,7 +44,6 @@
         padding: 3rem;
         border-radius: 1rem;
         background-color: white;
-        word-break: break-all;
     }
 
     h2 {
@@ -118,21 +117,8 @@
 </div>
 
 <div class="content">
-    <h2>Uw verificatie code</h2>
-    <p>Kopieer onderstaande 6-cijferige verificatie code en voer deze in op de app om uw e-mailadres te verifiëren of klik op de knop “Account verifiëren” om uw e-mailadres direct te verifiëren.</p>
-    <ul>
-        <li th:text="${#strings.substring(digitalCode, 0,1)}"></li>
-        <li th:text="${#strings.substring(digitalCode, 1,2)}"></li>
-        <li th:text="${#strings.substring(digitalCode, 2,3)}"></li>
-        <li th:text="${#strings.substring(digitalCode, 3,4)}"></li>
-        <li th:text="${#strings.substring(digitalCode, 4,5)}"></li>
-        <li th:text="${#strings.substring(digitalCode, 5,6)}"></li>
-    </ul>
-    <form th:action="${mailApiUrl}">
-        <button>Account verifiëren</button>
-    </form>
-    <p>Gebruik onderstaande link als u problemen ervaart met de knop “Account verifiëren”:</p>
-    <a th:href="${mailApiUrl}" th:text="${mailApiUrl}"></a>
+    <h2>Je onderzoeksrapport is klaar</h2>
+    <p>In het pakket vind je enkele JSON-bestanden van de onderzoeksgegevens die we bij elkaar konden verzamelen.</p>
 </div>
 
 <div>

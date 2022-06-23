@@ -14,7 +14,7 @@ import java.io.FileWriter;
 public class FileHandler implements Handler
 {
     private static final Logger logger = LoggerFactory.getLogger(FileHandler.class);
-    private final DataRequestContent dataRequestContent;
+    private final Object dataRequestContent;
     private File file;
 
     @Override

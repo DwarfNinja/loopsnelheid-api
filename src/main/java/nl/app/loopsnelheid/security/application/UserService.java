@@ -7,6 +7,7 @@ import nl.app.loopsnelheid.security.domain.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -17,5 +18,10 @@ public class UserService
 
     public User loadUserByUsername(String username) {
         return this.userRepository.findByEmail(username).orElseThrow(() -> new UserNotFoundException("Gebruiker bestaat niet"));
+    }
+
+    public List<User> getResearchCandidates()
+    {
+        return userRepository.findAllWhereIsResearchCandidate();
     }
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Entity
 @Table(name = "devices")
@@ -12,7 +13,7 @@ import javax.persistence.*;
 public class Device
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -21,16 +22,24 @@ public class Device
     @Enumerated(EnumType.STRING)
     private EDevice eDevice;
 
+    @Enumerated(EnumType.STRING)
+    private EOSDevice eosDevice;
+
+    @Column(nullable = false, length = 99999)
+    private String deviceInfoJSON;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Device() {}
 
-    public Device(String session, EDevice eDevice, User user)
+    public Device(String session, String deviceInfoJSON, EDevice eDevice, EOSDevice eosDevice, User user)
     {
         this.session = session;
+        this.deviceInfoJSON = deviceInfoJSON;
         this.eDevice = eDevice;
+        this.eosDevice = eosDevice;
         this.user = user;
     }
 }

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class MeasureStatistic
@@ -47,7 +48,8 @@ public class MeasureStatistic
 
     public Map<LocalDate, Double> getAverageWalkingSpeedEachDay()
     {
-        Map<LocalDate, Double> averageWalkingSpeeds = new HashMap<>();
+        Map<LocalDate, Double> averageWalkingSpeeds = new TreeMap<>();
+
         Map<LocalDateTime, List<Measure>> measuresGroupedByDate = measures.stream()
                 .collect(Collectors.groupingBy(Measure::getRegisteredAt));
 

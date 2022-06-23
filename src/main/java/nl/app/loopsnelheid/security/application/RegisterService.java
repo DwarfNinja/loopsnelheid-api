@@ -35,7 +35,8 @@ public class RegisterService
                 .password(encodedPassword)
                 .dateOfBirth(userDto.dateOfBirth)
                 .sex(Sex.valueOf(userDto.sex))
-                .roles(roles);
+                .roles(roles)
+                .isResearchCandidate(userDto.isResearchCandidate);
 
         if (userDto.id != null)
         {
@@ -45,17 +46,20 @@ public class RegisterService
         return userBuilder.build();
     }
 
-    public void registerUser(UserDto userDTO, String password)
+    public Long registerUser(UserDto userDTO, String password)
     {
         String encodedPassword = this.passwordEncoder.encode(password);
         User user = createUser(userDTO, encodedPassword);
 
-        saveUser(user);
+        User savedUser = saveUser(user);
+
         eventPublisher.publishEvent(new OnRegistrationCompleteEvent(user));
+
+        return savedUser.getId();
     }
 
-    public void saveUser(User user)
+    public User saveUser(User user)
     {
-        this.userRepository.save(user);
+        return this.userRepository.save(user);
     }
 }
