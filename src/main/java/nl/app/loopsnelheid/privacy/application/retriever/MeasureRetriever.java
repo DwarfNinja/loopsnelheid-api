@@ -1,6 +1,6 @@
 package nl.app.loopsnelheid.privacy.application.retriever;
 
-import nl.app.loopsnelheid.meassurement.domain.Measure;
+import nl.app.loopsnelheid.measurement.domain.Measure;
 import nl.app.loopsnelheid.security.domain.User;
 
 import java.util.*;

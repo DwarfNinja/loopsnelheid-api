@@ -1,9 +1,10 @@
-package nl.app.loopsnelheid.privacy.application.handler;
+package nl.app.loopsnelheid.measurement.application.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.privacy.domain.DataRequestContent;
+import nl.app.loopsnelheid.privacy.application.handler.Handler;
 import nl.app.loopsnelheid.security.application.util.TokenGenerator;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,10 +12,10 @@ import java.io.File;
 import java.io.FileWriter;
 
 @RequiredArgsConstructor
-public class FileHandler implements Handler
+public class FileJsonHandler implements Handler
 {
-    private static final Logger logger = LoggerFactory.getLogger(FileHandler.class);
-    private final Object dataRequestContent;
+    private static final Logger logger = LoggerFactory.getLogger(FileJsonHandler.class);
+    private final JSONObject content;
     private File file;
 
     @Override
@@ -26,15 +27,13 @@ public class FileHandler implements Handler
 
             do {
                 String fileName = TokenGenerator.generateToken() + ".json";
-                path = "src/main/resources/assets/privacy/" + fileName;
+                path = "src/main/resources/assets/research/" + fileName;
                 file = new File(path);
 
             } while (!file.createNewFile());
 
-            ObjectMapper objectMapper = new ObjectMapper();
-
             FileWriter fileWriter = new FileWriter(path);
-            fileWriter.write(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dataRequestContent));
+            fileWriter.write(content.toJSONString());
             fileWriter.close();
         }
         catch (Exception e)

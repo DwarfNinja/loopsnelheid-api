@@ -1,7 +1,7 @@
 package nl.app.loopsnelheid.database.seeder;
 
-import nl.app.loopsnelheid.meassurement.application.DefaultMeasureService;
-import nl.app.loopsnelheid.meassurement.domain.DefaultMeasure;
+import nl.app.loopsnelheid.measurement.application.DefaultMeasureService;
+import nl.app.loopsnelheid.measurement.domain.DefaultMeasure;
 import nl.app.loopsnelheid.security.domain.Sex;
 
 import java.util.HashSet;
