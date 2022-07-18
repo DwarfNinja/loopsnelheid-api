@@ -23,4 +23,8 @@ public class UserDto
     public String sex;
 
     public boolean isResearchCandidate;
+
+    public int length;
+
+    public int weight;
 }

@@ -1,7 +1,7 @@
 package nl.app.loopsnelheid.privacy.application.handler;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.meassurement.domain.Measure;
+import nl.app.loopsnelheid.measurement.domain.Measure;
 import nl.app.loopsnelheid.privacy.application.retriever.MeasureRetriever;
 import nl.app.loopsnelheid.privacy.application.retriever.PersonalDataRetriever;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;

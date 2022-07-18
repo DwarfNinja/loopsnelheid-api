@@ -1,9 +1,8 @@
 package nl.app.loopsnelheid.database.seeder;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.database.LoadDatabase;
-import nl.app.loopsnelheid.meassurement.application.DefaultMeasureService;
-import nl.app.loopsnelheid.meassurement.data.DefaultMeasureRepository;
+import nl.app.loopsnelheid.measurement.application.DefaultMeasureService;
+import nl.app.loopsnelheid.measurement.data.DefaultMeasureRepository;
 import nl.app.loopsnelheid.security.application.RoleService;
 import nl.app.loopsnelheid.security.data.RoleRepository;
 import org.slf4j.Logger;
