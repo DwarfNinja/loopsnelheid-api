@@ -28,6 +28,7 @@ public class ResearchJsonEncoder implements Encoder
 
         wrapper.put("aanvrager", data.getExportedBy());
         wrapper.put("aanmaak_datum_bestand", simpleDateFormat.format(data.getExportedOn()));
+        wrapper.put("specificatie_nr", "Specificatie80");
 
         JSONArray candidates = new JSONArray();
 
