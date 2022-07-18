@@ -35,6 +35,12 @@ public class User
     private Sex sex;
 
     @Column(nullable = false)
+    private int length;
+
+    @Column(nullable = false)
+    private int weight;
+
+    @Column(nullable = false)
     private boolean isResearchCandidate;
 
     @OneToOne(mappedBy = "user")
@@ -65,6 +71,8 @@ public class User
             String password,
             Date dateOfBirth,
             Sex sex,
+            int length,
+            int weight,
             boolean isResearchCandidate,
             VerificationToken verificationToken,
             List<DataRequest> dataRequests,
@@ -76,6 +84,8 @@ public class User
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
+        this.length = length;
+        this.weight = weight;
         this.isResearchCandidate = isResearchCandidate;
         this.verificationToken = verificationToken;
         this.dataRequests = dataRequests;
@@ -99,6 +109,13 @@ public class User
         Period period = Period.between(dateOfBirth.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), date);
 
         return period.getYears();
+    }
+
+    public String getBirthYear()
+    {
+        LocalDate localDate = dateOfBirth.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        return Integer.toString(localDate.getYear());
     }
 
     public int getAmountOfDevices()

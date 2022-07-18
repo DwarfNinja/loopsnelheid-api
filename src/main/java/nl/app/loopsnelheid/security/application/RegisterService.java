@@ -36,7 +36,9 @@ public class RegisterService
                 .dateOfBirth(userDto.dateOfBirth)
                 .sex(Sex.valueOf(userDto.sex))
                 .roles(roles)
-                .isResearchCandidate(userDto.isResearchCandidate);
+                .isResearchCandidate(userDto.isResearchCandidate)
+                .length(userDto.length)
+                .weight(userDto.weight);
 
         if (userDto.id != null)
         {

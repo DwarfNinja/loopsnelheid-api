@@ -1,8 +1,7 @@
 package nl.app.loopsnelheid.meassurement.application.listener;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.meassurement.application.ResearchService;
-import nl.app.loopsnelheid.meassurement.domain.ResearchStatistic;
+import nl.app.loopsnelheid.meassurement.domain.ResearchData;
 import nl.app.loopsnelheid.meassurement.domain.event.OnResearchDataRequestCompleteEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +15,6 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Component
 @RequiredArgsConstructor
@@ -36,9 +33,9 @@ public class ResearchDataRequestListener implements ApplicationListener<OnResear
 
     public void confirmResearchDataRequest(OnResearchDataRequestCompleteEvent event)
     {
-        ResearchStatistic researchStatistic = event.getResearchStatistic();
+        ResearchData researchData = event.getResearchData();
 
-        sendResearchDataRequest(researchStatistic.getEmail(), researchStatistic.getPath());
+        sendResearchDataRequest(researchData.getEmail(), researchData.getPath());
     }
 
     public void sendResearchDataRequest(String email, String filePath)
