@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Set;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -18,24 +18,23 @@ import java.util.zip.ZipOutputStream;
 public class ArchiveHandler implements Handler
 {
     private static final Logger logger = LoggerFactory.getLogger(ArchiveHandler.class);
-    private final Set<File> files;
+    private final Map<String, File> processedFiles;
     private String path;
     @Override
     public void handle()
     {
         String archiveName = TokenGenerator.generateToken() + ".zip";
         String path = "src/main/resources/assets/research/" + archiveName;
-
         try
         {
             FileOutputStream fileOutputStream = new FileOutputStream(path);
             ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
 
-            for (File file : files)
+            for (Map.Entry<String, File> processedFile : processedFiles.entrySet())
             {
-                FileInputStream fileInputStream = new FileInputStream(file);
+                FileInputStream fileInputStream = new FileInputStream(processedFile.getValue());
 
-                zipOutputStream.putNextEntry(new ZipEntry("onderzoeksgegevens.json"));
+                zipOutputStream.putNextEntry(new ZipEntry(processedFile.getKey()));
 
                 int length;
 
