@@ -1,6 +1,6 @@
 package nl.app.loopsnelheid.measurement.application.encoder;
 
-public interface Encoder
+public interface JsonEncoder
 {
     void encode();
 }

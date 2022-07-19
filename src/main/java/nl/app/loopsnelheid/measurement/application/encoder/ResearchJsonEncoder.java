@@ -9,11 +9,11 @@ import org.json.simple.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
-public class ResearchJsonEncoder implements Encoder
+public class ResearchJsonEncoder implements JsonEncoder
 {
     private final ResearchData data;
     private JSONObject wrapper;
@@ -24,22 +24,21 @@ public class ResearchJsonEncoder implements Encoder
         String pattern = "yyyy.mm.dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-        JSONObject wrapper = new JSONObject();
-
-        wrapper.put("aanvrager", data.getExportedBy());
-        wrapper.put("aanmaak_datum_bestand", simpleDateFormat.format(data.getExportedOn()));
-        wrapper.put("specificatie_nr", "Specificatie80");
+        Map<String, Object> wrapperMap = new HashMap<>();
+        wrapperMap.put("aanvrager", data.getExportedBy());
+        wrapperMap.put("aanmaak_datum_bestand", simpleDateFormat.format(data.getExportedOn()));
+        wrapperMap.put("specificatie_nr", "Specificatie80");
 
         JSONArray candidates = new JSONArray();
 
         for (ResearchDataCandidate candidate : data.getCandidates())
         {
-            JSONObject candidateWrapper = new JSONObject();
-            candidateWrapper.put("gebruiker_id", candidate.getId());
-            candidateWrapper.put("geslacht", candidate.getSex().toString().equals("MALE") ? 1 : 2);
-            candidateWrapper.put("geboorte_jaar", candidate.getBirthYear());
-            candidateWrapper.put("lengte", candidate.getLength());
-            candidateWrapper.put("gewicht", candidate.getWeight());
+            Map<String, Object> candidateWrapperMap = new HashMap<>();
+            candidateWrapperMap.put("gebruiker_id", candidate.getId());
+            candidateWrapperMap.put("geslacht", candidate.getSex().toString().equals("MALE") ? 1 : 2);
+            candidateWrapperMap.put("geboortejaar", candidate.getBirthYear());
+            candidateWrapperMap.put("lengte", candidate.getLength());
+            candidateWrapperMap.put("gewicht", candidate.getWeight());
 
             JSONArray measures = new JSONArray();
 
@@ -48,22 +47,22 @@ public class ResearchJsonEncoder implements Encoder
                 DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy.MM.dd");
                 DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-                JSONObject measureWrapper = new JSONObject();
-                measureWrapper.put("meting_id", measure.getId());
-                measureWrapper.put("datum_meting", measure.getRegisteredAt().format(formatDate));
-                measureWrapper.put("tijd_meting", measure.getRegisteredAt().format(formatTime));
-                measureWrapper.put("gemiddelde_snelheid", measure.getWalkingSpeed());
+                Map<String, Object> measureWrapperMap = new HashMap<>();
+                measureWrapperMap.put("meting_id", measure.getId());
+                measureWrapperMap.put("datum_meting", measure.getRegisteredAt().format(formatDate));
+                measureWrapperMap.put("tijd_meting", measure.getRegisteredAt().format(formatTime));
+                measureWrapperMap.put("gemiddelde_snelheid", measure.getWalkingSpeed());
 
-                measures.add(measureWrapper);
+                measures.add(new JSONObject(measureWrapperMap));
             }
 
-            candidateWrapper.put("metingen", measures);
-            candidates.add(candidateWrapper);
+            candidateWrapperMap.put("metingen", measures);
+            candidates.add(new JSONObject(candidateWrapperMap));
         }
 
-        wrapper.put("gebruiker", candidates);
+        wrapperMap.put("gebruiker", candidates);
 
-        this.wrapper = wrapper;
+        this.wrapper = new JSONObject(wrapperMap);
     }
 
     public JSONObject getWrapper()

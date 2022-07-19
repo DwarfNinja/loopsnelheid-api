@@ -1,10 +1,9 @@
 package nl.app.loopsnelheid.measurement.application.handler;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import nl.app.loopsnelheid.measurement.application.encoder.ResearchJsonEncoder;
 import nl.app.loopsnelheid.privacy.application.handler.Handler;
 import nl.app.loopsnelheid.security.application.util.TokenGenerator;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,12 +14,14 @@ import java.io.FileWriter;
 public class FileJsonHandler implements Handler
 {
     private static final Logger logger = LoggerFactory.getLogger(FileJsonHandler.class);
-    private final JSONObject content;
+
+    private final ResearchJsonEncoder researchJsonEncoder;
     private File file;
 
     @Override
     public void handle()
     {
+        researchJsonEncoder.encode();
         try
         {
             String path;
@@ -33,7 +34,7 @@ public class FileJsonHandler implements Handler
             } while (!file.createNewFile());
 
             FileWriter fileWriter = new FileWriter(path);
-            fileWriter.write(content.toJSONString());
+            fileWriter.write(researchJsonEncoder.getWrapper().toJSONString());
             fileWriter.close();
         }
         catch (Exception e)

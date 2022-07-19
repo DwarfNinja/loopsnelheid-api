@@ -2,6 +2,8 @@ package nl.app.loopsnelheid.measurement.application;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.measurement.application.encoder.ResearchJsonEncoder;
+import nl.app.loopsnelheid.measurement.application.encoder.ResearchXmlEncoder;
+import nl.app.loopsnelheid.measurement.application.handler.FileXmlHandler;
 import nl.app.loopsnelheid.measurement.domain.Measure;
 import nl.app.loopsnelheid.measurement.domain.ResearchData;
 import nl.app.loopsnelheid.measurement.domain.ResearchDataCandidate;
@@ -66,23 +68,29 @@ public class ResearchService
     @Transactional
     public void handleRequest(ResearchData researchData)
     {
-        Set<File> files = new HashSet<>();
+        Map<String, File> processedFiles = new HashMap<>();
 
         // Generating JSON file
         ResearchJsonEncoder researchJsonEncoder = new ResearchJsonEncoder(researchData);
-        researchJsonEncoder.encode();
-        FileJsonHandler fileJsonHandler = new FileJsonHandler(researchJsonEncoder.getWrapper());
+        FileJsonHandler fileJsonHandler = new FileJsonHandler(researchJsonEncoder);
         fileJsonHandler.handle();
-        files.add(fileJsonHandler.getFile());
+        processedFiles.put("onderzoeksgegevens.json", fileJsonHandler.getFile());
+
+        // Generating XML file
+        ResearchXmlEncoder researchXmlEncoder = new ResearchXmlEncoder(researchData);
+        FileXmlHandler fileXmlHandler = new FileXmlHandler(researchXmlEncoder);
+        fileXmlHandler.handle();
+        processedFiles.put("onderzoeksgegevens.xml", fileXmlHandler.getFile());
 
         // Generate ZIP archive
-        ArchiveHandler archiveHandler = new ArchiveHandler(files);
+        ArchiveHandler archiveHandler = new ArchiveHandler(processedFiles);
         archiveHandler.handle();
 
         String archivePath = archiveHandler.getPath();
 
         // Remove files
         fileJsonHandler.removeFile();
+        fileXmlHandler.removeFile();
 
         eventPublisher.publishEvent(new OnResearchDataRequestCompleteEvent(archivePath, researchData));
     }
