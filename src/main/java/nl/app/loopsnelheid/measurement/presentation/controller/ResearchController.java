@@ -4,12 +4,15 @@ import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.measurement.application.ResearchDataRequestJobService;
 import nl.app.loopsnelheid.measurement.application.ResearchService;
 import nl.app.loopsnelheid.measurement.domain.ResearchData;
+import nl.app.loopsnelheid.measurement.presentation.dto.ResearchDataRequestDto;
 import nl.app.loopsnelheid.security.application.UserService;
 import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +28,7 @@ public class ResearchController
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public void requestResearchData()
+    public void requestResearchData(@Validated @RequestBody ResearchDataRequestDto researchDataRequestDto)
     {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
@@ -35,6 +38,11 @@ public class ResearchController
                 userService.getResearchCandidates()
         );
 
+        researchDataRequestJobService.setPreferences(
+                researchDataRequestDto.withJson,
+                researchDataRequestDto.withXml,
+                researchDataRequestDto.withCsv
+        );
         researchDataRequestJobService.initJob(researchData);
     }
 }
