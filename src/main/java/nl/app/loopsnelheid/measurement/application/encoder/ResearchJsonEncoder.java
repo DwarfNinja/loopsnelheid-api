@@ -23,6 +23,8 @@ public class ResearchJsonEncoder implements JsonEncoder
     {
         String pattern = "yyyy.mm.dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+        DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
 
         Map<String, Object> wrapperMap = new HashMap<>();
         wrapperMap.put("aanvrager", data.getExportedBy());
@@ -44,9 +46,6 @@ public class ResearchJsonEncoder implements JsonEncoder
 
             for (ResearchDataCandidateMeasure measure : candidate.getMeasures())
             {
-                DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy.MM.dd");
-                DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
-
                 Map<String, Object> measureWrapperMap = new HashMap<>();
                 measureWrapperMap.put("meting_id", measure.getId());
                 measureWrapperMap.put("datum_meting", measure.getRegisteredAt().format(formatDate));

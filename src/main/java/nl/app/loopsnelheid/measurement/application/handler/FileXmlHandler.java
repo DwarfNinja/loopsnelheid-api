@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor
 public class FileXmlHandler implements Handler
 {
-    private static final Logger logger = LoggerFactory.getLogger(FileJsonHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(FileXmlHandler.class);
     private final ResearchXmlEncoder researchXmlEncoder;
 
     private File file;

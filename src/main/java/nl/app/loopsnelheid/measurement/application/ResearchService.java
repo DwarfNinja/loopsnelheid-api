@@ -1,8 +1,10 @@
 package nl.app.loopsnelheid.measurement.application;
 
 import lombok.RequiredArgsConstructor;
+import nl.app.loopsnelheid.measurement.application.encoder.ResearchCsvEncoder;
 import nl.app.loopsnelheid.measurement.application.encoder.ResearchJsonEncoder;
 import nl.app.loopsnelheid.measurement.application.encoder.ResearchXmlEncoder;
+import nl.app.loopsnelheid.measurement.application.handler.FileCsvHandler;
 import nl.app.loopsnelheid.measurement.application.handler.FileXmlHandler;
 import nl.app.loopsnelheid.measurement.domain.Measure;
 import nl.app.loopsnelheid.measurement.domain.ResearchData;
@@ -82,6 +84,17 @@ public class ResearchService
         fileXmlHandler.handle();
         processedFiles.put("onderzoeksgegevens.xml", fileXmlHandler.getFile());
 
+        // Generating CSV file
+        ResearchCsvEncoder researchCsvEncoderCandidates = new ResearchCsvEncoder(researchData, "Candidates");
+        FileCsvHandler fileCsvHandlerCandidates = new FileCsvHandler(researchCsvEncoderCandidates);
+        fileCsvHandlerCandidates.handle();
+        processedFiles.put("onderzoeksgegevens_kandidaten.csv", fileCsvHandlerCandidates.getFile());
+
+        ResearchCsvEncoder researchCsvEncoderMeasures = new ResearchCsvEncoder(researchData, "Measures");
+        FileCsvHandler fileCsvHandlerMeasures = new FileCsvHandler(researchCsvEncoderMeasures);
+        fileCsvHandlerMeasures.handle();
+        processedFiles.put("onderzoeksgegevens_metingen.csv", fileCsvHandlerMeasures.getFile());
+
         // Generate ZIP archive
         ArchiveHandler archiveHandler = new ArchiveHandler(processedFiles);
         archiveHandler.handle();
@@ -91,6 +104,8 @@ public class ResearchService
         // Remove files
         fileJsonHandler.removeFile();
         fileXmlHandler.removeFile();
+        fileCsvHandlerCandidates.removeFile();
+        fileCsvHandlerMeasures.removeFile();
 
         eventPublisher.publishEvent(new OnResearchDataRequestCompleteEvent(archivePath, researchData));
     }
