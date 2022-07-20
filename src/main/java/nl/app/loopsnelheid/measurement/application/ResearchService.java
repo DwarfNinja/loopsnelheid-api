@@ -1,8 +1,10 @@
 package nl.app.loopsnelheid.measurement.application;
 
 import lombok.RequiredArgsConstructor;
+import nl.app.loopsnelheid.measurement.application.encoder.ResearchCsvEncoder;
 import nl.app.loopsnelheid.measurement.application.encoder.ResearchJsonEncoder;
 import nl.app.loopsnelheid.measurement.application.encoder.ResearchXmlEncoder;
+import nl.app.loopsnelheid.measurement.application.handler.FileCsvHandler;
 import nl.app.loopsnelheid.measurement.application.handler.FileXmlHandler;
 import nl.app.loopsnelheid.measurement.domain.Measure;
 import nl.app.loopsnelheid.measurement.domain.ResearchData;
@@ -11,6 +13,7 @@ import nl.app.loopsnelheid.measurement.domain.ResearchDataCandidateMeasure;
 import nl.app.loopsnelheid.measurement.domain.event.OnResearchDataRequestCompleteEvent;
 import nl.app.loopsnelheid.measurement.application.handler.ArchiveHandler;
 import nl.app.loopsnelheid.measurement.application.handler.FileJsonHandler;
+import nl.app.loopsnelheid.measurement.domain.exception.EmptyResearchDataFormatException;
 import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -66,21 +69,41 @@ public class ResearchService
     }
 
     @Transactional
-    public void handleRequest(ResearchData researchData)
+    public void handleRequest(ResearchData researchData, boolean withJson, boolean withXml, boolean withCsv)
     {
         Map<String, File> processedFiles = new HashMap<>();
 
-        // Generating JSON file
-        ResearchJsonEncoder researchJsonEncoder = new ResearchJsonEncoder(researchData);
-        FileJsonHandler fileJsonHandler = new FileJsonHandler(researchJsonEncoder);
-        fileJsonHandler.handle();
-        processedFiles.put("onderzoeksgegevens.json", fileJsonHandler.getFile());
+        if (withJson)
+        {
+            // Generating JSON file
+            ResearchJsonEncoder researchJsonEncoder = new ResearchJsonEncoder(researchData);
+            FileJsonHandler fileJsonHandler = new FileJsonHandler(researchJsonEncoder);
+            fileJsonHandler.handle();
+            processedFiles.put("onderzoeksgegevens.json", fileJsonHandler.getFile());
+        }
 
-        // Generating XML file
-        ResearchXmlEncoder researchXmlEncoder = new ResearchXmlEncoder(researchData);
-        FileXmlHandler fileXmlHandler = new FileXmlHandler(researchXmlEncoder);
-        fileXmlHandler.handle();
-        processedFiles.put("onderzoeksgegevens.xml", fileXmlHandler.getFile());
+        if (withXml)
+        {
+            // Generating XML file
+            ResearchXmlEncoder researchXmlEncoder = new ResearchXmlEncoder(researchData);
+            FileXmlHandler fileXmlHandler = new FileXmlHandler(researchXmlEncoder);
+            fileXmlHandler.handle();
+            processedFiles.put("onderzoeksgegevens.xml", fileXmlHandler.getFile());
+        }
+
+        if (withCsv)
+        {
+            // Generating CSV file
+            ResearchCsvEncoder researchCsvEncoderCandidates = new ResearchCsvEncoder(researchData, "Candidates");
+            FileCsvHandler fileCsvHandlerCandidates = new FileCsvHandler(researchCsvEncoderCandidates);
+            fileCsvHandlerCandidates.handle();
+            processedFiles.put("onderzoeksgegevens_kandidaten.csv", fileCsvHandlerCandidates.getFile());
+
+            ResearchCsvEncoder researchCsvEncoderMeasures = new ResearchCsvEncoder(researchData, "Measures");
+            FileCsvHandler fileCsvHandlerMeasures = new FileCsvHandler(researchCsvEncoderMeasures);
+            fileCsvHandlerMeasures.handle();
+            processedFiles.put("onderzoeksgegevens_metingen.csv", fileCsvHandlerMeasures.getFile());
+        }
 
         // Generate ZIP archive
         ArchiveHandler archiveHandler = new ArchiveHandler(processedFiles);
@@ -89,8 +112,7 @@ public class ResearchService
         String archivePath = archiveHandler.getPath();
 
         // Remove files
-        fileJsonHandler.removeFile();
-        fileXmlHandler.removeFile();
+        for (Map.Entry<String, File> processedFile : processedFiles.entrySet()) processedFile.getValue().delete();
 
         eventPublisher.publishEvent(new OnResearchDataRequestCompleteEvent(archivePath, researchData));
     }

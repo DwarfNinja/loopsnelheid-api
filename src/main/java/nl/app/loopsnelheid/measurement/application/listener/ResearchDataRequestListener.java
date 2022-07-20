@@ -57,6 +57,8 @@ public class ResearchDataRequestListener implements ApplicationListener<OnResear
             helper.setTo(email);
             helper.addAttachment("onderzoeksarchief.zip", fileSystemResource);
             javaMailSender.send(mimeMessage);
+
+            file.delete();
         }
         catch(MessagingException messagingException)
         {

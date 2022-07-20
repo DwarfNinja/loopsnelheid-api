@@ -30,6 +30,9 @@ public class ResearchXmlEncoder implements XmlEncoder
     {
         String pattern = "yyyy.mm.dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+        DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
+
         XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
 
         XMLStreamWriter writer = xmlOutputFactory.createXMLStreamWriter(outputStream);
@@ -82,9 +85,6 @@ public class ResearchXmlEncoder implements XmlEncoder
             writer.writeAttribute("aantal", Integer.toString(candidate.getMeasures().size()));
             for (ResearchDataCandidateMeasure measure : candidate.getMeasures())
             {
-                DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy.MM.dd");
-                DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
-
                 // <measure>
                 writer.writeStartElement("meting");
                 writer.writeAttribute("meting-id", measure.getId().toString());

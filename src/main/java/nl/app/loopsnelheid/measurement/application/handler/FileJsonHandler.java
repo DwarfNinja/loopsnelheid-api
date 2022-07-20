@@ -22,6 +22,7 @@ public class FileJsonHandler implements Handler
     public void handle()
     {
         researchJsonEncoder.encode();
+
         try
         {
             String path;
