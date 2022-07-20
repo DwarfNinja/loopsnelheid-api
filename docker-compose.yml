@@ -13,7 +13,7 @@ services:
   db:
     build: development/db
     ports:
-      - "15432:5432"
+      - "5432:5432"
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
@@ -28,3 +28,8 @@ services:
     ports:
       - "1080:1080"
       - "1025:1025"
+  api:
+    build: .
+    container_name: loopsnelheid-api
+    ports:
+      - "8080:8443"
