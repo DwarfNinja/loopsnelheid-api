@@ -170,7 +170,7 @@
         </tr>
       </table>
     </div>
-    <div class="table-group">
+    <div class="table-group" th:if="${#maps.size(daily_measures_last_year) > 0}">
       <h4>Gemiddelde metingen per dag (afgelopen jaar)</h4>
       <table class="measures-data-table">
         <tr>
