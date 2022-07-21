@@ -59,11 +59,13 @@ public class DataRequestListener implements ApplicationListener<OnDataRequestCom
             javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-            helper.setSubject("Verzoek tot gegevensoverdraagbaarheid ");
+            helper.setSubject("Verzoek tot gegevensoverdraagbaarheid");
             helper.setText(process, true);
             helper.setTo(email);
-            helper.addAttachment("persoonsgegevens.zip", fileSystemResource);
+            helper.addAttachment("persoonsgegevens.pdf", fileSystemResource);
             javaMailSender.send(mimeMessage);
+
+            file.delete();
         }
         catch(MessagingException messagingException)
         {
