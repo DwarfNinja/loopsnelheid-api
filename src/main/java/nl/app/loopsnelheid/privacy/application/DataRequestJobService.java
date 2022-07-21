@@ -21,11 +21,11 @@ public class DataRequestJobService implements JobService<DataRequest>
     public void initJob(DataRequest dataRequest)
     {
         this.dataRequest = dataRequest;
-        jobScheduler.schedule(LocalDateTime.now().plusSeconds(60), this::executeJob);
+        jobScheduler.schedule(LocalDateTime.now(), this::executeJob);
     }
 
     @Override
-    @Job(name = "Executing data request within a job", retries = 2)
+    @Job(name = "Executing data request within a job", retries = 1)
     public void executeJob()
     {
         privacyService.handleRequest(dataRequest);
