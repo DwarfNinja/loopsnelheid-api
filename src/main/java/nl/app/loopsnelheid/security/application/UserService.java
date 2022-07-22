@@ -16,12 +16,23 @@ public class UserService
 {
     private final UserRepository userRepository;
 
-    public User loadUserByUsername(String username) {
+    public User loadUserByUsername(String username)
+    {
         return this.userRepository.findByEmail(username).orElseThrow(() -> new UserNotFoundException("Gebruiker bestaat niet"));
+    }
+
+    public User loadUserById(Long id)
+    {
+        return this.userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Gebruiker bestaat niet"));
     }
 
     public List<User> getResearchCandidates()
     {
         return userRepository.findAllWhereIsResearchCandidate();
+    }
+
+    public List<User> getAllUsers()
+    {
+        return userRepository.findAll();
     }
 }
