@@ -29,9 +29,9 @@ public class UserDto
 
     public int weight;
 
-    public Set<RoleDto> roles;
+    public Set<String> roles;
 
-    public UserDto(Long id, String email, Date dateOfBirth, String sex, boolean isResearchCandidate, int length, int weight, Set<RoleDto> roles)
+    public UserDto(Long id, String email, Date dateOfBirth, String sex, boolean isResearchCandidate, int length, int weight, Set<String> roles)
     {
         this.id = id;
         this.email = email;

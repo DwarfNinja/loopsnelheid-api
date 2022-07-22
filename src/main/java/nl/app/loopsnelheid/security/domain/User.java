@@ -2,6 +2,7 @@ package nl.app.loopsnelheid.security.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import nl.app.loopsnelheid.measurement.domain.Measure;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
 
@@ -17,6 +18,7 @@ import java.util.*;
                 @Index(name = "unique_email_index", columnList = "email", unique = true),
         })
 @Getter
+@Setter
 @Builder
 public class User
 {
