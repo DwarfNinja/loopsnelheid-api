@@ -2,6 +2,7 @@ package nl.app.loopsnelheid.security.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import nl.app.loopsnelheid.measurement.domain.Measure;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
 
@@ -17,6 +18,7 @@ import java.util.*;
                 @Index(name = "unique_email_index", columnList = "email", unique = true),
         })
 @Getter
+@Setter
 @Builder
 public class User
 {
@@ -43,16 +45,16 @@ public class User
     @Column(nullable = false)
     private boolean isResearchCandidate;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private VerificationToken verificationToken;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<DataRequest> dataRequests;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Device> devices;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

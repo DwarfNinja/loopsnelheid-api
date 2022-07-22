@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Set;
 
 public class UserDto
 {
@@ -27,4 +28,18 @@ public class UserDto
     public int length;
 
     public int weight;
+
+    public Set<String> roles;
+
+    public UserDto(Long id, String email, Date dateOfBirth, String sex, boolean isResearchCandidate, int length, int weight, Set<String> roles)
+    {
+        this.id = id;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+        this.isResearchCandidate = isResearchCandidate;
+        this.length = length;
+        this.weight = weight;
+        this.roles = roles;
+    }
 }

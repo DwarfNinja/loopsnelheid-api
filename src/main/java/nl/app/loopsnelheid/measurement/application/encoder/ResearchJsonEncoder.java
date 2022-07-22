@@ -59,7 +59,7 @@ public class ResearchJsonEncoder implements JsonEncoder
             candidates.add(new JSONObject(candidateWrapperMap));
         }
 
-        wrapperMap.put("gebruiker", candidates);
+        wrapperMap.put("gebruikers", candidates);
 
         this.wrapper = new JSONObject(wrapperMap);
     }
