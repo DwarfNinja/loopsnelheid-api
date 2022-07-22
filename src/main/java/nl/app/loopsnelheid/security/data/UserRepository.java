@@ -13,6 +13,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
     Boolean existsByEmail(String email);
 
+    void deleteByEmail(String email);
+
     @Query("select u from User u where u.isResearchCandidate = true ORDER BY u.dateOfBirth")
     List<User> findAllWhereIsResearchCandidate();
 }

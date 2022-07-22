@@ -2,6 +2,8 @@ package nl.app.loopsnelheid.privacy.application;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
+import nl.app.loopsnelheid.security.application.DeleteRequestService;
+import org.jobrunr.jobs.JobId;
 import org.jobrunr.jobs.annotations.Job;
 import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.stereotype.Service;
