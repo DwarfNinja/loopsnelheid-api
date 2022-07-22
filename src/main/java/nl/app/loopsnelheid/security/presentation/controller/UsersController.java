@@ -86,4 +86,11 @@ public class UsersController
                 user.getRoles().stream().map(role -> role.getName().toString()).collect(Collectors.toSet())
         );
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable Long userId)
+    {
+        userService.deleteUserById(userId);
+    }
 }
