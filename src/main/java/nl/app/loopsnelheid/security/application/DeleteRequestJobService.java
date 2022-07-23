@@ -37,5 +37,6 @@ public class DeleteRequestJobService implements JobService<DeleteRequest>
     public void deleteJob(DeleteRequest deleteRequest)
     {
         jobScheduler.delete(deleteRequest.getJobId());
+        deleteRequestService.revokeDeleteRequest(deleteRequest);
     }
 }

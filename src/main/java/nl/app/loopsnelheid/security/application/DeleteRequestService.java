@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DeleteRequestService
 {
@@ -43,7 +44,7 @@ public class DeleteRequestService
 
     public void revokeDeleteRequest(DeleteRequest deleteRequest)
     {
-        deleteRequestRepository.deleteById(deleteRequest.getId());
+        deleteRequestRepository.delete(deleteRequest);
     }
 
     public boolean hasOpenDeleteRequest(User user)
@@ -53,7 +54,6 @@ public class DeleteRequestService
         return deleteRequest.isPresent();
     }
 
-    @Transactional
     public void handleRequest(DeleteRequest deleteRequest)
     {
         User user = deleteRequest.getUser();
