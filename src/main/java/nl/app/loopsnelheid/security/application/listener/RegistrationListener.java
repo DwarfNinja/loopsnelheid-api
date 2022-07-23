@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent>
 {
-    private static final Logger logger = LoggerFactory.getLogger(DataRequestListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationListener.class);
     private final VerificationTokenService verificationTokenService;
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
