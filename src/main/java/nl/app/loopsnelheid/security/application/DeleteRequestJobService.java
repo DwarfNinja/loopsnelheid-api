@@ -23,7 +23,7 @@ public class DeleteRequestJobService implements JobService<DeleteRequest>
     public void initJob(DeleteRequest deleteRequest)
     {
         this.deleteRequest = deleteRequest;
-        JobId jobId = jobScheduler.schedule(LocalDateTime.now().plusHours(48), this::executeJob);
+        JobId jobId = jobScheduler.schedule(LocalDateTime.now().plusMinutes(1), this::executeJob);
         deleteRequestService.submitDeleteRequest(jobId.asUUID(), deleteRequest);
     }
 

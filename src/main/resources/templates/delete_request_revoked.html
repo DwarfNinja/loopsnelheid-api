@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <title>Verzoek tot vergetelheid</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        font-family: 'Lato', serif;
+    }
+
+    html {
+        height: 100vh;
+        background-image: linear-gradient(to bottom, #1d58ef, #1c4ae4, #1d3bd9, #1f2ace, #2215c2);
+    }
+
+    .header {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        justify-content: center;
+        margin-top: 2rem;
+        margin-bottom: 5rem;
+    }
+
+    h1 {
+        font-size: 36px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+    }
+
+    svg {
+        margin-left: auto;
+        margin-right: 0;
+        fill: white;
+        padding-right: 1rem;
+    }
+
+    .content {
+        margin: auto;
+        width: 30%;
+        padding: 3rem;
+        border-radius: 1rem;
+        background-color: white;
+    }
+
+    h2 {
+        margin-bottom: 1rem;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: bold;
+        color: #AAAAAA;
+        width: 70%;
+    }
+
+    ul {
+        padding: 0;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    li {
+        display: inline-block;
+        width: 2.5vw;
+        height: 4vh;
+        text-align: center;
+        font-size: 26px;
+        font-weight: bold;
+        border-radius: .5rem;
+        margin: 0 .7rem 0 0;
+        border: solid 1px #B1B1B1;
+    }
+
+    button {
+        background-color: #2215C2;
+        color: white;
+        border: none;
+        width: 20vw;
+        height: 5vh;
+        border-radius: .5rem;
+        padding: 0;
+        font-size: 20px;
+        box-shadow: .1rem .1rem .4rem black;
+        cursor: pointer;
+        outline: inherit;
+        margin-bottom: 1.5rem;
+    }
+
+    a {
+        font-size: 14px;
+        font-weight: bold;
+        color: #1D58EF;
+        width: 70%;
+        text-decoration: none;
+    }
+
+    .footer-text {
+        text-align: center;
+        width: 100%;
+        color: white;
+        font-size: 18px;
+        font-weight: lighter;
+        margin-top: 4rem;
+    }
+
+</style>
+<body>
+<div class="header">
+    <svg  viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48h-48z" fill="none"/><path d="M28 7.6c1.98 0 3.6-1.61 3.6-3.6s-1.62-3.6-3.6-3.6c-1.99 0-3.6 1.61-3.6 3.6s1.61 3.6 3.6 3.6zm.24 12.4h9.76v-3.6h-7.25l-4-6.66c-.59-1-1.68-1.66-2.92-1.66-.34 0-.67.05-.98.14l-10.85 3.38v10.4h3.6v-7.33l4.21-1.31-7.81 30.64h3.6l5.74-16.22 4.66 6.22v10h3.6v-12.81l-4.98-9.08 1.47-5.74 2.15 3.63z"/></svg>
+    <h1>Loopsnelheid</h1>
+</div>
+
+<div class="content">
+    <h2>Uw verzoek tot vergetelheid is ingetrokken.</h2>
+    <p>Er is op <span style="font-weight: bold" th:text="${date}"></span> om <span style="font-weight: bold" th:text="${time}"></span> een verzoek tot vergetelheid ingediend op uw account. Deze is zojuist door u ingetrokken. Fijn om te horen dat u nog gebruik wilt maken van onze app.</p>
+</div>
+
+<div>
+    <p class="footer-text">©2022 Loopsnelheid. Alle rechten voorbehouden.</p>
+</div>
+</body>
+
+</html>
