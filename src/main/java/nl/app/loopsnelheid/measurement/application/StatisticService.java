@@ -45,4 +45,34 @@ public class StatisticService
 
         return new MeasureStatistic(startDate, endDate, measuresThisWeek, MeasureStatisticType.MONTH);
     }
+
+    public MeasureStatistic getAverageMeasuresOfLatestQuarter(User authenticatedUser)
+    {
+        LocalDateTime startDate = LocalDateTime.now();
+        LocalDateTime endDate = startDate.minusMonths(3);
+
+        List<Measure> measuresThisWeek = measureService.getMeasuresBetweenDatesByUser(endDate, startDate, authenticatedUser.getId());
+
+        return new MeasureStatistic(startDate, endDate, measuresThisWeek, MeasureStatisticType.QUARTER);
+    }
+
+    public MeasureStatistic getAverageMeasuresOfLatestHalfYear(User authenticatedUser)
+    {
+        LocalDateTime startDate = LocalDateTime.now();
+        LocalDateTime endDate = startDate.minusMonths(6);
+
+        List<Measure> measuresThisWeek = measureService.getMeasuresBetweenDatesByUser(endDate, startDate, authenticatedUser.getId());
+
+        return new MeasureStatistic(startDate, endDate, measuresThisWeek, MeasureStatisticType.HALF_YEAR);
+    }
+
+    public MeasureStatistic getAverageMeasuresOfLatestYear(User authenticatedUser)
+    {
+        LocalDateTime startDate = LocalDateTime.now();
+        LocalDateTime endDate = startDate.minusMonths(12);
+
+        List<Measure> measuresThisWeek = measureService.getMeasuresBetweenDatesByUser(endDate, startDate, authenticatedUser.getId());
+
+        return new MeasureStatistic(startDate, endDate, measuresThisWeek, MeasureStatisticType.YEAR);
+    }
 }

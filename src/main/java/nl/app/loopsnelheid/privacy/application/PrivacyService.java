@@ -1,12 +1,14 @@
 package nl.app.loopsnelheid.privacy.application;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.privacy.application.handler.ArchiveHandler;
-import nl.app.loopsnelheid.privacy.application.handler.DataRequestHandler;
-import nl.app.loopsnelheid.privacy.application.handler.FileHandler;
+import nl.app.loopsnelheid.measurement.application.DefaultMeasureService;
+import nl.app.loopsnelheid.measurement.application.StatisticService;
+import nl.app.loopsnelheid.measurement.domain.DefaultMeasure;
+import nl.app.loopsnelheid.measurement.domain.MeasureStatistic;
+import nl.app.loopsnelheid.privacy.application.encoder.PrivacyPdfEncoder;
+import nl.app.loopsnelheid.privacy.application.handler.FilePdfHandler;
 import nl.app.loopsnelheid.privacy.data.DataRequestRepository;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
-import nl.app.loopsnelheid.privacy.domain.DataRequestContent;
 import nl.app.loopsnelheid.privacy.domain.DataRequestStatus;
 import nl.app.loopsnelheid.privacy.domain.event.OnDataRequestCompleteEvent;
 import nl.app.loopsnelheid.privacy.domain.exception.DataRequestNotFoundException;
@@ -15,11 +17,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.File;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Transactional
@@ -28,19 +27,20 @@ public class PrivacyService {
     private final DataRequestRepository dataRequestRepository;
     private final ApplicationEventPublisher eventPublisher;
 
-    private DataRequest createDataRequest(User user)
-    {
-        return DataRequest.builder()
-                .email(user.getEmail())
-                .user(user)
-                .requestedAt(LocalDateTime.now())
-                .dataRequestStatus(DataRequestStatus.CONFIRMED)
-                .build();
-    }
+    private final StatisticService statisticService;
+
+    private final DefaultMeasureService defaultMeasureService;
+
+    private final FilePdfHandler filePdfHandler;
 
     public DataRequest saveDataRequest(User authenticatedUser)
     {
-        DataRequest dataRequest = createDataRequest(authenticatedUser);
+        DataRequest dataRequest = new DataRequest(
+                authenticatedUser.getEmail(),
+                authenticatedUser,
+                DataRequestStatus.CONFIRMED,
+                LocalDateTime.now()
+        );
 
         return dataRequestRepository.save(dataRequest);
     }
@@ -68,19 +68,24 @@ public class PrivacyService {
         dataRequest.markAsPending();
         dataRequestRepository.save(dataRequest);
 
-        DataRequestHandler dataRequestHandler = new DataRequestHandler(dataRequest);
-        dataRequestHandler.handle();
-        DataRequestContent dataRequestContent = dataRequestHandler.getDataRequestContent();
+        DefaultMeasure defaultMeasure = this.defaultMeasureService.getDefaultMeasureBySexAndAge(
+                dataRequest.getSex(),
+                dataRequest.getAge()
+        );
 
-        FileHandler fileHandler = new FileHandler(dataRequestContent);
-        fileHandler.handle();
-        File file = fileHandler.getFile();
+        List<MeasureStatistic> measureStatistics = List.of(
+                statisticService.getAverageMeasuresOfToday(dataRequest.getUser()),
+                statisticService.getAverageMeasuresOfCurrentWeek(dataRequest.getUser()),
+                statisticService.getAverageMeasuresOfCurrentMonth(dataRequest.getUser()),
+                statisticService.getAverageMeasuresOfLatestQuarter(dataRequest.getUser()),
+                statisticService.getAverageMeasuresOfLatestHalfYear(dataRequest.getUser()),
+                statisticService.getAverageMeasuresOfLatestYear(dataRequest.getUser())
+        );
 
-        ArchiveHandler archiveHandler = new ArchiveHandler(file);
-        archiveHandler.handle();
-        dataRequest.setFilePath(archiveHandler.getPath());
-
-        fileHandler.removeFile();
+        PrivacyPdfEncoder privacyPdfEncoder = new PrivacyPdfEncoder(dataRequest, measureStatistics, defaultMeasure);
+        filePdfHandler.setPrivacyPdfEncoder(privacyPdfEncoder);
+        filePdfHandler.handle();
+        dataRequest.setFilePath(filePdfHandler.getFile().getPath());
 
         eventPublisher.publishEvent(new OnDataRequestCompleteEvent(dataRequest));
     }
