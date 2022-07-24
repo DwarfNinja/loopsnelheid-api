@@ -48,6 +48,9 @@ public class User
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private VerificationToken verificationToken;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private DeleteRequest deleteRequest;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<DataRequest> dataRequests;
 
@@ -77,6 +80,7 @@ public class User
             int weight,
             boolean isResearchCandidate,
             VerificationToken verificationToken,
+            DeleteRequest deleteRequest,
             List<DataRequest> dataRequests,
             Set<Device> devices,
             Set<Role> roles,
@@ -90,6 +94,7 @@ public class User
         this.weight = weight;
         this.isResearchCandidate = isResearchCandidate;
         this.verificationToken = verificationToken;
+        this.deleteRequest = deleteRequest;
         this.dataRequests = dataRequests;
         this.devices = devices;
         this.roles = roles;

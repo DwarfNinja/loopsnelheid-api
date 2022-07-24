@@ -70,4 +70,9 @@ public class UserService
     {
         userRepository.deleteById(id);
     }
+
+    public void deleteUserByUsername(String username)
+    {
+        userRepository.deleteByEmail(username);
+    }
 }
