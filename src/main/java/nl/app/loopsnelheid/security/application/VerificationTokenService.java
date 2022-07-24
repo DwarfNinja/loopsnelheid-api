@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.data.VerificationTokenRepository;
 import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.domain.VerificationToken;
+import nl.app.loopsnelheid.security.domain.event.OnDeleteRequestConfirmedEvent;
+import nl.app.loopsnelheid.security.domain.event.OnRegistrationConfirmedCompleteEvent;
 import nl.app.loopsnelheid.security.domain.exception.VerificationTokenExpiredException;
 import nl.app.loopsnelheid.security.domain.exception.VerificationTokenNotFoundException;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,6 +19,8 @@ import java.util.List;
 public class VerificationTokenService
 {
     private final VerificationTokenRepository verificationTokenRepository;
+    private final UserService userService;
+    private final ApplicationEventPublisher eventPublisher;
 
     public VerificationToken createVerificationToken(User user, String token, List<Integer> digitalCode)
     {
@@ -47,6 +52,8 @@ public class VerificationTokenService
         verificationToken.setVerificationDate(LocalDateTime.now());
 
         saveVerificationToken(verificationToken);
+
+        sendRegisterCompleteNotification(userId);
     }
 
     public void verifyDigitalCode(Long userId, String digitalCode)
@@ -58,5 +65,14 @@ public class VerificationTokenService
         verificationToken.setVerificationDate(LocalDateTime.now());
 
         saveVerificationToken(verificationToken);
+
+        sendRegisterCompleteNotification(userId);
+    }
+
+    private void sendRegisterCompleteNotification(Long userId)
+    {
+        User user = userService.loadUserById(userId);
+
+        eventPublisher.publishEvent(new OnRegistrationConfirmedCompleteEvent(user));
     }
 }
