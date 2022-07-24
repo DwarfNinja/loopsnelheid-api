@@ -48,6 +48,18 @@
       list-style-type: none;
       margin-top: 16px;
     }
+    .body .measures .legenda {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+      margin-top: 16px;
+    }
+    .body .measures .legenda .box {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      background-color: #FF7F7F;
+    }
     .body .table-group {
       margin: 48px 0;
     }
@@ -69,8 +81,9 @@
       font-weight: bold;
     }
 
-    /*# sourceMappingURL=style.css.map */
-
+    .text-italic {
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -117,7 +130,10 @@
       Deze metingen zijn tot stand gekomen door op willekeurige momenten een meettraject in de achtergrond te draaien.
       U kunt deze gegevens, op eigen initiatief, overhandigen aan een zorgverlener.
     </p>
-    <small style="color: #FF7F7F;font-weight: bold;margin-top:10px;">**Regels die in de tabel rood is gekleurd, vallen onder de aanbevolen loopsnelheid.</small>
+    <div class="legenda">
+      <span class="box"></span>
+      <span class="text-italic">De meting ligt onder de aanbevolen loopsnelheid.</span>
+    </div>
     <div class="table-group">
       <h4>Gemiddelde metingen per periode</h4>
       <table class="measures-data-table">
