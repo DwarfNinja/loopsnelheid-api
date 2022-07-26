@@ -63,17 +63,31 @@ public class UsersController
     public UserDto updateUser(@PathVariable Long userId, @Validated @RequestBody RegisterDto registerDto)
     {
         Set<Role> roles = registerDto.roles.stream().map(roleService::getRoleByName).collect(Collectors.toSet());
-        User user = userService.updateUserById(
-                userId,
-                registerDto.password,
-                registerDto.email,
-                registerDto.dateOfBirth,
-                registerDto.sex,
-                registerDto.isResearchCandidate,
-                registerDto.length,
-                registerDto.weight,
-                roles
-        );
+
+        User user = registerDto.password == null
+                ?
+                userService.updateUserById(
+                    userId,
+                    registerDto.email,
+                    registerDto.dateOfBirth,
+                    registerDto.sex,
+                    registerDto.isResearchCandidate,
+                    registerDto.length,
+                    registerDto.weight,
+                    roles
+                )
+                :
+                userService.updateUserById(
+                        userId,
+                        registerDto.password,
+                        registerDto.email,
+                        registerDto.dateOfBirth,
+                        registerDto.sex,
+                        registerDto.isResearchCandidate,
+                        registerDto.length,
+                        registerDto.weight,
+                        roles
+                );
 
         return new UserDto(
                 user.getId(),
