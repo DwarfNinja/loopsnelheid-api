@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.data.VerificationTokenRepository;
 import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.domain.VerificationToken;
-import nl.app.loopsnelheid.security.domain.event.OnDeleteRequestConfirmedEvent;
 import nl.app.loopsnelheid.security.domain.event.OnRegistrationConfirmedCompleteEvent;
 import nl.app.loopsnelheid.security.domain.exception.VerificationTokenExpiredException;
 import nl.app.loopsnelheid.security.domain.exception.VerificationTokenNotFoundException;

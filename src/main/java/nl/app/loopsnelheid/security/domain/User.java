@@ -48,6 +48,9 @@ public class User
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private VerificationToken verificationToken;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ResetEmailVerification> resetEmailVerification;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     private DeleteRequest deleteRequest;
 
@@ -80,6 +83,7 @@ public class User
             int weight,
             boolean isResearchCandidate,
             VerificationToken verificationToken,
+            List<ResetEmailVerification> resetEmailVerification,
             DeleteRequest deleteRequest,
             List<DataRequest> dataRequests,
             Set<Device> devices,
@@ -94,6 +98,7 @@ public class User
         this.weight = weight;
         this.isResearchCandidate = isResearchCandidate;
         this.verificationToken = verificationToken;
+        this.resetEmailVerification = resetEmailVerification;
         this.deleteRequest = deleteRequest;
         this.dataRequests = dataRequests;
         this.devices = devices;

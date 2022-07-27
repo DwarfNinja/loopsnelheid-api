@@ -3,10 +3,9 @@ package nl.app.loopsnelheid.security.presentation.controller;
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.application.RoleService;
 import nl.app.loopsnelheid.security.application.UserService;
-import nl.app.loopsnelheid.security.domain.ERole;
 import nl.app.loopsnelheid.security.domain.Role;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.presentation.dto.RegisterDto;
+import nl.app.loopsnelheid.security.presentation.dto.ChangeUserDto;
 import nl.app.loopsnelheid.security.presentation.dto.UserDto;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -60,22 +59,36 @@ public class UsersController
 
     @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/{userId}")
-    public UserDto updateUser(@PathVariable Long userId, @Validated @RequestBody RegisterDto registerDto)
+    public ChangeUserDto updateUser(@PathVariable Long userId, @Validated @RequestBody ChangeUserDto dto)
     {
-        Set<Role> roles = registerDto.roles.stream().map(roleService::getRoleByName).collect(Collectors.toSet());
-        User user = userService.updateUserById(
-                userId,
-                registerDto.password,
-                registerDto.email,
-                registerDto.dateOfBirth,
-                registerDto.sex,
-                registerDto.isResearchCandidate,
-                registerDto.length,
-                registerDto.weight,
-                roles
-        );
+        Set<Role> roles = dto.roles.stream().map(roleService::getRoleByName).collect(Collectors.toSet());
 
-        return new UserDto(
+        User user = dto.password == null
+                ?
+                userService.updateUserById(
+                    userId,
+                    dto.email,
+                    dto.dateOfBirth,
+                    dto.sex,
+                    dto.isResearchCandidate,
+                    dto.length,
+                    dto.weight,
+                    roles
+                )
+                :
+                userService.updateUserById(
+                        userId,
+                        dto.password,
+                        dto.email,
+                        dto.dateOfBirth,
+                        dto.sex,
+                        dto.isResearchCandidate,
+                        dto.length,
+                        dto.weight,
+                        roles
+                );
+
+        return new ChangeUserDto(
                 user.getId(),
                 user.getEmail(),
                 user.getDateOfBirth(),

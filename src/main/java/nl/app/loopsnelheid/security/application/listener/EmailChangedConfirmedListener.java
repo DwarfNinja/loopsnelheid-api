@@ -2,7 +2,7 @@ package nl.app.loopsnelheid.security.application.listener;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.domain.event.OnRegistrationConfirmedCompleteEvent;
+import nl.app.loopsnelheid.security.domain.event.OnEmailChangeCompleteEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
@@ -17,20 +17,20 @@ import java.text.SimpleDateFormat;
 
 @Component
 @RequiredArgsConstructor
-public class RegistrationConfirmedListener implements ApplicationListener<OnRegistrationConfirmedCompleteEvent>
+public class EmailChangedConfirmedListener implements ApplicationListener<OnEmailChangeCompleteEvent>
 {
-    private static final Logger logger = LoggerFactory.getLogger(RegistrationConfirmedListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(EmailChangedConfirmedListener.class);
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
 
     @Override
-    public void onApplicationEvent(OnRegistrationConfirmedCompleteEvent onRegistrationCompleteEvent)
+    public void onApplicationEvent(OnEmailChangeCompleteEvent onEmailChangeCompleteEvent)
     {
-        this.sendConfirmationEmail(onRegistrationCompleteEvent);
+        this.sendConfirmationEmail(onEmailChangeCompleteEvent);
     }
 
-    private void sendConfirmationEmail(OnRegistrationConfirmedCompleteEvent event)
+    private void sendConfirmationEmail(OnEmailChangeCompleteEvent event)
     {
         String pattern = "dd-MM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -44,13 +44,13 @@ public class RegistrationConfirmedListener implements ApplicationListener<OnRegi
         context.setVariable("weight", user.getWeight());
         context.setVariable("is_research_candidate", user.isResearchCandidate() ? "Ja" : "Nee");
 
-        String process = templateEngine.process("successfully_registered", context);
+        String process = templateEngine.process("successfully_changed_email", context);
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
 
         try
         {
-            helper.setSubject("Uw account is succesvol geregistreerd");
+            helper.setSubject("Uw e-mailadres is succesvol gewijzigd");
             helper.setText(process, true);
             helper.setTo(user.getEmail());
             javaMailSender.send(mimeMessage);

@@ -1,6 +1,5 @@
 package nl.app.loopsnelheid.measurement.application.encoder;
 
-import com.opencsv.CSVWriter;
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.measurement.domain.ResearchData;
 import nl.app.loopsnelheid.measurement.domain.ResearchDataCandidate;

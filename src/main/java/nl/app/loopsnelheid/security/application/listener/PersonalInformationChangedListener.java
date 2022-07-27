@@ -2,7 +2,7 @@ package nl.app.loopsnelheid.security.application.listener;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.domain.event.OnRegistrationConfirmedCompleteEvent;
+import nl.app.loopsnelheid.security.domain.event.OnPersonalInformationChangeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
@@ -17,40 +17,38 @@ import java.text.SimpleDateFormat;
 
 @Component
 @RequiredArgsConstructor
-public class RegistrationConfirmedListener implements ApplicationListener<OnRegistrationConfirmedCompleteEvent>
+public class PersonalInformationChangedListener implements ApplicationListener<OnPersonalInformationChangeEvent>
 {
-    private static final Logger logger = LoggerFactory.getLogger(RegistrationConfirmedListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(PersonalInformationChangedListener.class);
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
-
     @Override
-    public void onApplicationEvent(OnRegistrationConfirmedCompleteEvent onRegistrationCompleteEvent)
+    public void onApplicationEvent(OnPersonalInformationChangeEvent onPersonalInformationChangeEvent)
     {
-        this.sendConfirmationEmail(onRegistrationCompleteEvent);
+        this.sendConfirmationEmail(onPersonalInformationChangeEvent);
     }
 
-    private void sendConfirmationEmail(OnRegistrationConfirmedCompleteEvent event)
+    private void sendConfirmationEmail(OnPersonalInformationChangeEvent onPersonalInformationChangeEvent)
     {
         String pattern = "dd-MM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        User user = event.getUser();
+        User user = onPersonalInformationChangeEvent.getUser();
 
         Context context = new Context();
-        context.setVariable("email", user.getEmail());
         context.setVariable("birth_date", simpleDateFormat.format(user.getDateOfBirth()));
         context.setVariable("sex", user.getSex().toString().equals("MALE") ? "Man" : "Vrouw");
         context.setVariable("length", user.getLength());
         context.setVariable("weight", user.getWeight());
         context.setVariable("is_research_candidate", user.isResearchCandidate() ? "Ja" : "Nee");
 
-        String process = templateEngine.process("successfully_registered", context);
+        String process = templateEngine.process("successfully_changed_personal_information", context);
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
 
         try
         {
-            helper.setSubject("Uw account is succesvol geregistreerd");
+            helper.setSubject("Uw persoonlijke gegevens zijn gewijzigd");
             helper.setText(process, true);
             helper.setTo(user.getEmail());
             javaMailSender.send(mimeMessage);

@@ -1,7 +1,6 @@
 package nl.app.loopsnelheid.privacy.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
 import lombok.Getter;
 import nl.app.loopsnelheid.security.domain.Sex;
 import nl.app.loopsnelheid.security.domain.User;

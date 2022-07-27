@@ -1,12 +1,11 @@
 package nl.app.loopsnelheid.security.application.listener;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.security.application.VerificationTokenService;
-import nl.app.loopsnelheid.security.application.util.TokenGenerator;
+import nl.app.loopsnelheid.security.application.ResetEmailVerificationService;
 import nl.app.loopsnelheid.security.config.AccountEndpoints;
+import nl.app.loopsnelheid.security.domain.ResetEmailVerification;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.domain.VerificationToken;
-import nl.app.loopsnelheid.security.domain.event.OnRegistrationCompleteEvent;
+import nl.app.loopsnelheid.security.domain.event.OnEmailChangeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,14 +17,13 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent>
+public class EmailChangedListener implements ApplicationListener<OnEmailChangeEvent>
 {
-    private static final Logger logger = LoggerFactory.getLogger(RegistrationListener.class);
-    private final VerificationTokenService verificationTokenService;
+    private static final Logger logger = LoggerFactory.getLogger(EmailChangedListener.class);
+    private final ResetEmailVerificationService resetEmailVerificationService;
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
@@ -33,39 +31,35 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     private String mailApiUrl;
 
     @Override
-    public void onApplicationEvent(OnRegistrationCompleteEvent onRegistrationCompleteEvent)
+    public void onApplicationEvent(OnEmailChangeEvent onEmailChangeEvent)
     {
-        this.confirmRegistration(onRegistrationCompleteEvent);
+        this.confirmEmailChange(onEmailChangeEvent);
     }
 
-    private void confirmRegistration(OnRegistrationCompleteEvent event)
+    private void confirmEmailChange(OnEmailChangeEvent event)
     {
-        User user = event.getUser();
-        String generatedToken = TokenGenerator.generateToken();
-        List<Integer> generatedDigitalCodeList = TokenGenerator.generateDigitalCode(6);
-        VerificationToken verificationToken = verificationTokenService.createVerificationToken(user, generatedToken, generatedDigitalCodeList);
-        verificationTokenService.saveVerificationToken(verificationToken);
+        ResetEmailVerification resetEmailVerification = event.getResetEmailVerification();
+        User user = resetEmailVerification.getUser();
 
-        sendConfirmationEmail(user.getId(), user.getEmail(), verificationToken.getToken(), verificationToken.getDigitalCode());
+        sendConfirmationEmail(user.getId(), resetEmailVerification.getNewEmail(), resetEmailVerification.getToken());
     }
 
     private String generateMailApiUrl(Long userId, String token)
     {
-        String verifyTokenPath = AccountEndpoints.VERIFY_TOKEN_PATH
+        String verifyTokenPath = AccountEndpoints.RESET_EMAIL_VERIFICATION_PATH
                 .replace("{userId}", userId.toString())
                 .replace("{token}", token);
 
         return mailApiUrl + verifyTokenPath;
     }
 
-    private void sendConfirmationEmail(Long userId, String email, String token, String digitalCode)
+    private void sendConfirmationEmail(Long userId, String email, String token)
     {
         Context context = new Context();
         context.setVariable("token", token);
-        context.setVariable("digitalCode", digitalCode);
         context.setVariable("mailApiUrl", generateMailApiUrl(userId, token));
 
-        String process = templateEngine.process("welcome", context);
+        String process = templateEngine.process("reset_email", context);
         javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
 

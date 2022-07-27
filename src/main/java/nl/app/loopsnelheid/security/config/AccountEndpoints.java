@@ -8,6 +8,8 @@ public class AccountEndpoints
     public static final String VERIFY_DIGITAL_CODE_PATH = "/auth/verify/code/{userId}/{digitalCode}";
     public static final String VERIFY_TOKEN_PATH = "/auth/verify/token/{userId}/{token}";
 
+    public static final String RESET_EMAIL_VERIFICATION_PATH = "/auth/verify/{userId}/{token}";
+
     // Measure endpoints
     public static final String DEFAULT_MEASURES = "/measures/default";
 

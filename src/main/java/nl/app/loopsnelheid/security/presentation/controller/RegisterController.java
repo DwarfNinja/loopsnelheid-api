@@ -20,7 +20,7 @@ public class RegisterController
     private final VerificationTokenService verificationTokenService;
 
     @PostMapping(AccountEndpoints.REGISTER_PATH)
-    public DetailsDto register(@Validated @RequestBody RegisterDto registerDto, HttpServletResponse response)
+    public DetailsDto register(@Validated @RequestBody RegisterDto registerDto)
     {
         Long id = registerService.registerUser(registerDto, registerDto.password);
 
