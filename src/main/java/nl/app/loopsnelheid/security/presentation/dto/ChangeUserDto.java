@@ -1,5 +1,6 @@
 package nl.app.loopsnelheid.security.presentation.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,6 +20,7 @@ public class ChangeUserDto
     
     @JsonProperty("date_of_birth")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     public Date dateOfBirth;
 
     public String sex;

@@ -2,10 +2,11 @@ package nl.app.loopsnelheid.security.application;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.data.UserRepository;
+import nl.app.loopsnelheid.security.domain.ResetEmailVerification;
 import nl.app.loopsnelheid.security.domain.Role;
 import nl.app.loopsnelheid.security.domain.Sex;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.domain.event.OnDeleteRequestConfirmedEvent;
+import nl.app.loopsnelheid.security.domain.event.OnEmailChangeEvent;
 import nl.app.loopsnelheid.security.domain.event.OnPasswordChangeEvent;
 import nl.app.loopsnelheid.security.domain.event.OnPersonalInformationChangeEvent;
 import nl.app.loopsnelheid.security.domain.exception.EmailAlreadyUsedException;
@@ -89,7 +90,7 @@ public class UserService
 
         if (!user.getEmail().equals(email) && this.isEmailRegistered(email))
         {
-            throw new EmailAlreadyUsedException("Het opgegeven e-mailadres is wordt al gebruikt door een ander gebruiker");
+            throw new EmailAlreadyUsedException("Het opgegeven e-mailadres wordt al gebruikt door een ander gebruiker");
         }
 
         user.setEmail(email);
@@ -103,18 +104,31 @@ public class UserService
         return userRepository.save(user);
     }
 
+    public void determineEmailUpdate(User user, String email)
+    {
+        if (user.getEmail().equals(email))
+        {
+            throw new EmailAlreadyUsedException("Dit e-mailadres wordt momenteel al door u gebruikt");
+        }
+
+        if (!user.getEmail().equals(email) && this.isEmailRegistered(email))
+        {
+            throw new EmailAlreadyUsedException("Het opgegeven e-mailadres wordt al gebruikt door een ander gebruiker");
+        }
+    }
+    public void requestEmailUpdateById(ResetEmailVerification resetEmailVerification)
+    {
+        eventPublisher.publishEvent(new OnEmailChangeEvent(resetEmailVerification));
+    }
+
     public User updateEmailById(Long id, String email)
     {
         User user = loadUserById(id);
 
         if (!user.getEmail().equals(email) && this.isEmailRegistered(email))
         {
-            throw new EmailAlreadyUsedException("Het opgegeven e-mailadres is wordt al gebruikt door een ander gebruiker");
+            throw new EmailAlreadyUsedException("Het opgegeven e-mailadres wordt al gebruikt door een ander gebruiker");
         }
-
-        // TODO
-        //  Confirm that the new email is theirs
-        //  But make sure the account can still be used with the old email (so the email should only change when its confirmed)
 
         user.setEmail(email);
 
