@@ -1,7 +1,6 @@
 package nl.app.loopsnelheid.security.domain.event;
 
 import lombok.Getter;
-import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.security.core.userdetails.UserDetails;
 

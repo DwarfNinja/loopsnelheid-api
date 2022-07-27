@@ -6,7 +6,6 @@ import nl.app.loopsnelheid.security.data.ResetEmailVerificationRepository;
 import nl.app.loopsnelheid.security.domain.ResetEmailVerification;
 import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.domain.event.OnEmailChangeCompleteEvent;
-import nl.app.loopsnelheid.security.domain.event.OnRegistrationConfirmedCompleteEvent;
 import nl.app.loopsnelheid.security.domain.exception.VerificationTokenExpiredException;
 import nl.app.loopsnelheid.security.domain.exception.VerificationTokenNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;

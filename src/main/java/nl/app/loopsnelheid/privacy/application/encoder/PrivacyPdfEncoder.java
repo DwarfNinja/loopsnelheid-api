@@ -2,15 +2,12 @@ package nl.app.loopsnelheid.privacy.application.encoder;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.measurement.domain.DefaultMeasure;
-import nl.app.loopsnelheid.measurement.domain.Measure;
 import nl.app.loopsnelheid.measurement.domain.MeasureStatistic;
 import nl.app.loopsnelheid.privacy.domain.DataRequest;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

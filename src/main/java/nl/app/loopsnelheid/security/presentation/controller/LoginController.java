@@ -10,7 +10,6 @@ import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.presentation.dto.DeviceDto;
 import nl.app.loopsnelheid.security.presentation.dto.JwtResponseDto;
 import nl.app.loopsnelheid.security.presentation.dto.LoginDto;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
