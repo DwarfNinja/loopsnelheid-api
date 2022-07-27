@@ -25,7 +25,7 @@ public class DeviceService
     public Device getDeviceBySession(String session)
     {
         return deviceRepository.findBySession(session)
-                .orElseThrow(() -> new DeviceNotFoundException("Het opgegeven sessie bestaat niet"));
+                .orElseThrow(() -> new DeviceNotFoundException("Uw huidige apparaat is niet gekoppeld aan dit account."));
     }
 
     public Device createDevice(User authenticatedUser, String deviceOs, String deviceInfo)

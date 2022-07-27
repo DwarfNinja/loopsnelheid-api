@@ -59,7 +59,7 @@ public class PrivacyService {
     public DataRequest getDataRequestById(Long id)
     {
         return dataRequestRepository.findById(id)
-                .orElseThrow(() -> new DataRequestNotFoundException("Gegeven data request id bestaat niet"));
+                .orElseThrow(() -> new DataRequestNotFoundException("Opgegeven data verzoek bestaat niet."));
     }
 
     @Transactional

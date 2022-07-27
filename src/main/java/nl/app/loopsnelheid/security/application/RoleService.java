@@ -22,7 +22,7 @@ public class RoleService
     public Role getRoleByName(String name)
     {
         return roleRepository.findByName(ERole.valueOf(name))
-                .orElseThrow(() -> new RoleNotFoundException("Error: Deze rol bestaat niet"));
+                .orElseThrow(() -> new RoleNotFoundException("Deze rol bestaat niet."));
     }
 
     public Set<Role> provideUserRoles(List<String> roles)

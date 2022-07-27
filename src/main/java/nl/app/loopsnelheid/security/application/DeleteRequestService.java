@@ -30,7 +30,7 @@ public class DeleteRequestService
     {
         if (hasOpenDeleteRequest(user))
         {
-            throw new AlreadyRequestedException("Je hebt al een openstaand verzoek tot vergetelheid ingediend.");
+            throw new AlreadyRequestedException("U hebt al een openstaand verzoek tot vergetelheid ingediend.");
         }
 
         return new DeleteRequest(user);
@@ -46,7 +46,7 @@ public class DeleteRequestService
 
     public DeleteRequest getDeleteRequestByUser(User user)
     {
-        return deleteRequestRepository.findByUser(user).orElseThrow(() -> new DeleteRequestNotFoundException("Je hebt nog geen verzoek tot vergetelheid ingediend"));
+        return deleteRequestRepository.findByUser(user).orElseThrow(() -> new DeleteRequestNotFoundException("U heeft nog geen verzoek tot vergetelheid ingediend."));
     }
 
     public void revokeDeleteRequest(DeleteRequest deleteRequest)
