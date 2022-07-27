@@ -8,6 +8,6 @@ public class VerificationTokenNotFoundException extends RuntimeException
 {
     public VerificationTokenNotFoundException()
     {
-        super("Given verification token does not exist.");
+        super("Gegeven verifieer code is ongeldig.");
     }
 }

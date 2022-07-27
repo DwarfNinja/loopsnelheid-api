@@ -8,6 +8,6 @@ public class EmptyResearchDataFormatException extends RuntimeException
 {
     public EmptyResearchDataFormatException()
     {
-        super("Je moet op z'n minst één formaat uitkiezen.");
+        super("U moet op z'n minst één formaat uitkiezen.");
     }
 }

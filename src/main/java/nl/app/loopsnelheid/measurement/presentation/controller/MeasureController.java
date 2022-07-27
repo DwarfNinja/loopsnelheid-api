@@ -46,7 +46,7 @@ public class MeasureController
     }
 
     @PostMapping
-    public List<MeasureDto> createMany(@RequestHeader("session") String session, @Validated @RequestBody List<MeasureDto> measureDtos)
+    public List<MeasureDto> createMany(@RequestHeader("session") String session, @Validated @RequestBody List<MeasureDto> dtos)
     {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
@@ -58,7 +58,7 @@ public class MeasureController
             throw new UnauthorizedMeasureDeviceException();
         }
 
-        List<Measure> measures = measureService.createManyMeasures(measureDtos, authenticatedUser);
+        List<Measure> measures = measureService.createManyMeasures(dtos, authenticatedUser);
 
         return measures.stream()
                 .map(measure -> new MeasureDto(measure.getId(), measure.getWalkingSpeed(), measure.getRegisteredAt()))

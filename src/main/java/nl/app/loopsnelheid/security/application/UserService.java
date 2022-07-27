@@ -24,12 +24,12 @@ public class UserService
 
     public User loadUserByUsername(String username)
     {
-        return this.userRepository.findByEmail(username).orElseThrow(() -> new UserNotFoundException("Gebruiker bestaat niet"));
+        return this.userRepository.findByEmail(username).orElseThrow(() -> new UserNotFoundException("Opgegeven gebruiker bestaat niet."));
     }
 
     public User loadUserById(Long id)
     {
-        return this.userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Gebruiker bestaat niet"));
+        return this.userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Opgegeven gebruiker bestaat niet."));
     }
 
     public List<User> getResearchCandidates()

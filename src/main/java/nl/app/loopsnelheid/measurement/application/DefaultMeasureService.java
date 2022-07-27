@@ -41,6 +41,6 @@ public class DefaultMeasureService
     public DefaultMeasure getDefaultMeasureBySexAndAge(Sex sex, int age)
     {
         return defaultMeasureRepository.findBySexAndAge(sex, age)
-                .orElseThrow(() -> new MissingDataSetException("Gegeven geslacht en leeftijd is geen match in de dataset"));
+                .orElseThrow(() -> new MissingDataSetException("Gegeven geslacht en leeftijd is geen match in onze dataset."));
     }
 }

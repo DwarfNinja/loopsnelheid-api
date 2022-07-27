@@ -13,7 +13,6 @@ import nl.app.loopsnelheid.measurement.domain.ResearchDataCandidateMeasure;
 import nl.app.loopsnelheid.measurement.domain.event.OnResearchDataRequestCompleteEvent;
 import nl.app.loopsnelheid.measurement.application.handler.ArchiveHandler;
 import nl.app.loopsnelheid.measurement.application.handler.FileJsonHandler;
-import nl.app.loopsnelheid.measurement.domain.exception.EmptyResearchDataFormatException;
 import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
