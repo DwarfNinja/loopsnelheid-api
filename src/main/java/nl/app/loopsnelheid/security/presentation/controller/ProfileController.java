@@ -30,12 +30,6 @@ public class ProfileController
     private final DeleteRequestService deleteRequestService;
     private final DeleteRequestJobService deleteRequestJobService;
 
-    @GetMapping("/profile")
-    public UserDetails profileUser()
-    {
-        return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
-
     @PostMapping("/profile/delete")
     public void deleteProfile()
     {

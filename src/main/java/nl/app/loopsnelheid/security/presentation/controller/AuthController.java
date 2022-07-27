@@ -16,35 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController
 {
-    private final UserService userService;
-    private final DeleteRequestService deleteRequestService;
-    private final DeleteRequestJobService deleteRequestJobService;
-
     @PostMapping("/profile")
     public UserDetails profileUser()
     {
         return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
-
-    @PostMapping("/profile/delete")
-    public void deleteProfile()
-    {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
-
-        DeleteRequest deleteRequest = deleteRequestService.initDeleteRequest(authenticatedUser);
-        deleteRequestJobService.initJob(deleteRequest);
-    }
-
-    @DeleteMapping("/profile/delete")
-    public DeleteRequestDto revokeDeleteProfile()
-    {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User authenticatedUser = userService.loadUserByUsername(userDetails.getUsername());
-
-        DeleteRequest deletedRequest = deleteRequestService.getDeleteRequestByUser(authenticatedUser);
-        deleteRequestJobService.deleteJob(deletedRequest);
-
-        return new DeleteRequestDto(deletedRequest.getJobId());
     }
 }
