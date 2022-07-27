@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.config.JwtUtils;
 import nl.app.loopsnelheid.security.domain.JwtResponse;
 import nl.app.loopsnelheid.security.domain.UserDetailsImp;
+import nl.app.loopsnelheid.security.domain.event.OnLoginCompleteEvent;
+import nl.app.loopsnelheid.security.domain.event.OnRegistrationConfirmedCompleteEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,6 +26,7 @@ public class LoginService
 {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
+    private final ApplicationEventPublisher eventPublisher;
 
     private UserDetails userDetails;
 
@@ -39,6 +43,8 @@ public class LoginService
         Set<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
+
+        eventPublisher.publishEvent(new OnLoginCompleteEvent(userDetails));
 
         return new JwtResponse(jwt, userDetails.getUsername(), roles);
     }
