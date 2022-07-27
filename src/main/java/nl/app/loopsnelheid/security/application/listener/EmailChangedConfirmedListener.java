@@ -3,7 +3,6 @@ package nl.app.loopsnelheid.security.application.listener;
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.domain.event.OnEmailChangeCompleteEvent;
-import nl.app.loopsnelheid.security.domain.event.OnRegistrationConfirmedCompleteEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;

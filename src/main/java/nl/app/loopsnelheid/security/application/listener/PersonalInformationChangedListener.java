@@ -2,7 +2,6 @@ package nl.app.loopsnelheid.security.application.listener;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.domain.event.OnPasswordChangeEvent;
 import nl.app.loopsnelheid.security.domain.event.OnPersonalInformationChangeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

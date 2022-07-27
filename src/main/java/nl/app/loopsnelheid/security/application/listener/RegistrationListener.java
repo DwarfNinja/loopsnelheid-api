@@ -1,7 +1,6 @@
 package nl.app.loopsnelheid.security.application.listener;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.privacy.application.listener.DataRequestListener;
 import nl.app.loopsnelheid.security.application.VerificationTokenService;
 import nl.app.loopsnelheid.security.application.util.TokenGenerator;
 import nl.app.loopsnelheid.security.config.AccountEndpoints;

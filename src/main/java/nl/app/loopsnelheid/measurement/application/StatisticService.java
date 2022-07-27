@@ -1,7 +1,9 @@
 package nl.app.loopsnelheid.measurement.application;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.measurement.domain.*;
+import nl.app.loopsnelheid.measurement.domain.Measure;
+import nl.app.loopsnelheid.measurement.domain.MeasureStatistic;
+import nl.app.loopsnelheid.measurement.domain.MeasureStatisticType;
 import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.stereotype.Service;
 

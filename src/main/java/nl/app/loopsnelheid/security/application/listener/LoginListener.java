@@ -1,11 +1,9 @@
 package nl.app.loopsnelheid.security.application.listener;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.domain.event.OnLoginCompleteEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -15,7 +13,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor

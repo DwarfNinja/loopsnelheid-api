@@ -5,7 +5,6 @@ import nl.app.loopsnelheid.security.config.JwtUtils;
 import nl.app.loopsnelheid.security.domain.JwtResponse;
 import nl.app.loopsnelheid.security.domain.UserDetailsImp;
 import nl.app.loopsnelheid.security.domain.event.OnLoginCompleteEvent;
-import nl.app.loopsnelheid.security.domain.event.OnRegistrationConfirmedCompleteEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

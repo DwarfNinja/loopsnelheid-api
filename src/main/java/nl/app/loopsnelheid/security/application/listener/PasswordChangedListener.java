@@ -1,16 +1,10 @@
 package nl.app.loopsnelheid.security.application.listener;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.security.application.VerificationTokenService;
-import nl.app.loopsnelheid.security.application.util.TokenGenerator;
-import nl.app.loopsnelheid.security.config.AccountEndpoints;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.domain.VerificationToken;
 import nl.app.loopsnelheid.security.domain.event.OnPasswordChangeEvent;
-import nl.app.loopsnelheid.security.domain.event.OnRegistrationCompleteEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -19,7 +13,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
