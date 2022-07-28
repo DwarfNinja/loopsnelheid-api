@@ -22,7 +22,16 @@ public class RegisterController
     @PostMapping(AccountEndpoints.REGISTER_PATH)
     public DetailsDto register(@Validated @RequestBody RegisterDto registerDto)
     {
-        Long id = registerService.registerUser(registerDto, registerDto.password);
+        Long id = registerService.registerUser(
+                registerDto.id,
+                registerDto.password,
+                registerDto.email,
+                registerDto.dateOfBirth,
+                registerDto.sex,
+                registerDto.isResearchCandidate,
+                registerDto.length,
+                registerDto.weight
+        );
 
         return new DetailsDto(id);
     }
