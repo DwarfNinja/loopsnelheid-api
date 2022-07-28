@@ -1,14 +1,13 @@
 package nl.app.loopsnelheid.security.application;
 
 import lombok.RequiredArgsConstructor;
+import nl.app.loopsnelheid.security.application.util.PasswordGenerator;
 import nl.app.loopsnelheid.security.data.UserRepository;
-import nl.app.loopsnelheid.security.domain.ResetEmailVerification;
-import nl.app.loopsnelheid.security.domain.Role;
-import nl.app.loopsnelheid.security.domain.Sex;
-import nl.app.loopsnelheid.security.domain.User;
+import nl.app.loopsnelheid.security.domain.*;
 import nl.app.loopsnelheid.security.domain.event.OnEmailChangeEvent;
 import nl.app.loopsnelheid.security.domain.event.OnPasswordChangeEvent;
 import nl.app.loopsnelheid.security.domain.event.OnPersonalInformationChangeEvent;
+import nl.app.loopsnelheid.security.domain.event.OnResetPasswordEvent;
 import nl.app.loopsnelheid.security.domain.exception.EmailAlreadyUsedException;
 import nl.app.loopsnelheid.security.domain.exception.OldPasswordIncorrectException;
 import nl.app.loopsnelheid.security.domain.exception.UserNotFoundException;
@@ -145,10 +144,24 @@ public class UserService
         }
 
         user.setPassword(passwordEncoder.encode(password));
-
         User updatedUser = userRepository.save(user);
-
         eventPublisher.publishEvent(new OnPasswordChangeEvent(updatedUser));
+    }
+
+    public String resetPasswordById(Long id)
+    {
+        User user = loadUserById(id);
+        String password = PasswordGenerator.generatePassword(8);
+        user.setPassword(passwordEncoder.encode(password));
+
+        userRepository.save(user);
+
+        return password;
+    }
+
+    public void requestPasswordUpdateById(ResetPasswordVerification resetPasswordVerification)
+    {
+        eventPublisher.publishEvent(new OnResetPasswordEvent(resetPasswordVerification));
     }
 
     public User updatePersonalInformationById(
