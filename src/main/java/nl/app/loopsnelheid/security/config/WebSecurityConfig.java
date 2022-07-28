@@ -54,6 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.REGISTER_PATH).permitAll()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.LOGIN_PATH).permitAll()
+                .antMatchers(HttpMethod.POST, AccountEndpoints.RESET_PASSWORD_PATH).permitAll()
+                .antMatchers(HttpMethod.GET, AccountEndpoints.RESET_PASSWORD_VERIFICATION_PATH).permitAll()
                 .antMatchers(HttpMethod.GET, AccountEndpoints.VERIFY_TOKEN_PATH).permitAll()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.VERIFY_DIGITAL_CODE_PATH).permitAll()
                 .antMatchers(HttpMethod.GET, AccountEndpoints.RESET_EMAIL_VERIFICATION_PATH).permitAll()
