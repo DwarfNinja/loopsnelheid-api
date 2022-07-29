@@ -6,9 +6,11 @@
     <title>Verzoek tot vergetelheid</title>
 </head>
 <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400&amp;display=swap");
+
     * {
         margin: 0;
-        font-family: 'Lato', serif;
+        font-family: 'Poppins', serif;
     }
 
     html {
@@ -20,8 +22,7 @@
         display: grid;
         grid-template-columns: auto auto auto;
         justify-content: center;
-        margin-top: 2rem;
-        margin-bottom: 5rem;
+        margin: 2.5rem 0;
     }
 
     h1 {
@@ -44,6 +45,7 @@
         padding: 3rem;
         border-radius: 1rem;
         background-color: white;
+        word-break: break-all;
     }
 
     h2 {
@@ -53,16 +55,15 @@
     }
 
     p {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: bold;
         color: #AAAAAA;
-        width: 70%;
+        word-break: break-word;
     }
 
-    ul {
+    ul, form {
         padding: 0;
         margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
     }
 
     li {
@@ -86,7 +87,7 @@
         border-radius: .5rem;
         padding: 0;
         font-size: 20px;
-        box-shadow: .1rem .1rem .4rem black;
+        box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
         cursor: pointer;
         outline: inherit;
         margin-bottom: 1.5rem;
@@ -118,7 +119,8 @@
 
 <div class="content">
     <h2>Uw verzoek tot vergetelheid is ingetrokken.</h2>
-    <p>Er is op <span style="font-weight: bold" th:text="${date}"></span> om <span style="font-weight: bold" th:text="${time}"></span> een verzoek tot vergetelheid ingediend op uw account. Deze is zojuist door u ingetrokken. Fijn om te horen dat u nog gebruik wilt maken van onze app.</p>
+    <p>Er is op <span style="font-weight: bold" th:text="${date}"></span> om <span style="font-weight: bold" th:text="${time}"></span> een verzoek tot vergetelheid ingediend op uw account.</p>
+    <p>Dit verzoek is zojuist door u ingetrokken. Fijn om te horen dat u nog gebruik wilt maken van de loopsnelheid app.</p>
 </div>
 
 <div>

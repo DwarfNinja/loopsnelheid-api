@@ -8,15 +8,11 @@ import nl.app.loopsnelheid.security.domain.Sex;
 import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.domain.event.OnRegistrationCompleteEvent;
 import nl.app.loopsnelheid.security.domain.exception.RegisterValidationException;
-import nl.app.loopsnelheid.security.presentation.dto.UserDto;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;

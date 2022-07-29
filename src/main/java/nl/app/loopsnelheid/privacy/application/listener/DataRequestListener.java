@@ -62,7 +62,7 @@ public class DataRequestListener implements ApplicationListener<OnDataRequestCom
             helper.setSubject("Verzoek tot gegevensoverdraagbaarheid");
             helper.setText(process, true);
             helper.setTo(email);
-            helper.addAttachment("persoonsgegevens.pdf", fileSystemResource);
+            helper.addAttachment("persoonsdocument.pdf", fileSystemResource);
             javaMailSender.send(mimeMessage);
 
             file.delete();

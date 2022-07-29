@@ -6,7 +6,6 @@ import nl.app.loopsnelheid.security.data.ResetPasswordVerificationRepository;
 import nl.app.loopsnelheid.security.domain.ResetEmailVerification;
 import nl.app.loopsnelheid.security.domain.ResetPasswordVerification;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.domain.event.OnEmailChangeCompleteEvent;
 import nl.app.loopsnelheid.security.domain.event.OnResetPasswordCompleteEvent;
 import nl.app.loopsnelheid.security.domain.exception.VerificationTokenExpiredException;
 import nl.app.loopsnelheid.security.domain.exception.VerificationTokenNotFoundException;

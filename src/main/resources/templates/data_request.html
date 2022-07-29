@@ -6,9 +6,11 @@
     <title>Verzoek tot gegevensoverdraagbaarheid</title>
 </head>
 <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400&amp;display=swap");
+
     * {
         margin: 0;
-        font-family: 'Lato', serif;
+        font-family: 'Poppins', serif;
     }
 
     html {
@@ -53,51 +55,19 @@
     }
 
     p {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: bold;
         color: #AAAAAA;
-        width: 70%;
     }
 
     ul {
-        padding: 0;
         margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
     }
 
-    li {
-        display: inline-block;
-        width: 2.5vw;
-        height: 4vh;
-        text-align: center;
-        font-size: 26px;
+    li span {
+        font-size: 15px;
         font-weight: bold;
-        border-radius: .5rem;
-        margin: 0 .7rem 0 0;
-        border: solid 1px #B1B1B1;
-    }
-
-    button {
-        background-color: #2215C2;
-        color: white;
-        border: none;
-        width: 20vw;
-        height: 5vh;
-        border-radius: .5rem;
-        padding: 0;
-        font-size: 20px;
-        box-shadow: .1rem .1rem .4rem black;
-        cursor: pointer;
-        outline: inherit;
-        margin-bottom: 1.5rem;
-    }
-
-    a {
-        font-size: 14px;
-        font-weight: bold;
-        color: #1D58EF;
-        width: 70%;
-        text-decoration: none;
+        color: #AAAAAA;
     }
 
     .footer-text {
@@ -109,6 +79,10 @@
         margin-top: 4rem;
     }
 
+    .font-bold {
+        font-weight: bold;
+    }
+
 </style>
 <body>
 <div class="header">
@@ -117,9 +91,10 @@
 </div>
 
 <div class="content">
-    <h2>Je datapakket is klaar</h2>
-    <p>Onze privacy-hamsters zijn blij om aan te kondigen dat je datapakket klaar is om opgehaald te worden! (Mocht je het vergeten zijn, je hebt deze speciale bezorging op <span th:text="${requestedAt}"></span> aangevraagd)</p>
-    <p>In het pakket vind je een pdf document met daarin jouw gegevens die we gebruiken om de ultieme service aan te bieden.</p>
+    <h2>Uw persoonsdocument is gereed</h2>
+    <p>Onze privacy-hamsters zijn blij om aan te kondigen dat uw persoonsdocument klaar is om opgehaald te worden! (Mocht u het vergeten zijn, u heeft deze speciale bezorging op <span th:text="${requestedAt}"></span> aangevraagd)</p>
+    <p>In het persoonsdocument bevinden zich uw (persoons)gegevens en metingen die we gebruiken om de ultieme service aan te bieden.</p>
+    <p>Ook kunt u, op eigen initiatief, het document overhandigen aan een zorgverlener. Uw zorgverlener heeft dan inzicht op uw (persoons)gegevens en metingen.</p>
 </div>
 
 <div>
