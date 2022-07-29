@@ -1,13 +1,9 @@
 package nl.app.loopsnelheid.security.application.listener;
 
 import lombok.RequiredArgsConstructor;
-import nl.app.loopsnelheid.security.application.ResetEmailVerificationService;
-import nl.app.loopsnelheid.security.application.ResetPasswordVerificationService;
 import nl.app.loopsnelheid.security.config.AccountEndpoints;
-import nl.app.loopsnelheid.security.domain.ResetEmailVerification;
 import nl.app.loopsnelheid.security.domain.ResetPasswordVerification;
 import nl.app.loopsnelheid.security.domain.User;
-import nl.app.loopsnelheid.security.domain.event.OnEmailChangeEvent;
 import nl.app.loopsnelheid.security.domain.event.OnResetPasswordEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

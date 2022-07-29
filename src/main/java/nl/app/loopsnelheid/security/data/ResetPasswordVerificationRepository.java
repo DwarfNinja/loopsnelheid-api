@@ -1,6 +1,5 @@
 package nl.app.loopsnelheid.security.data;
 
-import nl.app.loopsnelheid.security.domain.ResetEmailVerification;
 import nl.app.loopsnelheid.security.domain.ResetPasswordVerification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
