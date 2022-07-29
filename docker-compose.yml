@@ -1,19 +1,9 @@
-# Running "docker-compose up" (active process)
-# or "docker-compose start" (background process)
-# will setup our development database
-#
-# One can connect to it using your DB client
-# (IntelliJ, DataGrip, pqadmin, psql, ...),
-# using the following parameters (see: application.properties):
-#   url = jdbc:postgresql://localhost:15432/bep2-huland-casino
-#   username = bep2-huland-casino
-#   password = bep2-huland-casino
 version: "3.7"
 services:
   db:
     build: development/db
     ports:
-      - "15432:5432"
+      - "5432:5432"
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
@@ -22,9 +12,33 @@ services:
       - DB_APP_PASS=loopsnelheid-db
     volumes:
       - "./data:/var/data/db"
+    networks:
+      - shared_network
   mailcatcher:
     image: schickling/mailcatcher
     container_name: loopsnelheid-mailcatcher
     ports:
       - "1080:1080"
       - "1025:1025"
+    networks:
+      - shared_network
+  api:
+    image: ghcr.io/team-dom-toren/loopsnelheid-app-api/api:v0.0.3
+    container_name: loopsnelheid-api
+    ports:
+      - "8080:8080"
+    networks:
+      - shared_network
+  nginx:
+    image: nginx:latest
+    container_name: loopsnelheid-nginx
+    restart: always
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - shared_network
+networks:
+  shared_network:
