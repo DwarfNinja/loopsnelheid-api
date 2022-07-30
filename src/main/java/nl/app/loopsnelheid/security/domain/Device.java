@@ -24,8 +24,8 @@ public class Device
     @Enumerated(EnumType.STRING)
     private EOSDevice eosDevice;
 
-    @Column(nullable = false, length = 99999)
-    private String deviceInfoJSON;
+    @Column(nullable = false)
+    private String deviceModel;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -33,10 +33,10 @@ public class Device
 
     public Device() {}
 
-    public Device(String session, String deviceInfoJSON, EDevice eDevice, EOSDevice eosDevice, User user)
+    public Device(String session, String deviceModel, EDevice eDevice, EOSDevice eosDevice, User user)
     {
         this.session = session;
-        this.deviceInfoJSON = deviceInfoJSON;
+        this.deviceModel = deviceModel;
         this.eDevice = eDevice;
         this.eosDevice = eosDevice;
         this.user = user;

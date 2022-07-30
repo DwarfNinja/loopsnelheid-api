@@ -10,6 +10,6 @@ public class LoginDto
     @JsonProperty("device_os")
     public String deviceOs;
 
-    @JsonProperty("device_info")
-    public String deviceInfo;
+    @JsonProperty("device_model")
+    public String deviceModel;
 }

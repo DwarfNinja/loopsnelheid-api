@@ -33,7 +33,7 @@ public class LoginController
     {
         JwtResponse jwtResponse = loginService.authenticateUser(loginDto.email, loginDto.password);
         User authenticatedUser = userService.loadUserByUsername(loginService.getUserDetails().getUsername());
-        Device device = deviceService.createDevice(authenticatedUser, loginDto.deviceOs, loginDto.deviceInfo);
+        Device device = deviceService.createDevice(authenticatedUser, loginDto.deviceOs, loginDto.deviceModel);
 
         return new JwtResponseDto(
                 jwtResponse.getJwt(),
@@ -43,7 +43,7 @@ public class LoginController
                         device.getId(),
                         device.getSession(),
                         device.getEosDevice().toString(),
-                        device.getDeviceInfoJSON(),
+                        device.getDeviceModel(),
                         device.getEDevice().toString()
                 )
         );
@@ -70,7 +70,7 @@ public class LoginController
                         device.getId(),
                         device.getSession(),
                         device.getEosDevice().toString(),
-                        device.getDeviceInfoJSON(),
+                        device.getDeviceModel(),
                         device.getEDevice().toString()
                 )).collect(Collectors.toList());
     }
