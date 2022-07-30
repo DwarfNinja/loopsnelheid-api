@@ -10,18 +10,18 @@ public class DeviceDto
     @JsonProperty("device_os")
     public String deviceOs;
 
-    @JsonProperty("device_info")
-    public String deviceInfo;
+    @JsonProperty("device_model")
+    public String deviceModel;
 
     @JsonProperty("type")
     public String eDevice;
 
-    public DeviceDto(Long id, String session, String deviceOs, String deviceInfo, String eDevice)
+    public DeviceDto(Long id, String session, String deviceOs, String deviceModel, String eDevice)
     {
         this.id = id;
         this.session = session;
         this.deviceOs = deviceOs;
-        this.deviceInfo = deviceInfo;
+        this.deviceModel = deviceModel;
         this.eDevice = eDevice;
     }
 }

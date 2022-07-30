@@ -28,14 +28,14 @@ public class DeviceService
                 .orElseThrow(() -> new DeviceNotFoundException("Uw huidige apparaat is niet gekoppeld aan dit account."));
     }
 
-    public Device createDevice(User authenticatedUser, String deviceOs, String deviceInfo)
+    public Device createDevice(User authenticatedUser, String deviceOs, String deviceModel)
     {
         EDevice eDevice = authenticatedUser.getAmountOfDevices() > 0
                 ? EDevice.READING_DEVICE
                 : EDevice.MEASURING_DEVICE;
         Device device = new Device(
                 TokenGenerator.generateToken(),
-                deviceInfo,
+                deviceModel,
                 eDevice,
                 EOSDevice.valueOf(deviceOs),
                 authenticatedUser
