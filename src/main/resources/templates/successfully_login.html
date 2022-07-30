@@ -22,7 +22,8 @@
         display: grid;
         grid-template-columns: auto auto auto;
         justify-content: center;
-        margin: 2.5rem 0;
+        margin-top: 2rem;
+        margin-bottom: 5rem;
     }
 
     h1 {
@@ -45,7 +46,6 @@
         padding: 3rem;
         border-radius: 1rem;
         background-color: white;
-        word-break: break-all;
     }
 
     h2 {
@@ -58,47 +58,16 @@
         font-size: 15px;
         font-weight: bold;
         color: #AAAAAA;
-        word-break: break-word;
     }
 
-    ul, form {
-        padding: 0;
+    ul {
         margin-top: 1.5rem;
     }
 
-    li {
-        display: inline-block;
-        width: 2.5vw;
-        height: 4vh;
-        text-align: center;
-        font-size: 26px;
+    li span {
+        font-size: 15px;
         font-weight: bold;
-        border-radius: .5rem;
-        margin: 0 .7rem 0 0;
-        border: solid 1px #B1B1B1;
-    }
-
-    button {
-        background-color: #2215C2;
-        color: white;
-        border: none;
-        width: 20vw;
-        height: 5vh;
-        border-radius: .5rem;
-        padding: 0;
-        font-size: 20px;
-        box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
-        cursor: pointer;
-        outline: inherit;
-        margin-bottom: 1.5rem;
-    }
-
-    a {
-        font-size: 14px;
-        font-weight: bold;
-        color: #1D58EF;
-        width: 70%;
-        text-decoration: none;
+        color: #AAAAAA;
     }
 
     .footer-text {
@@ -108,6 +77,10 @@
         font-size: 18px;
         font-weight: lighter;
         margin-top: 4rem;
+    }
+
+    .font-bold {
+        font-weight: bold;
     }
 
 </style>
@@ -120,6 +93,24 @@
 <div class="content">
     <h2>Een apparaat is ingelogd op uw account</h2>
     <p>Wij laten u weten dat er zojuist een apparaat is aangemeld op uw account. Heeft u niet ingelogd? Verander dan onmiddelijk uw wachtwoord vanaf de loopsnelheid app.</p>
+    <ul>
+        <li>
+            <span class="font-bold">Datum:</span>
+            <span th:text="${signed_in_date}"></span>
+        </li>
+        <li>
+            <span class="font-bold">Tijdstip:</span>
+            <span th:text="${signed_in_time}"></span>
+        </li>
+        <li>
+            <span class="font-bold">Apparaat model:</span>
+            <span th:text="${model}"></span>
+        </li>
+        <li>
+            <span class="font-bold">Apparaat besturingssysteem:</span>
+            <span th:text="${os}"></span>
+        </li>
+    </ul>
 </div>
 
 <div>

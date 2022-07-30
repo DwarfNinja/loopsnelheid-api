@@ -2,7 +2,9 @@ package nl.app.loopsnelheid.security.application;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.config.JwtUtils;
+import nl.app.loopsnelheid.security.domain.Device;
 import nl.app.loopsnelheid.security.domain.JwtResponse;
+import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.domain.UserDetailsImp;
 import nl.app.loopsnelheid.security.domain.event.OnLoginCompleteEvent;
 import org.springframework.context.ApplicationEventPublisher;
@@ -43,9 +45,12 @@ public class LoginService
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
 
-        eventPublisher.publishEvent(new OnLoginCompleteEvent(userDetails));
-
         return new JwtResponse(jwt, userDetails.getUsername(), roles);
+    }
+
+    public void notifyUserLogin(User user, Device device)
+    {
+        eventPublisher.publishEvent(new OnLoginCompleteEvent(user, device));
     }
 
     public UserDetails getUserDetails()

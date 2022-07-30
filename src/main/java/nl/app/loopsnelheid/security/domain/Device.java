@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "devices")
@@ -27,6 +28,8 @@ public class Device
     @Column(nullable = false)
     private String deviceModel;
 
+    private LocalDateTime signedInAt;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -40,5 +43,6 @@ public class Device
         this.eDevice = eDevice;
         this.eosDevice = eosDevice;
         this.user = user;
+        this.signedInAt = LocalDateTime.now();
     }
 }

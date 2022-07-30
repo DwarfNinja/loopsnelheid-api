@@ -1,18 +1,21 @@
 package nl.app.loopsnelheid.security.domain.event;
 
 import lombok.Getter;
+import nl.app.loopsnelheid.security.domain.Device;
+import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 public class OnLoginCompleteEvent extends ApplicationEvent
 {
-    private final UserDetails userDetails;
-    public OnLoginCompleteEvent(UserDetails userDetails)
+    private final User user;
+    private final Device device;
+
+    public OnLoginCompleteEvent(User user, Device device)
     {
-        super(userDetails);
+        super(user);
 
-        this.userDetails = userDetails;
-
+        this.user = user;
+        this.device = device;
     }
 }

@@ -34,6 +34,7 @@ public class LoginController
         JwtResponse jwtResponse = loginService.authenticateUser(loginDto.email, loginDto.password);
         User authenticatedUser = userService.loadUserByUsername(loginService.getUserDetails().getUsername());
         Device device = deviceService.createDevice(authenticatedUser, loginDto.deviceOs, loginDto.deviceModel);
+        loginService.notifyUserLogin(authenticatedUser, device);
 
         return new JwtResponseDto(
                 jwtResponse.getJwt(),
