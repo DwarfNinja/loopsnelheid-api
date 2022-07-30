@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,13 @@ public class RoleService
                 .orElseThrow(() -> new RoleNotFoundException("Deze rol bestaat niet."));
     }
 
+    public boolean roleExistsByName(String name)
+    {
+        Optional<Role> role = roleRepository.findByName(ERole.valueOf(name));
+
+        return role.isPresent();
+    }
+
     public Set<Role> provideUserRoles(List<String> roles)
     {
         return roles.stream().map(this::getRoleByName).collect(Collectors.toSet());
@@ -37,6 +45,12 @@ public class RoleService
 
     public void saveAllRoles(Set<Role> roles)
     {
-        roleRepository.saveAll(roles);
+        for (Role role : roles)
+        {
+            if (!roleExistsByName(role.getName().toString()))
+            {
+                roleRepository.save(role);
+            }
+        }
     }
 }

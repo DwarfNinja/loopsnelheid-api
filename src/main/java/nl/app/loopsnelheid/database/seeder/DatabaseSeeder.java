@@ -26,9 +26,9 @@ public class DatabaseSeeder extends Seeder
     protected void load()
     {
         seeders.add(new RoleSeeder(new RoleService(roleRepository)));
-        logger.info("All roles has been saved");
+        logger.info("All roles has been updated");
         seeders.add(new DefaultMeasureSeeder(new DefaultMeasureService(defaultMeasureRepository)));
-        logger.info("All default measures has been saved");
+        logger.info("All default measures has been updates");
     }
 
     @Override
