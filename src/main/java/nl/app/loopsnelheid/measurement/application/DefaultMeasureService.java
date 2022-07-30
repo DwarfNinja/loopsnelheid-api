@@ -28,11 +28,6 @@ public class DefaultMeasureService
         defaultMeasureRepository.save(createDefaultMeasure(sex, age, speed));
     }
 
-    public void saveAllDefaultMeasures(Set<DefaultMeasure> defaultMeasures)
-    {
-        defaultMeasureRepository.saveAll(defaultMeasures);
-    }
-
     public List<DefaultMeasure> getDefaultMeasuresBySex(Sex sex)
     {
         return defaultMeasureRepository.findAllBySex(sex);
@@ -42,5 +37,18 @@ public class DefaultMeasureService
     {
         return defaultMeasureRepository.findBySexAndAge(sex, age)
                 .orElseThrow(() -> new MissingDataSetException("Gegeven geslacht en leeftijd is geen match in onze dataset."));
+    }
+
+    public boolean isDefaultMeasuresStored()
+    {
+        return defaultMeasureRepository.count() == 160;
+    }
+
+    public void saveAllDefaultMeasures(Set<DefaultMeasure> defaultMeasures)
+    {
+        if (!isDefaultMeasuresStored())
+        {
+            defaultMeasureRepository.saveAll(defaultMeasures);
+        }
     }
 }

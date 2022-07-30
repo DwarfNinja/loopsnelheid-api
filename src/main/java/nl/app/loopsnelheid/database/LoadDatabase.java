@@ -9,15 +9,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LoadDatabase
 {
-    @Value("${database.seed.state}")
-    private boolean finished;
     @Bean
     CommandLineRunner initDatabase(DatabaseSeeder databaseSeeder)
     {
         return args -> {
-            if (!finished) {
-                databaseSeeder.run();
-            }
+            databaseSeeder.run();
         };
     }
 }
