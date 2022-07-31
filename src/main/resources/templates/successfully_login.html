@@ -2,7 +2,6 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <title>Er is met een nieuw apparaat ingelogd</title>
 </head>
 <style>
@@ -14,8 +13,14 @@
     }
 
     html {
-        height: 100vh;
+        height: 100%;
         background-image: linear-gradient(to bottom, #1d58ef, #1c4ae4, #1d3bd9, #1f2ace, #2215c2);
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1rem;
     }
 
     .header {
@@ -42,7 +47,6 @@
 
     .content {
         margin: auto;
-        width: 30%;
         padding: 3rem;
         border-radius: 1rem;
         background-color: white;
@@ -79,42 +83,65 @@
         margin-top: 4rem;
     }
 
+    button {
+        background-color: #2215C2;
+        color: white;
+        border: none;
+        border-radius: .5rem;
+        padding: 1rem;
+        font-size: 20px;
+        box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
+        cursor: pointer;
+        outline: inherit;
+        margin-bottom: 1.5rem;
+    }
+
+    a {
+        font-size: 14px;
+        font-weight: bold;
+        color: #1D58EF;
+        width: 70%;
+        text-decoration: none;
+    }
+
     .font-bold {
         font-weight: bold;
     }
 
 </style>
 <body>
-<div class="header">
-    <svg  viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48h-48z" fill="none"/><path d="M28 7.6c1.98 0 3.6-1.61 3.6-3.6s-1.62-3.6-3.6-3.6c-1.99 0-3.6 1.61-3.6 3.6s1.61 3.6 3.6 3.6zm.24 12.4h9.76v-3.6h-7.25l-4-6.66c-.59-1-1.68-1.66-2.92-1.66-.34 0-.67.05-.98.14l-10.85 3.38v10.4h3.6v-7.33l4.21-1.31-7.81 30.64h3.6l5.74-16.22 4.66 6.22v10h3.6v-12.81l-4.98-9.08 1.47-5.74 2.15 3.63z"/></svg>
-    <h1>Loopsnelheid</h1>
-</div>
+<div class="container">
+    <div class="header">
+        <svg  viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48h-48z" fill="none"/><path d="M28 7.6c1.98 0 3.6-1.61 3.6-3.6s-1.62-3.6-3.6-3.6c-1.99 0-3.6 1.61-3.6 3.6s1.61 3.6 3.6 3.6zm.24 12.4h9.76v-3.6h-7.25l-4-6.66c-.59-1-1.68-1.66-2.92-1.66-.34 0-.67.05-.98.14l-10.85 3.38v10.4h3.6v-7.33l4.21-1.31-7.81 30.64h3.6l5.74-16.22 4.66 6.22v10h3.6v-12.81l-4.98-9.08 1.47-5.74 2.15 3.63z"/></svg>
+        <h1>Loopsnelheid</h1>
+    </div>
 
-<div class="content">
-    <h2>Een apparaat is ingelogd op uw account</h2>
-    <p>Wij laten u weten dat er zojuist een apparaat is aangemeld op uw account. Heeft u niet ingelogd? Verander dan onmiddelijk uw wachtwoord vanaf de loopsnelheid app.</p>
-    <ul>
-        <li>
-            <span class="font-bold">Datum:</span>
-            <span th:text="${signed_in_date}"></span>
-        </li>
-        <li>
-            <span class="font-bold">Tijdstip:</span>
-            <span th:text="${signed_in_time}"></span>
-        </li>
-        <li>
-            <span class="font-bold">Apparaat model:</span>
-            <span th:text="${model}"></span>
-        </li>
-        <li>
-            <span class="font-bold">Apparaat besturingssysteem:</span>
-            <span th:text="${os}"></span>
-        </li>
-    </ul>
-</div>
+    <div class="content">
+        <h2>Een apparaat is ingelogd op uw account</h2>
+        <p>Wij laten u weten dat er zojuist een apparaat is aangemeld op uw account. Heeft u niet ingelogd? Verander dan onmiddelijk uw wachtwoord vanaf de loopsnelheid app.</p>
+        <ul>
+            <li>
+                <span class="font-bold">Datum:</span>
+                <span th:text="${signed_in_date}"></span>
+            </li>
+            <li>
+                <span class="font-bold">Tijdstip:</span>
+                <span th:text="${signed_in_time}"></span>
+            </li>
+            <li>
+                <span class="font-bold">Apparaat model:</span>
+                <span th:text="${model}"></span>
+            </li>
+            <li>
+                <span class="font-bold">Apparaat besturingssysteem:</span>
+                <span th:text="${os}"></span>
+            </li>
+        </ul>
+    </div>
 
-<div>
-    <p class="footer-text">©2022 Loopsnelheid. Alle rechten voorbehouden.</p>
+    <div>
+        <p class="footer-text">©2022 Loopsnelheid. Alle rechten voorbehouden.</p>
+    </div>
 </div>
 </body>
 
