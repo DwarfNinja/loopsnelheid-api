@@ -5,6 +5,7 @@ import nl.app.loopsnelheid.security.domain.DeleteRequest;
 import nl.app.loopsnelheid.security.domain.event.OnDeleteRequestConfirmedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -22,6 +23,9 @@ public class DeleteRequestConfirmedListener implements ApplicationListener<OnDel
     private static final Logger logger = LoggerFactory.getLogger(DeleteRequestConfirmedListener.class);
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
+
+    @Value("${spring.mail.username}")
+    private String from;
 
     @Override
     public void onApplicationEvent(OnDeleteRequestConfirmedEvent onDeleteRequestConfirmedEvent)
@@ -46,6 +50,7 @@ public class DeleteRequestConfirmedListener implements ApplicationListener<OnDel
 
         try
         {
+            helper.setFrom(from);
             helper.setSubject("Verzoek tot vergetelheid bevestiging");
             helper.setText(process, true);
             helper.setTo(deleteRequest.getEmail());

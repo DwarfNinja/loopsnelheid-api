@@ -32,6 +32,9 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     @Value("${mail.api.url}")
     private String mailApiUrl;
 
+    @Value("${spring.mail.username}")
+    private String from;
+
     @Override
     public void onApplicationEvent(OnRegistrationCompleteEvent onRegistrationCompleteEvent)
     {
@@ -71,6 +74,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
         try
         {
+            helper.setFrom(from);
             helper.setSubject("Bevestig uw e-mailadres ");
             helper.setText(process, true);
             helper.setTo(email);

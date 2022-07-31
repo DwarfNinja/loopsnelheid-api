@@ -30,6 +30,9 @@ public class EmailChangedListener implements ApplicationListener<OnEmailChangeEv
     @Value("${mail.api.url}")
     private String mailApiUrl;
 
+    @Value("${spring.mail.username}")
+    private String from;
+
     @Override
     public void onApplicationEvent(OnEmailChangeEvent onEmailChangeEvent)
     {
@@ -65,6 +68,7 @@ public class EmailChangedListener implements ApplicationListener<OnEmailChangeEv
 
         try
         {
+            helper.setFrom(from);
             helper.setSubject("Bevestig uw e-mailadres ");
             helper.setText(process, true);
             helper.setTo(email);

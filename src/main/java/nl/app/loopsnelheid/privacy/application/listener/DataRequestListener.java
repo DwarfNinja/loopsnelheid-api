@@ -6,6 +6,7 @@ import nl.app.loopsnelheid.privacy.domain.DataRequest;
 import nl.app.loopsnelheid.privacy.domain.event.OnDataRequestCompleteEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -28,6 +29,9 @@ public class DataRequestListener implements ApplicationListener<OnDataRequestCom
     private final JavaMailSender javaMailSender;
 
     private final TemplateEngine templateEngine;
+
+    @Value("${spring.mail.username}")
+    private String from;
 
     @Override
     public void onApplicationEvent(OnDataRequestCompleteEvent event)
@@ -59,6 +63,7 @@ public class DataRequestListener implements ApplicationListener<OnDataRequestCom
             javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
+            helper.setFrom(from);
             helper.setSubject("Verzoek tot gegevensoverdraagbaarheid");
             helper.setText(process, true);
             helper.setTo(email);

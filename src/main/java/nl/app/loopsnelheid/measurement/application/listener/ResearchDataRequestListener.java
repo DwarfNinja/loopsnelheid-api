@@ -5,6 +5,7 @@ import nl.app.loopsnelheid.measurement.domain.ResearchData;
 import nl.app.loopsnelheid.measurement.domain.event.OnResearchDataRequestCompleteEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -24,6 +25,9 @@ public class ResearchDataRequestListener implements ApplicationListener<OnResear
     private final JavaMailSender javaMailSender;
 
     private final TemplateEngine templateEngine;
+
+    @Value("${spring.mail.username}")
+    private String from;
 
     @Override
     public void onApplicationEvent(OnResearchDataRequestCompleteEvent event)
@@ -52,6 +56,7 @@ public class ResearchDataRequestListener implements ApplicationListener<OnResear
             javax.mail.internet.MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
+            helper.setFrom(from);
             helper.setSubject("Het onderzoeksrapport");
             helper.setText(process, true);
             helper.setTo(email);
