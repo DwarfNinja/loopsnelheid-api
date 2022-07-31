@@ -1,150 +1,37 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" style="height: 100%;background-image: linear-gradient(to bottom, #1d58ef, #1c4ae4, #1d3bd9, #1f2ace, #2215c2);">
 <head>
     <meta charset="UTF-8">
     <title>Bevestig uw e-mailadres</title>
 </head>
-<style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400&amp;display=swap");
 
-    * {
-        margin: 0;
-        font-family: 'Poppins', serif;
-    }
-
-    html {
-        height: 100%;
-        background-image: linear-gradient(to bottom, #1d58ef, #1c4ae4, #1d3bd9, #1f2ace, #2215c2);
-    }
-
-    .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 1rem;
-    }
-
-    .header {
-        display: grid;
-        grid-template-columns: auto auto auto;
-        justify-content: center;
-        margin: 2.5rem 0;
-    }
-
-    h1 {
-        font-size: 36px;
-        font-weight: bold;
-        color: white;
-        text-align: center;
-    }
-
-    svg {
-        margin-left: auto;
-        margin-right: 0;
-        fill: white;
-        padding-right: 1rem;
-    }
-
-    .content {
-        margin: auto;
-        padding: 3rem;
-        border-radius: 1rem;
-        background-color: white;
-        word-break: break-all;
-    }
-
-    h2 {
-        margin-bottom: 1rem;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    p {
-        font-size: 15px;
-        font-weight: bold;
-        color: #AAAAAA;
-        word-break: break-word;
-    }
-
-    ul {
-        display: flex;
-        justify-content: flex-start;
-        column-gap: 15px;
-        padding: 0;
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
-        list-style-type: none;
-    }
-
-    li {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 50px;
-        height: 50px;
-        font-size: 26px;
-        font-weight: bold;
-        border-radius: .5rem;
-        border: solid 1px #B1B1B1;
-    }
-
-    button {
-        background-color: #2215C2;
-        color: white;
-        border: none;
-        border-radius: .5rem;
-        padding: 1rem;
-        font-size: 20px;
-        box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
-        cursor: pointer;
-        outline: inherit;
-        margin-bottom: 1.5rem;
-    }
-
-    a {
-        font-size: 14px;
-        font-weight: bold;
-        color: #1D58EF;
-        width: 70%;
-        text-decoration: none;
-    }
-
-    .footer-text {
-        text-align: center;
-        width: 100%;
-        color: white;
-        font-size: 18px;
-        font-weight: lighter;
-        margin-top: 4rem;
-    }
-
-</style>
 <body>
-<div class="container">
-    <div class="header">
-        <svg  viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48h-48z" fill="none"/><path d="M28 7.6c1.98 0 3.6-1.61 3.6-3.6s-1.62-3.6-3.6-3.6c-1.99 0-3.6 1.61-3.6 3.6s1.61 3.6 3.6 3.6zm.24 12.4h9.76v-3.6h-7.25l-4-6.66c-.59-1-1.68-1.66-2.92-1.66-.34 0-.67.05-.98.14l-10.85 3.38v10.4h3.6v-7.33l4.21-1.31-7.81 30.64h3.6l5.74-16.22 4.66 6.22v10h3.6v-12.81l-4.98-9.08 1.47-5.74 2.15 3.63z"/></svg>
-        <h1>Loopsnelheid</h1>
+<div class="container" style="max-width: 900px;margin: 0 auto;padding: 1rem;">
+    <div class="header" style="display: grid;grid-template-columns: auto auto auto;justify-content: center;margin: 2.5rem 0;">
+        <svg viewbox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg" style="margin-left: auto;margin-right: 0;fill: white;padding-right: 1rem;"><path d="M0 0h48v48h-48z" fill="none"></path><path d="M28 7.6c1.98 0 3.6-1.61 3.6-3.6s-1.62-3.6-3.6-3.6c-1.99 0-3.6 1.61-3.6 3.6s1.61 3.6 3.6 3.6zm.24 12.4h9.76v-3.6h-7.25l-4-6.66c-.59-1-1.68-1.66-2.92-1.66-.34 0-.67.05-.98.14l-10.85 3.38v10.4h3.6v-7.33l4.21-1.31-7.81 30.64h3.6l5.74-16.22 4.66 6.22v10h3.6v-12.81l-4.98-9.08 1.47-5.74 2.15 3.63z"></path></svg>
+        <h1 style="font-size: 36px;font-weight: bold;color: white;text-align: center;">Loopsnelheid</h1>
     </div>
 
-    <div class="content">
-        <h2>Uw verificatie code</h2>
-        <p>Kopieer onderstaande 6-cijferige verificatie code en voer deze in op de loopsnelheid app om uw e-mailadres te verifiëren of klik op de knop “Account verifiëren” om uw e-mailadres direct te verifiëren.</p>
-        <ul>
-            <li th:text="${#strings.substring(digitalCode, 0,1)}">2</li>
-            <li th:text="${#strings.substring(digitalCode, 1,2)}">3</li>
-            <li th:text="${#strings.substring(digitalCode, 2,3)}">4</li>
-            <li th:text="${#strings.substring(digitalCode, 3,4)}">5</li>
-            <li th:text="${#strings.substring(digitalCode, 4,5)}">6</li>
-            <li th:text="${#strings.substring(digitalCode, 5,6)}">7</li>
+    <div class="content" style="margin: auto;padding: 3rem;border-radius: 1rem;background-color: white;word-break: break-all;">
+        <h2 style="margin-bottom: 1rem;font-size: 22px;font-weight: bold;">Uw verificatie code</h2>
+        <p style="font-size: 15px;font-weight: bold;color: #AAAAAA;word-break: break-word;">Kopieer onderstaande 6-cijferige verificatie code en voer deze in op de loopsnelheid app om uw e-mailadres te verifiëren of klik op de knop “Account verifiëren” om uw e-mailadres direct te verifiëren.</p>
+        <ul style="display: flex;justify-content: flex-start;column-gap: 15px;padding: 0;margin-top: 1.5rem;margin-bottom: 1.5rem;list-style-type: none;">
+            <li th:text="${#strings.substring(digitalCode, 0,1)}" style="display: flex;justify-content: center;align-items: center;width: 50px;height: 50px;font-size: 26px;font-weight: bold;border-radius: .5rem;border: solid 1px #B1B1B1;">2</li>
+            <li th:text="${#strings.substring(digitalCode, 1,2)}" style="display: flex;justify-content: center;align-items: center;width: 50px;height: 50px;font-size: 26px;font-weight: bold;border-radius: .5rem;border: solid 1px #B1B1B1;">3</li>
+            <li th:text="${#strings.substring(digitalCode, 2,3)}" style="display: flex;justify-content: center;align-items: center;width: 50px;height: 50px;font-size: 26px;font-weight: bold;border-radius: .5rem;border: solid 1px #B1B1B1;">4</li>
+            <li th:text="${#strings.substring(digitalCode, 3,4)}" style="display: flex;justify-content: center;align-items: center;width: 50px;height: 50px;font-size: 26px;font-weight: bold;border-radius: .5rem;border: solid 1px #B1B1B1;">5</li>
+            <li th:text="${#strings.substring(digitalCode, 4,5)}" style="display: flex;justify-content: center;align-items: center;width: 50px;height: 50px;font-size: 26px;font-weight: bold;border-radius: .5rem;border: solid 1px #B1B1B1;">6</li>
+            <li th:text="${#strings.substring(digitalCode, 5,6)}" style="display: flex;justify-content: center;align-items: center;width: 50px;height: 50px;font-size: 26px;font-weight: bold;border-radius: .5rem;border: solid 1px #B1B1B1;">7</li>
         </ul>
-        <form th:action="${mailApiUrl}">
-            <button>Account verifiëren</button>
+        <form th:action="${mailApiUrl}" method="get">
+            <button style="background-color: #2215C2;color: white;border: none;border-radius: .5rem;padding: 1rem;font-size: 20px;box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);cursor: pointer;outline: inherit;margin-bottom: 1.5rem;">Account verifiëren</button>
         </form>
-        <p>Gebruik onderstaande link als u problemen ervaart met de knop “Account verifiëren”:</p>
-        <a th:href="${mailApiUrl}" th:text="${mailApiUrl}"></a>
+        <p style="font-size: 15px;font-weight: bold;color: #AAAAAA;word-break: break-word;">Gebruik onderstaande link als u problemen ervaart met de knop “Account verifiëren”:</p>
+        <a th:href="${mailApiUrl}" th:text="${mailApiUrl}" style="font-size: 14px;font-weight: bold;color: #1D58EF;width: 70%;text-decoration: none;"></a>
     </div>
 
     <div>
-        <p class="footer-text">©2022 Loopsnelheid. Alle rechten voorbehouden.</p>
+        <p class="footer-text" style="font-size: 18px;font-weight: lighter;color: white;word-break: break-word;text-align: center;width: 100%;margin-top: 4rem;">©2022 Loopsnelheid. Alle rechten voorbehouden.</p>
     </div>
 </div>
 </body>
