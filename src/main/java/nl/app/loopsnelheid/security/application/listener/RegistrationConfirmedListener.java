@@ -5,6 +5,7 @@ import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.domain.event.OnRegistrationConfirmedCompleteEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -23,6 +24,8 @@ public class RegistrationConfirmedListener implements ApplicationListener<OnRegi
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
+    @Value("${spring.mail.username}")
+    private String from;
 
     @Override
     public void onApplicationEvent(OnRegistrationConfirmedCompleteEvent onRegistrationCompleteEvent)
@@ -50,6 +53,7 @@ public class RegistrationConfirmedListener implements ApplicationListener<OnRegi
 
         try
         {
+            helper.setFrom(from);
             helper.setSubject("Uw account is succesvol geregistreerd");
             helper.setText(process, true);
             helper.setTo(user.getEmail());

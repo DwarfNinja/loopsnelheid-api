@@ -28,6 +28,9 @@ public class PasswordResetListener implements ApplicationListener<OnResetPasswor
     @Value("${mail.api.url}")
     private String mailApiUrl;
 
+    @Value("${spring.mail.username}")
+    private String from;
+
     @Override
     public void onApplicationEvent(OnResetPasswordEvent onResetPasswordEvent)
     {
@@ -63,6 +66,7 @@ public class PasswordResetListener implements ApplicationListener<OnResetPasswor
 
         try
         {
+            helper.setFrom(from);
             helper.setSubject("Bevestig uw nieuwe wachtwoord ");
             helper.setText(process, true);
             helper.setTo(email);
