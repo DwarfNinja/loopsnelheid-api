@@ -33,6 +33,8 @@ public class UsersController
                 user.getDateOfBirth(),
                 user.getSex().toString(),
                 user.isResearchCandidate(),
+                true,
+                true,
                 user.getLength(),
                 user.getWeight(),
                 user.getRoles().stream().map(role -> role.getName().toString()).collect(Collectors.toSet())
@@ -51,6 +53,8 @@ public class UsersController
                 user.getDateOfBirth(),
                 user.getSex().toString(),
                 user.isResearchCandidate(),
+                true,
+                true,
                 user.getLength(),
                 user.getWeight(),
                 user.getRoles().stream().map(role -> role.getName().toString()).collect(Collectors.toSet())

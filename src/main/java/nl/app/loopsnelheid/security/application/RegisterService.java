@@ -35,11 +35,17 @@ public class RegisterService
             Date dateOfBirth,
             String sex,
             boolean isResearchCandidate,
+            boolean termsAndConditions,
+            boolean privacyStatement,
             int length,
             int weight
     )
     {
-        if (password.length() < 7)
+        if (!(termsAndConditions && privacyStatement))
+        {
+            throw new RegisterValidationException("U moet akkoord gaan met de algemene voorwaarden en privacy verklaring");
+        }
+        else if (password.length() < 7)
         {
             throw new RegisterValidationException("Het wachtwoord moet langer dan 7 karakters zijn");
         }
@@ -86,11 +92,13 @@ public class RegisterService
             Date dateOfBirth,
             String sex,
             boolean isResearchCandidate,
+            boolean termsAndConditions,
+            boolean privacyStatement,
             int length,
             int weight
     )
     {
-        User user = createUser(id, password, email, dateOfBirth, sex, isResearchCandidate, length, weight);
+        User user = createUser(id, password, email, dateOfBirth, sex, isResearchCandidate, termsAndConditions, privacyStatement, length, weight);
 
         User savedUser = saveUser(user);
 
