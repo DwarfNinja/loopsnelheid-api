@@ -18,19 +18,35 @@ public class UserDto
 
     public boolean isResearchCandidate;
 
+    public boolean termsAndConditions;
+
+    public boolean privacyStatement;
+
     public int length;
 
     public int weight;
 
     public Set<String> roles;
 
-    public UserDto(Long id, String email, Date dateOfBirth, String sex, boolean isResearchCandidate, int length, int weight, Set<String> roles)
+    public UserDto(
+            Long id,
+            String email,
+            Date dateOfBirth,
+            String sex,
+            boolean isResearchCandidate,
+            boolean termsAndConditions,
+            boolean privacyStatement,
+            int length,
+            int weight,
+            Set<String> roles)
     {
         this.id = id;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
         this.isResearchCandidate = isResearchCandidate;
+        this.termsAndConditions = termsAndConditions;
+        this.privacyStatement = privacyStatement;
         this.length = length;
         this.weight = weight;
         this.roles = roles;

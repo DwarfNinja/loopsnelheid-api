@@ -7,8 +7,18 @@ public class RegisterDto extends UserDto
 {
     public String password;
 
-    public RegisterDto(Long id, String email, Date dateOfBirth, String sex, boolean isResearchCandidate, int length, int weight, Set<String> roles)
+    public RegisterDto(
+            Long id,
+            String email,
+            Date dateOfBirth,
+            String sex,
+            boolean isResearchCandidate,
+            boolean termsAndConditions,
+            boolean privacyStatement,
+            int length,
+            int weight,
+            Set<String> roles)
     {
-        super(id, email, dateOfBirth, sex, isResearchCandidate, length, weight, roles);
+        super(id, email, dateOfBirth, sex, isResearchCandidate, termsAndConditions, privacyStatement, length, weight, roles);
     }
 }

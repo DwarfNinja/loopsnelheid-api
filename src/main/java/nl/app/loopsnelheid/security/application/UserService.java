@@ -203,4 +203,9 @@ public class UserService
     {
         userRepository.deleteByEmail(username);
     }
+
+    public User saveUser(User user)
+    {
+        return this.userRepository.save(user);
+    }
 }

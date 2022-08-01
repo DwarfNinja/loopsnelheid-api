@@ -22,8 +22,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class RegisterService
 {
-    private final UserRepository userRepository;
-
+    private final UserService userService;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher eventPublisher;
@@ -35,17 +34,23 @@ public class RegisterService
             Date dateOfBirth,
             String sex,
             boolean isResearchCandidate,
+            boolean termsAndConditions,
+            boolean privacyStatement,
             int length,
             int weight
     )
     {
-        if (password.length() < 7)
+        if (!(termsAndConditions && privacyStatement))
+        {
+            throw new RegisterValidationException("U moet akkoord gaan met de algemene voorwaarden en privacy verklaring");
+        }
+        else if (password.length() < 7)
         {
             throw new RegisterValidationException("Het wachtwoord moet langer dan 7 karakters zijn");
         }
-        else if (email == null || !Validation.validEmail(email))
+        else if (email == null || !Validation.validEmail(email) || userService.isEmailRegistered(email))
         {
-            throw new RegisterValidationException("Het opgegeven e-mailadres is ongeldig");
+            throw new RegisterValidationException("Het opgegeven e-mailadres is ongeldig of in gebruik");
         }
         else if (sex == null || (!sex.equals(Sex.MALE.toString()) || sex.equals(Sex.FEMALE.toString())))
         {
@@ -86,11 +91,13 @@ public class RegisterService
             Date dateOfBirth,
             String sex,
             boolean isResearchCandidate,
+            boolean termsAndConditions,
+            boolean privacyStatement,
             int length,
             int weight
     )
     {
-        User user = createUser(id, password, email, dateOfBirth, sex, isResearchCandidate, length, weight);
+        User user = createUser(id, password, email, dateOfBirth, sex, isResearchCandidate, termsAndConditions, privacyStatement, length, weight);
 
         User savedUser = saveUser(user);
 
@@ -101,6 +108,6 @@ public class RegisterService
 
     public User saveUser(User user)
     {
-        return this.userRepository.save(user);
+        return userService.saveUser(user);
     }
 }
