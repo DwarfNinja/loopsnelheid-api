@@ -12,13 +12,13 @@ public class RegisterDto extends UserDto
             String email,
             Date dateOfBirth,
             String sex,
-            boolean isResearchCandidate,
+            boolean researchPurposes,
             boolean termsAndConditions,
             boolean privacyStatement,
             int length,
             int weight,
             Set<String> roles)
     {
-        super(id, email, dateOfBirth, sex, isResearchCandidate, termsAndConditions, privacyStatement, length, weight, roles);
+        super(id, email, dateOfBirth, sex, researchPurposes, termsAndConditions, privacyStatement, length, weight, roles);
     }
 }

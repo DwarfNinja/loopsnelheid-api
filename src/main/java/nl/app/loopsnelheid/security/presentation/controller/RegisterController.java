@@ -28,7 +28,7 @@ public class RegisterController
                 registerDto.email,
                 registerDto.dateOfBirth,
                 registerDto.sex,
-                registerDto.isResearchCandidate,
+                registerDto.researchPurposes,
                 registerDto.termsAndConditions,
                 registerDto.privacyStatement,
                 registerDto.length,
