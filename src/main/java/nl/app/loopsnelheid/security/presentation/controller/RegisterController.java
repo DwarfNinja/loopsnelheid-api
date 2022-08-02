@@ -14,7 +14,6 @@ import java.io.IOException;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RequiredArgsConstructor
 public class RegisterController
 {
