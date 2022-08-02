@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(AccountEndpoints.PRIVACY_PATH)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequiredArgsConstructor
 public class PrivacyController {
 

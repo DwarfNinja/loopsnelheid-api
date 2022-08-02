@@ -11,12 +11,14 @@ import nl.app.loopsnelheid.security.application.UserService;
 import nl.app.loopsnelheid.security.domain.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/stats")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequiredArgsConstructor
 public class StatisticController
 {
