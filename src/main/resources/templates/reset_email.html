@@ -15,9 +15,7 @@
     <div class="content" style="margin: auto;padding: 3rem;border-radius: 1rem;background-color: white;word-break: break-all;">
         <h2 style="margin-bottom: 1rem;font-size: 22px;font-weight: bold;">Bevestig uw e-mailadres</h2>
         <p style="font-size: 15px;font-weight: bold;color: #AAAAAA;word-break: break-word;">U heeft het e-mailadres van uw account aangepast, verifieer dit e-mailadres door op de knop “E-mailadres verifiëren” te drukken.</p>
-        <form th:action="${mailApiUrl}" style="padding: 0;margin-top: 1.5rem;">
-            <button style="background-color: #2215C2;color: white;border: none;border-radius: .5rem;padding: 1rem;font-size: 20px;box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);cursor: pointer;outline: inherit;margin-bottom: 1.5rem;">E-mailadres verifiëren</button>
-        </form>
+        <a th:href="${mailApiUrl}" style="padding: 0;margin-top: 1.5rem;background-color: #2215C2;color: white;border: none;border-radius: .5rem;padding: 1rem;font-size: 20px;box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);cursor: pointer;outline: inherit;margin-bottom: 1.5rem;">E-mailadres verifiëren</a>
         <p style="font-size: 15px;font-weight: bold;color: #AAAAAA;word-break: break-word;">Gebruik onderstaande link als u problemen ervaart met de knop “E-mailadres verifiëren”:</p>
         <a th:href="${mailApiUrl}" th:text="${mailApiUrl}" style="font-size: 14px;font-weight: bold;color: #1D58EF;width: 70%;text-decoration: none;"></a>
     </div>

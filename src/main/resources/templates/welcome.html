@@ -23,9 +23,7 @@
             <li th:text="${#strings.substring(digitalCode, 4,5)}" style="display:block;padding: 10px 20px;font-size: 26px;font-weight: bold;border-radius: .5rem;border: solid 1px #B1B1B1;">6</li>
             <li th:text="${#strings.substring(digitalCode, 5,6)}" style="display:block;padding: 10px 20px;font-size: 26px;font-weight: bold;border-radius: .5rem;border: solid 1px #B1B1B1;">7</li>
         </ul>
-        <form th:action="${mailApiUrl}" method="get">
-            <button style="background-color: #2215C2;color: white;border: none;border-radius: .5rem;padding: 1rem;font-size: 20px;box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);cursor: pointer;outline: inherit;margin-bottom: 1.5rem;">Account verifiëren</button>
-        </form>
+        <a th:href="${mailApiUrl}" style="background-color: #2215C2;text-decoration: none;color: white;border: none;border-radius: .5rem;padding: 1rem;font-size: 20px;box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);cursor: pointer;outline: inherit;margin-bottom: 1.5rem;">Account verifiëren</a>
         <p style="font-size: 15px;font-weight: bold;color: #AAAAAA;word-break: break-word;">Gebruik onderstaande link als u problemen ervaart met de knop “Account verifiëren”:</p>
         <a th:href="${mailApiUrl}" th:text="${mailApiUrl}" style="font-size: 14px;font-weight: bold;color: #1D58EF;width: 70%;text-decoration: none;"></a>
     </div>
