@@ -14,11 +14,13 @@
         }
 
         .header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
             border-bottom: #e9ebed 1px solid;
         }
+
+        .header .profile-information {
+            float:left;
+        }
+
         .header .profile-information h1 {
             font-size: 25px;
         }
@@ -31,7 +33,17 @@
             margin: 24px 0;
         }
 
+        .header .logo {
+            float: right;
+        }
+
+        .header .logo {
+            height: 60px;
+            width: auto;
+        }
+
         .body {
+            float: left;
             border-bottom: #e9ebed 1px solid;
         }
         .body .measures {
@@ -41,7 +53,7 @@
             font-size: 20px;
         }
         .body .measures .columns {
-            display: flex;
+            display: flex;a
             justify-content: space-between;
             align-items: flex-start;
         }
@@ -121,9 +133,7 @@
             </li>
         </ul>
     </div>
-    <span class="icon">
-    <img src="../static/icon.svg" style="display: block" alt="Loopsnelheid"/>
-  </span>
+    <img src="http://app.loopsnelheid.hu.nl/icon.png" alt="Loopsnelheid" class="logo"/>
 </div>
 <div class="body">
     <div class="measures">
@@ -135,7 +145,7 @@
         </p>
         <div class="legenda">
             <span class="box"></span>
-            <span class="text-italic">De meting ligt onder de aanbevolen loopsnelheid.</span>
+            <span class="text-italic">Uw gemiddelde meting ligt onder de aanbevolen loopsnelheid op basis van uw geslacht en leeftijd.</span>
         </div>
         <div class="table-group">
             <h4>Gemiddelde metingen per periode</h4>
