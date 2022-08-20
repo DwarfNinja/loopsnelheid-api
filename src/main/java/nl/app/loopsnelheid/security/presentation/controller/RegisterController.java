@@ -57,7 +57,7 @@ public class RegisterController
     public VersionDto getCurrentVersion()
     {
         VersionDto versionDto = new VersionDto();
-        versionDto.version = "v0.0.6-CORS";
+        versionDto.version = "v0.0.8-CORS";
 
         return versionDto;
     }
