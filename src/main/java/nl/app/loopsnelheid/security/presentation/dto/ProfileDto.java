@@ -1,6 +1,5 @@
 package nl.app.loopsnelheid.security.presentation.dto;
 
-import java.util.Date;
 import java.util.Set;
 
 public class ProfileDto
@@ -12,6 +11,7 @@ public class ProfileDto
 
     public String sex;
     public boolean isResearchCandidate;
+    public boolean hasOpenDeleteRequest;
 
     public int length;
 
@@ -25,6 +25,7 @@ public class ProfileDto
             String dateOfBirth,
             String sex,
             boolean isResearchCandidate,
+            boolean hasOpenDeleteRequest,
             int length,
             int weight,
             Set<String> roles)
@@ -34,6 +35,7 @@ public class ProfileDto
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
         this.isResearchCandidate = isResearchCandidate;
+        this.hasOpenDeleteRequest = hasOpenDeleteRequest;
         this.length = length;
         this.weight = weight;
         this.roles = roles;

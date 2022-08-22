@@ -1,6 +1,7 @@
 package nl.app.loopsnelheid.security.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
+import nl.app.loopsnelheid.security.application.DeleteRequestService;
 import nl.app.loopsnelheid.security.application.UserService;
 import nl.app.loopsnelheid.security.domain.User;
 import nl.app.loopsnelheid.security.presentation.dto.ProfileDto;
@@ -19,6 +20,8 @@ import java.util.stream.Collectors;
 public class AuthController
 {
     private final UserService userService;
+    private final DeleteRequestService deleteRequestService;
+
     @GetMapping("/profile")
     public ProfileDto profileUser()
     {
@@ -34,6 +37,7 @@ public class AuthController
                 simpleDateFormat.format(user.getDateOfBirth()),
                 user.getSex().toString(),
                 user.isResearchCandidate(),
+                deleteRequestService.hasOpenDeleteRequest(user),
                 user.getLength(),
                 user.getWeight(),
                 user.getRoles().stream().map(role -> role.getName().toString()).collect(Collectors.toSet())
