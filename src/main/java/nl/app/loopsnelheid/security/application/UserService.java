@@ -2,6 +2,7 @@ package nl.app.loopsnelheid.security.application;
 
 import lombok.RequiredArgsConstructor;
 import nl.app.loopsnelheid.security.application.util.PasswordGenerator;
+import nl.app.loopsnelheid.security.application.util.Validation;
 import nl.app.loopsnelheid.security.data.UserRepository;
 import nl.app.loopsnelheid.security.domain.*;
 import nl.app.loopsnelheid.security.domain.event.OnEmailChangeEvent;
@@ -10,6 +11,7 @@ import nl.app.loopsnelheid.security.domain.event.OnPersonalInformationChangeEven
 import nl.app.loopsnelheid.security.domain.event.OnResetPasswordEvent;
 import nl.app.loopsnelheid.security.domain.exception.EmailAlreadyUsedException;
 import nl.app.loopsnelheid.security.domain.exception.OldPasswordIncorrectException;
+import nl.app.loopsnelheid.security.domain.exception.RegisterValidationException;
 import nl.app.loopsnelheid.security.domain.exception.UserNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -173,6 +175,19 @@ public class UserService
             boolean isResearchCandidate
     )
     {
+        if (sex == null || (!sex.equals(Sex.MALE.toString()) || sex.equals(Sex.FEMALE.toString())))
+        {
+            throw new RegisterValidationException("U moet een geldig geslacht invoeren");
+        }
+        else if (length < 100)
+        {
+            throw new RegisterValidationException("U moet uw lengte in centimeters opgeven");
+        }
+        else if (weight < 30)
+        {
+            throw new RegisterValidationException("U moet uw gewicht in kilograms opgeven");
+        }
+
         User user = loadUserById(id);
         user.setDateOfBirth(dateOfBirth);
         user.setSex(Sex.valueOf(sex));
