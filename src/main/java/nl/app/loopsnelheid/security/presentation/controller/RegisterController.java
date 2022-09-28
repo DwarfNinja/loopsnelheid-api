@@ -30,7 +30,7 @@ public class RegisterController
                 registerDto.email,
                 registerDto.dateOfBirth,
                 registerDto.sex,
-                registerDto.researchPurposes,
+                registerDto.isResearchCandidate,
                 registerDto.termsAndConditions,
                 registerDto.privacyStatement,
                 registerDto.length,
@@ -57,7 +57,7 @@ public class RegisterController
     public VersionDto getCurrentVersion()
     {
         VersionDto versionDto = new VersionDto();
-        versionDto.version = "v0.0.8-CORS";
+        versionDto.version = "v0.0.9-CORS";
 
         return versionDto;
     }

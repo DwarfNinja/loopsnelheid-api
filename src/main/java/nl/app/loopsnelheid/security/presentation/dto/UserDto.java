@@ -16,7 +16,7 @@ public class UserDto
 
     public String sex;
 
-    public boolean researchPurposes;
+    public boolean isResearchCandidate;
 
     public boolean termsAndConditions;
 
@@ -33,7 +33,7 @@ public class UserDto
             String email,
             Date dateOfBirth,
             String sex,
-            boolean researchPurposes,
+            boolean isResearchCandidate,
             boolean termsAndConditions,
             boolean privacyStatement,
             int length,
@@ -44,7 +44,7 @@ public class UserDto
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
-        this.researchPurposes = researchPurposes;
+        this.isResearchCandidate = isResearchCandidate;
         this.termsAndConditions = termsAndConditions;
         this.privacyStatement = privacyStatement;
         this.length = length;
