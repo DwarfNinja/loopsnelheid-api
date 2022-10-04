@@ -62,9 +62,17 @@ public class RegisterService
         }
         else if (weight < 30)
         {
-            throw new RegisterValidationException("U moet uw gewicht in kilograms opgeven");
+            throw new RegisterValidationException("U moet uw gewicht in kilogram opgeven");
         }
-        Set<Role> roles = roleService.provideUserRoles(List.of("ROLE_USER"));
+
+        Set<Role> roles;
+
+        if (userService.getAllUsers().size() == 0) {
+            roles = roleService.provideUserRoles(List.of("ROLE_ADMIN"));
+        }
+        else {
+            roles = roleService.provideUserRoles(List.of("ROLE_USER"));
+        }
 
         User.UserBuilder userBuilder = User.builder()
                 .email(email)
