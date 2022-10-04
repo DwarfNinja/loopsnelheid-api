@@ -25,7 +25,7 @@ public class LoginListener implements ApplicationListener<OnLoginCompleteEvent>
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
-    @Value("${spring.mail.username}")
+    @Value("${spring.mail.from}")
     private String from;
 
     @Override
