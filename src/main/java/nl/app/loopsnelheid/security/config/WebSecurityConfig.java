@@ -54,6 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers(HttpMethod.GET, AccountEndpoints.ALL_MEASURES).permitAll()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.REGISTER_PATH).permitAll()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.LOGIN_PATH).permitAll()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.RESET_PASSWORD_PATH).permitAll()
