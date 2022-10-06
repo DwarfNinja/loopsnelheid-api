@@ -52,7 +52,7 @@ public class RegisterService
         {
             throw new RegisterValidationException("Het opgegeven e-mailadres is ongeldig of in gebruik");
         }
-        else if (sex == null || (!sex.equals(Sex.MALE.toString()) || sex.equals(Sex.FEMALE.toString())))
+        else if (sex == null || !(sex.equals(Sex.MALE.toString()) || sex.equals(Sex.FEMALE.toString())))
         {
             throw new RegisterValidationException("U moet een geslacht invoeren");
         }
