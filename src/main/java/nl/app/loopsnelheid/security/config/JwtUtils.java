@@ -19,7 +19,7 @@ public class JwtUtils
     private String jwtSecret;
 
     @Value("${security.jwt.expiration-in-ms}")
-    private int jwtExpiration;
+    private Long jwtExpiration;
 
     public String generateJwtToken(Authentication authentication)
     {
