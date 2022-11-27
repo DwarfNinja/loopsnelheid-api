@@ -15,4 +15,7 @@ public class MeasureDto
 
     @JsonProperty("registered_at")
     public final LocalDateTime registeredAt;
+
+    @JsonProperty("user_id")
+    public final Long userId;
 }

@@ -26,7 +26,7 @@ public class ResearchDataRequestListener implements ApplicationListener<OnResear
 
     private final TemplateEngine templateEngine;
 
-    @Value("${spring.mail.username}")
+    @Value("${spring.mail.from}")
     private String from;
 
     @Override

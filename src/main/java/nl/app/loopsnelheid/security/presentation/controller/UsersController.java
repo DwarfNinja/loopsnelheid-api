@@ -24,7 +24,7 @@ public class UsersController
     private final UserService userService;
     private final RoleService roleService;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
     @GetMapping("")
     public List<UserDto> getAllUsers()
     {
@@ -42,7 +42,7 @@ public class UsersController
         )).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
     @GetMapping("/{userId}")
     public UserDto getUser(@PathVariable Long userId)
     {

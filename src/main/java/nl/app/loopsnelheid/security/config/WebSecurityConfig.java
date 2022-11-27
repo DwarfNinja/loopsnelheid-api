@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -52,6 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .exceptionHandling().authenticationEntryPoint(authEntryPointJwt).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers(HttpMethod.GET, AccountEndpoints.ALL_MEASURES).permitAll()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.REGISTER_PATH).permitAll()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.LOGIN_PATH).permitAll()
                 .antMatchers(HttpMethod.POST, AccountEndpoints.RESET_PASSWORD_PATH).permitAll()

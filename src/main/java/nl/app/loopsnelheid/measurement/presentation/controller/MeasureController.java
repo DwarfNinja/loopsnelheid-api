@@ -37,12 +37,12 @@ public class MeasureController
     private final DeviceService deviceService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
     public List<MeasureDto> getAll()
     {
         return measureService.getAllMeasures()
                 .stream()
-                .map(measure -> new MeasureDto(measure.getId(), measure.getWalkingSpeed(), measure.getRegisteredAt()))
+                .map(measure -> new MeasureDto(measure.getId(), measure.getWalkingSpeed(), measure.getRegisteredAt(), measure.getUserId()))
                 .collect(Collectors.toList());
     }
 
@@ -62,7 +62,7 @@ public class MeasureController
         List<Measure> measures = measureService.createManyMeasures(dtos, authenticatedUser);
 
         return measures.stream()
-                .map(measure -> new MeasureDto(measure.getId(), measure.getWalkingSpeed(), measure.getRegisteredAt()))
+                .map(measure -> new MeasureDto(measure.getId(), measure.getWalkingSpeed(), measure.getRegisteredAt(), measure.getUserId()))
                 .collect(Collectors.toList());
     }
 

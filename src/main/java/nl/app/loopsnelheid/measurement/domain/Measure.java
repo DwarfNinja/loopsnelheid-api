@@ -44,6 +44,11 @@ public class Measure
         return registeredAt;
     }
 
+    public Long getUserId()
+    {
+        return user.getId();
+    }
+
     public boolean isRegisterDateBetween(LocalDateTime startDate, LocalDateTime endDate)
     {
         return startDate.isBefore(registeredAt) && endDate.isAfter(registeredAt);

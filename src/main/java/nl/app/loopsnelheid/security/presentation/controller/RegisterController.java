@@ -6,6 +6,7 @@ import nl.app.loopsnelheid.security.application.VerificationTokenService;
 import nl.app.loopsnelheid.security.config.AccountEndpoints;
 import nl.app.loopsnelheid.security.presentation.dto.DetailsDto;
 import nl.app.loopsnelheid.security.presentation.dto.RegisterDto;
+import nl.app.loopsnelheid.security.presentation.dto.VersionDto;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class RegisterController
                 registerDto.email,
                 registerDto.dateOfBirth,
                 registerDto.sex,
-                registerDto.researchPurposes,
+                registerDto.isResearchCandidate,
                 registerDto.termsAndConditions,
                 registerDto.privacyStatement,
                 registerDto.length,
@@ -50,5 +51,14 @@ public class RegisterController
     {
         verificationTokenService.verifyToken(userId, token);
         response.sendRedirect("intent:#Intent;scheme=startci;package=com.example.loopsnelheidapp;end");
+    }
+
+    @GetMapping("/")
+    public VersionDto getCurrentVersion()
+    {
+        VersionDto versionDto = new VersionDto();
+        versionDto.version = "v0.0.9-CORS";
+
+        return versionDto;
     }
 }

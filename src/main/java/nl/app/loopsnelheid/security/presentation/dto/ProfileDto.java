@@ -1,26 +1,17 @@
 package nl.app.loopsnelheid.security.presentation.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 import java.util.Set;
 
-public class UserDto
+public class ProfileDto
 {
     public Long id;
-
     public String email;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    public Date dateOfBirth;
+    public String dateOfBirth;
 
     public String sex;
-
     public boolean isResearchCandidate;
-
-    public boolean termsAndConditions;
-
-    public boolean privacyStatement;
+    public boolean hasOpenDeleteRequest;
 
     public int length;
 
@@ -28,14 +19,13 @@ public class UserDto
 
     public Set<String> roles;
 
-    public UserDto(
+    public ProfileDto(
             Long id,
             String email,
-            Date dateOfBirth,
+            String dateOfBirth,
             String sex,
             boolean isResearchCandidate,
-            boolean termsAndConditions,
-            boolean privacyStatement,
+            boolean hasOpenDeleteRequest,
             int length,
             int weight,
             Set<String> roles)
@@ -45,8 +35,7 @@ public class UserDto
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
         this.isResearchCandidate = isResearchCandidate;
-        this.termsAndConditions = termsAndConditions;
-        this.privacyStatement = privacyStatement;
+        this.hasOpenDeleteRequest = hasOpenDeleteRequest;
         this.length = length;
         this.weight = weight;
         this.roles = roles;

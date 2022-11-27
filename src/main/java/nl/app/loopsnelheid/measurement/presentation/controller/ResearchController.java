@@ -25,7 +25,7 @@ public class ResearchController
     private final ResearchDataRequestJobService researchDataRequestJobService;
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
     public void requestResearchData(@Validated @RequestBody ResearchDataRequestDto researchDataRequestDto)
     {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -15,6 +15,7 @@ public class AccountEndpoints
     public static final String RESET_EMAIL_VERIFICATION_PATH = "/auth/verify/{userId}/{token}";
 
     // Measure endpoints
+    public static final String ALL_MEASURES = "/measures";
     public static final String DEFAULT_MEASURES = "/measures/default";
 
     // Privacy endpoints

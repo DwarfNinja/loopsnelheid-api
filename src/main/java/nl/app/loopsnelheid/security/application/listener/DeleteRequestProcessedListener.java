@@ -24,7 +24,7 @@ public class DeleteRequestProcessedListener implements ApplicationListener<OnDel
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
-    @Value("${spring.mail.username}")
+    @Value("${spring.mail.from}")
     private String from;
     @Override
     public void onApplicationEvent(OnDeleteRequestProcessedEvent onDeleteRequestProcessedEvent)

@@ -30,7 +30,7 @@ public class DataRequestListener implements ApplicationListener<OnDataRequestCom
 
     private final TemplateEngine templateEngine;
 
-    @Value("${spring.mail.username}")
+    @Value("${spring.mail.from}")
     private String from;
 
     @Override

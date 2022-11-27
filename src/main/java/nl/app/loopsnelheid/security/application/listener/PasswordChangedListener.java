@@ -23,7 +23,7 @@ public class PasswordChangedListener implements ApplicationListener<OnPasswordCh
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
-    @Value("${spring.mail.username}")
+    @Value("${spring.mail.from}")
     private String from;
     @Override
     public void onApplicationEvent(OnPasswordChangeEvent onPasswordChangeEvent)

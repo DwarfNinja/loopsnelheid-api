@@ -28,7 +28,7 @@ public class PasswordResetListener implements ApplicationListener<OnResetPasswor
     @Value("${mail.api.url}")
     private String mailApiUrl;
 
-    @Value("${spring.mail.username}")
+    @Value("${spring.mail.from}")
     private String from;
 
     @Override
