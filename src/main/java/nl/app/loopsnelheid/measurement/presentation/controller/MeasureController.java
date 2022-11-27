@@ -37,7 +37,7 @@ public class MeasureController
     private final DeviceService deviceService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('RESEARCHER')")
     public List<MeasureDto> getAll()
     {
         return measureService.getAllMeasures()

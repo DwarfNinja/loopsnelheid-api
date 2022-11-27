@@ -21,6 +21,7 @@ public class RoleSeeder extends ObjectSeeder<Role>
     {
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.createRole(ERole.ROLE_USER));
+        roles.add(roleService.createRole(ERole.ROLE_RESEARCHER));
         roles.add(roleService.createRole(ERole.ROLE_ADMIN));
 
         objects.addAll(roles);
