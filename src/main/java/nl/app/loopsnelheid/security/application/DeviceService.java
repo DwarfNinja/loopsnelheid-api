@@ -51,6 +51,7 @@ public class DeviceService
             Device newDevice = authenticatedUser.getRandomDeviceExceptGivenSession(device.getSession());
             newDevice.setEDevice(EDevice.MEASURING_DEVICE);
 
+            deviceRepository.delete(device);
             deviceRepository.save(newDevice);
         }
 
