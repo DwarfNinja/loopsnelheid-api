@@ -1,6 +1,6 @@
 VERSION ?= v0.0.1
 
-REGISTRY ?= ghcr.io/team-dom-toren/loopsnelheid-app-api
+REGISTRY ?= ghcr.io/team-dom-toren/loopsnelheid-api
 
 TYPE ?= dev
 
