@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Verzoek tot vergetelheid</title>
+</head>
+
+<body style="height: 100%;background-image: linear-gradient(to bottom, #1d58ef, #1c4ae4, #1d3bd9, #1f2ace, #2215c2);">
+<div class="container" style="max-width: 900px;margin: 0 auto;padding: 1rem;">
+    <div class="header" style="display: grid;grid-template-columns: auto auto auto;justify-content: center;">
+        <img src="http://app.loopsnelheid.hu.nl/icon-white.png" alt="Loopsnelheid Logo" style="margin-left: auto;margin-right: 0;fill: white;padding-right: 1rem;">
+        <h1 style="font-size: 36px;font-weight: bold;color: white;text-align: center;">Loopsnelheid</h1>
+    </div>
+
+    <div class="content" style="margin: auto;padding: 3rem;border-radius: 1rem;background-color: white;">
+        <h2 style="margin-bottom: 1rem;font-size: 22px;font-weight: bold;">Uw verzoek tot vergetelheid is ingediend</h2>
+        <p style="font-size: 15px;font-weight: bold;color: #AAAAAA;">Er is op <span style="font-weight: bold" th:text="${date}"></span> om <span style="font-weight: bold" th:text="${time}"></span> een verzoek tot vergetelheid ingediend op uw account.</p>
+        <p style="font-size: 15px;font-weight: bold;color: #AAAAAA;">Mocht u van gedachte zijn veranderd, kunt u het verzoek binnen 48-uur intrekken in de app.</p>
+        <p style="font-size: 15px;font-weight: bold;color: #AAAAAA;">Als het verzoek niet voor 48-uur is ingetrokken, dan zal het vernietigingsproces van uw account van start gaan. Vanaf dit punt worden al uw gegevens definitief verwijderd.</p>
+    </div>
+
+    <div>
+        <p class="footer-text" style="font-size: 18px;font-weight: lighter;color: white;text-align: center;width: 100%;margin-top: 4rem;">©2022 Loopsnelheid. Alle rechten voorbehouden.</p>
+    </div>
+</div>
+</body>
+</html>

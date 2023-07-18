@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Er is met een nieuw apparaat ingelogd</title>
+</head>
+
+<body style="height: 100%;background-image: linear-gradient(to bottom, #1d58ef, #1c4ae4, #1d3bd9, #1f2ace, #2215c2);">
+<div class="container" style="max-width: 900px;margin: 0 auto;padding: 1rem;">
+    <div class="header" style="display: grid;grid-template-columns: auto auto auto;justify-content: center;">
+        <img src="http://app.loopsnelheid.hu.nl/icon-white.png" alt="Loopsnelheid Logo" style="margin-left: auto;margin-right: 0;fill: white;padding-right: 1rem;">
+        <h1 style="font-size: 36px;font-weight: bold;color: white;text-align: center;">Loopsnelheid</h1>
+    </div>
+
+    <div class="content" style="margin: auto;padding: 3rem;border-radius: 1rem;background-color: white;">
+        <h2 style="margin-bottom: 1rem;font-size: 22px;font-weight: bold;">Een apparaat is ingelogd op uw account</h2>
+        <p style="font-size: 15px;font-weight: bold;color: #AAAAAA;">Wij laten u weten dat er zojuist een apparaat is aangemeld op uw account. Heeft u niet ingelogd? Verander dan onmiddelijk uw wachtwoord vanaf de loopsnelheid app.</p>
+        <ul style="margin-top: 1.5rem;">
+            <li>
+                <span class="font-bold" style="font-size: 15px;font-weight: bold;color: #AAAAAA;">Datum:</span>
+                <span th:text="${signed_in_date}" style="font-size: 15px;font-weight: bold;color: #AAAAAA;"></span>
+            </li>
+            <li>
+                <span class="font-bold" style="font-size: 15px;font-weight: bold;color: #AAAAAA;">Tijdstip:</span>
+                <span th:text="${signed_in_time}" style="font-size: 15px;font-weight: bold;color: #AAAAAA;"></span>
+            </li>
+            <li>
+                <span class="font-bold" style="font-size: 15px;font-weight: bold;color: #AAAAAA;">Apparaat model:</span>
+                <span th:text="${model}" style="font-size: 15px;font-weight: bold;color: #AAAAAA;"></span>
+            </li>
+            <li>
+                <span class="font-bold" style="font-size: 15px;font-weight: bold;color: #AAAAAA;">Apparaat besturingssysteem:</span>
+                <span th:text="${os}" style="font-size: 15px;font-weight: bold;color: #AAAAAA;"></span>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <p class="footer-text" style="font-size: 18px;font-weight: lighter;color: white;text-align: center;width: 100%;margin-top: 4rem;">©2022 Loopsnelheid. Alle rechten voorbehouden.</p>
+    </div>
+</div>
+</body>
+
+</html>

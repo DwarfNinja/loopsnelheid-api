@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <title>Persoonsgegevens rapport</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400&amp;display=swap");
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+
+        .header {
+            border-bottom: #e9ebed 1px solid;
+        }
+
+        .header .profile-information {
+            float:left;
+        }
+
+        .header .profile-information h1 {
+            font-size: 25px;
+        }
+        .header .profile-information h2 {
+            font-size: 17px;
+            font-weight: normal;
+        }
+        .header .profile-information .user-details {
+            list-style-type: none;
+            margin: 24px 0;
+        }
+
+        .header .logo {
+            float: right;
+        }
+
+        .header .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .body {
+            float: left;
+            border-bottom: #e9ebed 1px solid;
+        }
+        .body .measures {
+            margin: 24px 0;
+        }
+        .body .measures h3 {
+            font-size: 20px;
+        }
+        .body .measures .columns {
+            display: flex;a
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .body .measures .measure-statistics {
+            list-style-type: none;
+            margin-top: 16px;
+        }
+        .body .measures .legenda {
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+            margin-top: 16px;
+        }
+        .body .measures .legenda .box {
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            background-color: #FF7F7F;
+        }
+        .body .table-group {
+            margin: 48px 0;
+        }
+        .body .table-group .measures-data-table {
+            margin: 24px 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .body .table-group .measures-data-table td, .body .table-group .measures-data-table th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        .body .table-group .measures-data-table .under-average-speed {
+            background-color: #FF7F7F;
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .text-italic {
+            font-style: italic;
+        }
+
+        /*# sourceMappingURL=style.css.map */
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="profile-information">
+        <h1>Persoonsgegevens rapport</h1>
+        <h2>Dit document is ingediend op: 21-07-2022</h2>
+        <ul class="user-details">
+            <li>
+                <span class="text-bold">E-mailadres:</span>
+                <span th:text="${user.email}"></span>
+            </li>
+            <li>
+                <span class="text-bold">Geboortedatum:</span>
+                <span th:text="${user.birth_date}"></span>
+            </li>
+            <li>
+                <span class="text-bold">Geslacht:</span>
+                <span th:text="${user.sex}"></span>
+            </li>
+            <li>
+                <span class="text-bold">Lengte:</span>
+                <span th:text="${user.length} + ' cm'"></span>
+            </li>
+            <li>
+                <span class="text-bold">Gewicht:</span>
+                <span th:text="${user.weight} + ' kg'"></span>
+            </li>
+            <li>
+                <span class="text-bold">Onderzoeks kandidaat:</span>
+                <span th:text="${user.is_research_candidate}"></span>
+            </li>
+        </ul>
+    </div>
+    <img src="http://app.loopsnelheid.hu.nl/icon.png" alt="Loopsnelheid" class="logo"/>
+</div>
+<div class="body">
+    <div class="measures">
+        <h3>Mijn metingen</h3>
+        <p>
+            Om uw valrisico vroegtijdig te constateren is het belangrijk dat wij regelmatig uw loopsnelheid meten.
+            Deze metingen zijn tot stand gekomen door op willekeurige momenten een meettraject in de achtergrond te draaien.
+            U kunt deze gegevens, op eigen initiatief, overhandigen aan een zorgverlener.
+        </p>
+        <div class="legenda">
+            <span class="box"></span>
+            <span class="text-italic">Uw gemiddelde meting ligt onder de aanbevolen loopsnelheid op basis van uw geslacht en leeftijd.</span>
+        </div>
+        <div class="table-group">
+            <h4>Gemiddelde metingen per periode</h4>
+            <table class="measures-data-table">
+                <tr>
+                    <th>Periode</th>
+                    <th>Gemiddelde loopsnelheid</th>
+                    <th>Aantal metingen</th>
+                </tr>
+                <tr th:classappend="${measures_period.day.average_speed > 0.0 && minimum_speed > measures_period.day.average_speed} ? 'under-average-speed' : ''">
+                    <td>
+                        <span class="text-bold">Afgelopen 24-uur:</span>
+                    </td>
+                    <td th:text="${measures_period.day.average_speed == 0.0 ? 'Geen metingen' : #numbers.formatDecimal(measures_period.day.average_speed, 0, 1) + ' km/u'}"></td>
+                    <td th:text="${measures_period.day.amount_of_measures}"></td>
+                </tr>
+                <tr th:classappend="${measures_period.week.average_speed > 0.0 && minimum_speed > measures_period.week.average_speed} ? 'under-average-speed' : ''">
+                    <td>
+                        <span class="text-bold">Afgelopen 7 dagen:</span>
+                    </td>
+                    <td th:text="${measures_period.week.average_speed == 0.0 ? 'Geen metingen' : #numbers.formatDecimal(measures_period.week.average_speed, 0, 1) + ' km/u'}"></td>
+                    <td th:text="${measures_period.week.amount_of_measures}"></td>
+                </tr>
+                <tr th:classappend="${measures_period.month.average_speed > 0.0 && minimum_speed > measures_period.month.average_speed} ? 'under-average-speed' : ''">
+                    <td>
+                        <span class="text-bold">Afgelopen maand:</span>
+                    </td>
+                    <td th:text="${measures_period.month.average_speed == 0.0 ? 'Geen metingen' : #numbers.formatDecimal(measures_period.month.average_speed, 0, 1) + ' km/u'}"></td>
+                    <td th:text="${measures_period.month.amount_of_measures}"></td>
+                </tr>
+                <tr th:classappend="${measures_period.quarter.average_speed > 0.0 && minimum_speed > measures_period.quarter.average_speed} ? 'under-average-speed' : ''">
+                    <td>
+                        <span class="text-bold">Afgelopen kwartaal:</span>
+                    </td>
+                    <td th:text="${measures_period.quarter.average_speed == 0.0 ? 'Geen metingen' : #numbers.formatDecimal(measures_period.quarter.average_speed, 0, 1) + ' km/u'}"></td>
+                    <td th:text="${measures_period.quarter.amount_of_measures}"></td>
+                </tr>
+                <tr th:classappend="${measures_period.half_year.average_speed > 0.0 && minimum_speed > measures_period.half_year.average_speed} ? 'under-average-speed' : ''">
+                    <td>
+                        <span class="text-bold">Afgelopen half jaar:</span>
+                    </td>
+                    <td th:text="${measures_period.half_year.average_speed == 0.0 ? 'Geen metingen' : #numbers.formatDecimal(measures_period.half_year.average_speed, 0, 1) + ' km/u'}"></td>
+                    <td th:text="${measures_period.half_year.amount_of_measures}"></td>
+                </tr>
+                <tr th:classappend="${measures_period.year.average_speed > 0.0 && minimum_speed > measures_period.year.average_speed} ? 'under-average-speed' : ''">
+                    <td>
+                        <span class="text-bold">Afgelopen jaar:</span>
+                    </td>
+                    <td th:text="${measures_period.year.average_speed == 0.0 ? 'Geen metingen' : #numbers.formatDecimal(measures_period.year.average_speed, 0, 1) + ' km/u'}"></td>
+                    <td th:text="${measures_period.year.amount_of_measures}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="table-group" th:if="${#maps.size(daily_measures_last_year) > 0}">
+            <h4>Gemiddelde metingen per dag (afgelopen jaar)</h4>
+            <table class="measures-data-table">
+                <tr>
+                    <th>Datum</th>
+                    <th>Gemiddelde loopsnelheid</th>
+                </tr>
+                <tr th:classappend="${minimum_speed > day.value} ? 'under-average-speed' : ''" th:each="day : ${daily_measures_last_year}">
+                    <td th:text="${day.key}"></td>
+                    <td th:text="${#numbers.formatDecimal(day.value, 0, 1)} + ' km/u'"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

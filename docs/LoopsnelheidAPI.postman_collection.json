@@ -1,0 +1,532 @@
+{
+	"info": {
+		"_postman_id": "a4871d75-89ef-45a0-9ffb-f78e4dbddc9f",
+		"name": "Loopsnelheid API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10984202"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Email Verification",
+					"item": [
+						{
+							"name": "Verify Email By DigitalCode",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{backendUrl}}/auth/verify/code/1/328014",
+									"host": [
+										"{{backendUrl}}"
+									],
+									"path": [
+										"auth",
+										"verify",
+										"code",
+										"1",
+										"328014"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify Email By Token",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"admin@test.nl\",\r\n    \"password\" : \"afefef\",\r\n    \"sex\": \"MALE\",\r\n    \"dateOfBirth\": \"2002-02-02\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{backendUrl}}/auth/verify/token/3/uLTXmeSZJzzN2sQGCsw2zzm+4xsCrhIgVkA8KRrCw4mljwSNddMH+9gIgDciBcyFB4pzCwhQ3j5zkWXIlKVzg==",
+									"host": [
+										"{{backendUrl}}"
+									],
+									"path": [
+										"auth",
+										"verify",
+										"token",
+										"3",
+										"uLTXmeSZJzzN2sQGCsw2zzm+4xsCrhIgVkA8KRrCw4mljwSNddMH+9gIgDciBcyFB4pzCwhQ3j5zkWXIlKVzg=="
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Devices",
+					"item": [
+						{
+							"name": "Retrieve all devices",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjU0NjQyNDQ0LCJleHAiOjE2NTUyNDcyNDR9.uGSlCcu2aIQKX3OLCnM7pOUnCukaBpGw6bXv5o67uaJa9IRacK6uExPkcrWk_JEKSjotpn2nEbQzwkJuz02S-Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backendUrl}}/auth/devices",
+									"host": [
+										"{{backendUrl}}"
+									],
+									"path": [
+										"auth",
+										"devices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark device as new measure device",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjU0NjQyNDQ0LCJleHAiOjE2NTUyNDcyNDR9.uGSlCcu2aIQKX3OLCnM7pOUnCukaBpGw6bXv5o67uaJa9IRacK6uExPkcrWk_JEKSjotpn2nEbQzwkJuz02S-Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{backendUrl}}/auth/devices/ClRpolmL0qzfs50OY1klJnwnoYRkIl0T8ehV4kqNDOxahPPDxwSi0RKd3B9m+j9FhK0TybK7438qEeVL9ZrDg==",
+									"host": [
+										"{{backendUrl}}"
+									],
+									"path": [
+										"auth",
+										"devices",
+										"ClRpolmL0qzfs50OY1klJnwnoYRkIl0T8ehV4kqNDOxahPPDxwSi0RKd3B9m+j9FhK0TybK7438qEeVL9ZrDg=="
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@test.nl\",\r\n    \"password\" : \"afefef\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backendUrl}}/auth/login",
+							"host": [
+								"{{backendUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@test.nl\",\r\n    \"password\" : \"afefef\",\r\n    \"sex\": \"MALE\",\r\n    \"dateOfBirth\": \"2002-02-02\",\r\n    \"isResearchCandidate\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backendUrl}}/auth/register",
+							"host": [
+								"{{backendUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJsb29wc25lbGhlaWQtYXBpIiwiYXVkIjoibG9vcHNuZWxoZWlkIiwic3ViIjoiYWRtaW5zQHRlc3QubmwiLCJleHAiOjE2NTQwMDkxNjh9.B_kQe3ccBEkOA1jEY1J5ulQ7F94-u1MKPdgMitGjObJMF9hHx6YGF2gmqV5XPuquyXyYyXv-u3Ftr0hXvxRRJA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{backendUrl}}/auth/profile",
+							"host": [
+								"{{backendUrl}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjU0NjQyNDQ0LCJleHAiOjE2NTUyNDcyNDR9.uGSlCcu2aIQKX3OLCnM7pOUnCukaBpGw6bXv5o67uaJa9IRacK6uExPkcrWk_JEKSjotpn2nEbQzwkJuz02S-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "session",
+								"value": "Ipbt2ncshw6GykFreaGFIpLgvQgEKPMcU9WlGIbKWn7+ldFCnxp98+g3X0Ojghytb7KFNux5r7q7TRE5xkXcg==",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{backendUrl}}/auth/logout",
+							"host": [
+								"{{backendUrl}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Measures",
+			"item": [
+				{
+					"name": "Statistics",
+					"item": [
+						{
+							"name": "Get average measures of this week",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjb250YWN0QHlhc3NpbmVmYWhtaS5ubCIsImlhdCI6MTY1Mzk1MTA1NywiZXhwIjoxNjU0NTU1ODU3fQ.BytK2IAvRHC4uQzfVy-3g2Rrbpa24TG4QnLQRUoF2PT8vm_VE6tG9dja3V-nAqDyILjvqobCqHgOv2tkqCpM-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backendUrl}}/stats/week",
+									"host": [
+										"{{backendUrl}}"
+									],
+									"path": [
+										"stats",
+										"week"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get average measures of this month",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzNDQ1OTc3LCJleHAiOjE2NTQwNTA3Nzd9.9vNHwykQd29in3wMvT0uyM8TUnVM2OcCArCjvP1t0--KaqTho8VrYW5blXXCoimWPkIaItIg1i8dbVhqBTZjRw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backendUrl}}/stats/month",
+									"host": [
+										"{{backendUrl}}"
+									],
+									"path": [
+										"stats",
+										"month"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get average measures of today",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzNDQ2ODI4LCJleHAiOjE2NTQwNTE2Mjh9.Yjjf-IP2kKxSEVJrIpLnLVG3msq7VYxOA0I--1jxHoX36Jyxa3IUTqOtHMdnktz8m5eUbfC9czzCyi8XMWJEBw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backendUrl}}/stats/today",
+									"host": [
+										"{{backendUrl}}"
+									],
+									"path": [
+										"stats",
+										"today"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Submit research data request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjU1Mzg1MzI0LCJleHAiOjE2NTU5OTAxMjR9.p3xD9Y8y8OzlVMhf9HnvhOWGTsrE7PNJk3awmKsw9OaB3xD1Yowk4lpT-yKFRY-24AO7sExx-kniiwtoBfpPFA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{backendUrl}}/stats/research",
+									"host": [
+										"{{backendUrl}}"
+									],
+									"path": [
+										"stats",
+										"research"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create measures",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzODMwNjI1LCJleHAiOjE2NTQ0MzU0MjV9.PRru4dZbA7daiwPUTURAT-ShCQHV3ig_rqqX9qRRdYAkLHN1gBBNw9xnZVoGKwkuckoUmb3ot1QDdqJgkroycg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"walkingSpeed\": \"1\",\r\n        \"registeredAt\": \"2022-05-13T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"3.4\",\r\n        \"registeredAt\": \"2022-04-14T12:30:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"30.4\",\r\n        \"registeredAt\": \"2022-04-14T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"18.4\",\r\n        \"registeredAt\": \"2022-04-14T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"2.1\",\r\n        \"registeredAt\": \"2022-04-13T12:59:11.332\"\r\n    },\r\n    {\r\n        \"walkingSpeed\": \"2.1\",\r\n        \"registeredAt\": \"2022-03-03T12:59:11.332\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backendUrl}}/measures",
+							"host": [
+								"{{backendUrl}}"
+							],
+							"path": [
+								"measures"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve all measures",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjb250YWN0QHlhc3NpbmVmYWhtaS5ubCIsImlhdCI6MTY1Mzk1MTA1NywiZXhwIjoxNjU0NTU1ODU3fQ.BytK2IAvRHC4uQzfVy-3g2Rrbpa24TG4QnLQRUoF2PT8vm_VE6tG9dja3V-nAqDyILjvqobCqHgOv2tkqCpM-w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{backendUrl}}/measures",
+							"host": [
+								"{{backendUrl}}"
+							],
+							"path": [
+								"measures"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get default measures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{backendUrl}}/measures/default",
+							"host": [
+								"{{backendUrl}}"
+							],
+							"path": [
+								"measures",
+								"default"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Privacy",
+			"item": [
+				{
+					"name": "Submit privacy data request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzNjUyMDgxLCJleHAiOjE2NTQyNTY4ODF9.Fg75ZPgj69YGJtJza_bJkIKfSTp50WC9oNUEv6MxTn2pyvbTstWas3Wfdp2cbKDXOSJp33zW4pcBusqHnNg9kQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{backendUrl}}/privacy",
+							"host": [
+								"{{backendUrl}}"
+							],
+							"path": [
+								"privacy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get data request content",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkB0ZXN0Lm5sIiwiaWF0IjoxNjUzNjUyMDgxLCJleHAiOjE2NTQyNTY4ODF9.Fg75ZPgj69YGJtJza_bJkIKfSTp50WC9oNUEv6MxTn2pyvbTstWas3Wfdp2cbKDXOSJp33zW4pcBusqHnNg9kQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{backendUrl}}/privacy/1",
+							"host": [
+								"{{backendUrl}}"
+							],
+							"path": [
+								"privacy",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get data requests",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "backendUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}
